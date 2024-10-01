@@ -41,9 +41,27 @@
             display: flex;
             align-items: center;
             padding: 2rem;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
         }
         .hero-content {
             max-width: 50%;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .hero:hover .overlay {
+            opacity: 1;
         }
         h1 {
             font-size: 3rem;
@@ -116,18 +134,20 @@
         </header>
         <main>
             <section class="hero">
-                <div class="hero-content">
-                    <h1>Spider-man: No Way Home</h1>
-                    <div class="movie-info">
-                        <span>IMDB 8.2</span>
-                        <span>2021</span>
-                        <span>1 hour 55 minutes</span>
-                        <span>Sci-fi</span>
-                    </div>
-                    <p>Scelerisque sed ultricies tristique. Mi in vivamus aliquam varius eu felis. Id ultricies diam turpis mi tincidunt. Ut morbi sed urna tempor imperdiet eu scelerisque egestas. Interdum mi orci suspendisse in s...</p>
-                    <div class="buttons">
-                        <button class="btn btn-secondary">Watch trailer</button>
-                        <button class="btn btn-primary">Watch now</button>
+                <div class="overlay">
+                    <div class="hero-content">
+                        <h1 style="color: white; text-align: center; position: relative; z-index: 1;">Spider-man: No Way Home</h1>
+                        <div class="movie-info">
+                            <span style="color: white; text-align: center; position: relative; z-index: 1;">IMDB 8.2</span>
+                            <span style="color: white; text-align: center; position: relative; z-index: 1;">2021</span>
+                            <span style="color: white; text-align: center; position: relative; z-index: 1;">1 hour 55 minutes</span>
+                            <span style="color: white; text-align: center; position: relative; z-index: 1;">Sci-fi</span>
+                        </div>
+                        <p style="color: white; text-align: center; position: relative; z-index: 1;">Scelerisque sed ultricies tristique. Mi in vivamus aliquam varius eu felis. Id ultricies diam turpis mi tincidunt. Ut morbi sed urna tempor imperdiet eu scelerisque egestas. Interdum mi orci suspendisse in s...</p>
+                        <div class="buttons">
+                            <button class="btn btn-secondary" style="color: white; text-align: center; position: relative; z-index: 1;">Watch trailer</button>
+                            <button class="btn btn-primary" style="color: white; text-align: center; position: relative; z-index: 1;">Watch now</button>
+                        </div>
                     </div>
                 </div>
             </section>
