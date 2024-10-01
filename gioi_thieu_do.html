@@ -35,7 +35,7 @@
         .hero {
             position: relative;
             height: 70vh;
-            background-image: url('https://via.placeholder.com/1200x600');
+            background-image: url('spiderman-nowayhome.png');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -84,12 +84,23 @@
             height: auto;
             border-radius: 5px;
         }
+        .search-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .search-icon img {
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="logo">MovieStream</div>
+            <div class="logo">ReelPhim</div>
             <nav>
                 <ul>
                     <li><a href="#" class="active">New Movie</a></li>
@@ -100,10 +111,9 @@
                 </ul>
             </nav>
             <div class="search">
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search"><span>&#128269;</span>
             </div>
         </header>
-        
         <main>
             <section class="hero">
                 <div class="hero-content">
@@ -121,22 +131,23 @@
                     </div>
                 </div>
             </section>
-            
+            <br>
+            <h2>Movie Poster</h2>
             <section class="movie-list">
                 <div class="movie-card">
-                    <img src="https://via.placeholder.com/200x300" alt="Movie poster">
+                    <img src="poster1.png" alt="Movie poster">
                 </div>
                 <div class="movie-card">
-                    <img src="https://via.placeholder.com/200x300" alt="Movie poster">
+                    <img src="poster2.png" alt="Movie poster">
                 </div>
                 <div class="movie-card">
-                    <img src="https://via.placeholder.com/200x300" alt="Movie poster">
+                    <img src="poster3.png" alt="Movie poster">
                 </div>
                 <div class="movie-card">
-                    <img src="https://via.placeholder.com/200x300" alt="Movie poster">
+                    <img src="poster4.png" alt="Movie poster">
                 </div>
                 <div class="movie-card">
-                    <img src="https://via.placeholder.com/200x300" alt="Movie poster">
+                    <img src="poster5.png" alt="Movie poster">
                 </div>
             </section>
         </main>
