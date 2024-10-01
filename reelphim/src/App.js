@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { Search } from 'lucide-react';
 
 const MovieCard = ({ title, year, imageUrl }) => (
@@ -11,13 +11,45 @@ const MovieCard = ({ title, year, imageUrl }) => (
   </div>
 );
 
-const MovieGrid = ({ movies }) => (
-  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-    {movies.map((movie, index) => (
-      <MovieCard key={index} {...movie} />
-    ))}
-  </div>
-);
+const MovieGrid = ({ movies }) => {
+  const gridRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (gridRef.current) {
+      gridRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (gridRef.current) {
+      gridRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="relative">
+      <button
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+        onClick={scrollLeft}
+      >
+        &lt;
+      </button>
+      <div ref={gridRef} className="flex overflow-x-auto space-x-4 no-scrollbar">
+        {movies.map((movie, index) => (
+          <div key={index} className="flex-shrink-0 w-48">
+            <MovieCard {...movie} />
+          </div>
+        ))}
+      </div>
+      <button
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+        onClick={scrollRight}
+      >
+        &gt;
+      </button>
+    </div>
+  );
+};
 
 const MovieSection = ({ title, description, movies }) => (
   <section className="mb-8">
@@ -26,10 +58,14 @@ const MovieSection = ({ title, description, movies }) => (
     <MovieGrid movies={movies} />
   </section>
 );
-
 const App = () => {
   const continueWatching = [
     { title: "Look Back: Liệu Ta Có Dám Nhìn Lại?", year: "2024", imageUrl: "https://iguov8nhvyobj.vcdn.cloud/media/catalog/product/cache/1/image/c5f0a1eff4c394a251036189ccddaacd/p/o/poster_lookback_.jpg" },
+    { title: "Khóa chặt cửa nào Suzume", year: "2023", imageUrl: "https://upload.wikimedia.org/wikipedia/vi/thumb/5/51/Suzume_no_Tojimari.tiff/lossy-page1-374px-Suzume_no_Tojimari.tiff.jpg?20220929010539" },
+    { title: "Oppenheimer", year: "2023", imageUrl: "https://upload.wikimedia.org/wikipedia/vi/2/21/Oppenheimer_%E2%80%93_Vietnam_poster.jpg" },
+    { title: "Interstellar: Hố đen tử thần", year: "2014", imageUrl: "https://upload.wikimedia.org/wikipedia/vi/4/46/Interstellar_poster.jpg?20160325095701" },
+    { title: "Zootopia: Phi vụ động trời", year: "2016", imageUrl: "https://upload.wikimedia.org/wikipedia/vi/1/1f/Zootopia_logo_vietnam.jpg?20160307231626" },
+        { title: "Look Back: Liệu Ta Có Dám Nhìn Lại?", year: "2024", imageUrl: "https://iguov8nhvyobj.vcdn.cloud/media/catalog/product/cache/1/image/c5f0a1eff4c394a251036189ccddaacd/p/o/poster_lookback_.jpg" },
     { title: "Khóa chặt cửa nào Suzume", year: "2023", imageUrl: "https://upload.wikimedia.org/wikipedia/vi/thumb/5/51/Suzume_no_Tojimari.tiff/lossy-page1-374px-Suzume_no_Tojimari.tiff.jpg?20220929010539" },
     { title: "Oppenheimer", year: "2023", imageUrl: "https://upload.wikimedia.org/wikipedia/vi/2/21/Oppenheimer_%E2%80%93_Vietnam_poster.jpg" },
     { title: "Interstellar: Hố đen tử thần", year: "2014", imageUrl: "https://upload.wikimedia.org/wikipedia/vi/4/46/Interstellar_poster.jpg?20160325095701" },
