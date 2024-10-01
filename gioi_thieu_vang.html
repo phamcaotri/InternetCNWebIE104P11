@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Streaming Platform</title>
+    <style>
+        /* Reset và style cơ bản */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            color: #ffffff;
+        }
+        
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 24px;
+        }
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        /* Main content */
+        .main-content {
+            padding: 20px;
+        }
+        .featured-movie {
+            position: relative;
+            height: 70vh;
+            background-image: url('path-to-spiderman-image.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+        }
+        .movie-info h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .movie-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .imdb-rating {
+            background-color: #f5c518;
+            color: #000000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .movie-description {
+            max-width: 50%;
+            margin-bottom: 20px;
+        }
+        .cta-buttons button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .watch-now {
+            background-color: #f5c518;
+            color: #000000;
+        }
+        .watch-trailer {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+        
+        /* Movie carousel */
+        .movie-carousel {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 20px 0;
+        }
+        .movie-carousel img {
+            width: 150px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">NEW MOVIE</div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">New Movie</a></li>
+                <li><a href="#">Genre</a></li>
+                <li><a href="#">Country</a></li>
+                <li><a href="#">Movie</a></li>
+                <li><a href="#">TV Series</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <section class="featured-movie">
+            <div class="movie-info">
+                <h1>Spider man No Way Home</h1>
+                <div class="movie-meta">
+                    <span class="imdb-rating">IMDb 8.2</span>
+                    <span>2021 | 1 hour 55 minutes | Sci-fi</span>
+                </div>
+                <p class="movie-description">
+                    Scelerisque sed ultricies tristique. Mi in vivamus aliquam varius eu felis. 
+                    Id ultrices diam turpis mi tincidunt. Ut morbi sed urna tempor imperdiet 
+                    eu scelerisque egestas. Interdum mi orci suspendisse in s... See more
+                </p>
+                <div class="cta-buttons">
+                    <button class="watch-trailer">Watch trailer</button>
+                    <button class="watch-now">Watch now</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="movie-carousel">
+            <!-- Movie posters would go here -->
+            <img src="path-to-movie-poster-1.jpg" alt="Movie poster">
+            <img src="path-to-movie-poster-2.jpg" alt="Movie poster">
+            <!-- Add more movie posters as needed -->
+        </section>
+    </main>
+</body>
+</html>

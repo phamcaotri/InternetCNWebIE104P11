@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Settings - MovieStream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #141414;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+        .settings-section {
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        label {
+            flex: 1;
+        }
+        select, input[type="text"], input[type="email"], input[type="password"] {
+            background-color: #333;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #e50914;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .btn {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #f40612;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>User Settings</h1>
+            <a href="#" class="btn">Save Changes</a>
+        </header>
+        
+        <main>
+            <section class="settings-section">
+                <h2>Account</h2>
+                <div class="setting-item">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="user@example.com">
+                </div>
+                <div class="setting-item">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" value="••••••••">
+                </div>
+            </section>
+
+            <section class="settings-section">
+                <h2>Preferences</h2>
+                <div class="setting-item">
+                    <label for="language">Language</label>
+                    <select id="language">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="autoplay">Autoplay next episode</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="autoplay" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label for="subtitles">Default subtitles</label>
+                    <select id="subtitles">
+                        <option value="off">Off</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="settings-section">
+                <h2>Playback</h2>
+                <div class="setting-item">
+                    <label for="quality">Default video quality</label>
+                    <select id="quality">
+                        <option value="auto">Auto</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="data-saver">Data saver</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="data-saver">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="settings-section">
+                <h2>Notifications</h2>
+                <div class="setting-item">
+                    <label for="email-notifications">Email notifications</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="email-notifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label for="push-notifications">Push notifications</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="push-notifications" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

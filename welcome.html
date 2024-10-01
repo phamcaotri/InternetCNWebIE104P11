@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to MovieStream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #141414;
+            color: white;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+        .buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .btn {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-primary {
+            background-color: #e50914;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #333;
+            color: white;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to MovieStream</h1>
+        <div class="buttons">
+            <a href="login.html" class="btn btn-primary">Log In</a>
+            <a href="signup.html" class="btn btn-secondary">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>

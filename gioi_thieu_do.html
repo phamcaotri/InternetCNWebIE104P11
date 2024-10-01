@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieStream - Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #141414;
+            color: white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            gap: 1rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        .hero {
+            position: relative;
+            height: 70vh;
+            background-image: url('https://via.placeholder.com/1200x600');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+        }
+        .hero-content {
+            max-width: 50%;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .movie-info {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-primary {
+            background-color: #e50914;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #333;
+            color: white;
+        }
+        .movie-list {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+        .movie-card {
+            flex: 0 0 200px;
+        }
+        .movie-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">MovieStream</div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">New Movie</a></li>
+                    <li><a href="#">Genre</a></li>
+                    <li><a href="#">Country</a></li>
+                    <li><a href="#">Movie</a></li>
+                    <li><a href="#">TV Series</a></li>
+                </ul>
+            </nav>
+            <div class="search">
+                <input type="text" placeholder="Search">
+            </div>
+        </header>
+        
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Spider-man: No Way Home</h1>
+                    <div class="movie-info">
+                        <span>IMDB 8.2</span>
+                        <span>2021</span>
+                        <span>1 hour 55 minutes</span>
+                        <span>Sci-fi</span>
+                    </div>
+                    <p>Scelerisque sed ultricies tristique. Mi in vivamus aliquam varius eu felis. Id ultricies diam turpis mi tincidunt. Ut morbi sed urna tempor imperdiet eu scelerisque egestas. Interdum mi orci suspendisse in s...</p>
+                    <div class="buttons">
+                        <button class="btn btn-secondary">Watch trailer</button>
+                        <button class="btn btn-primary">Watch now</button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="movie-list">
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/200x300" alt="Movie poster">
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/200x300" alt="Movie poster">
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/200x300" alt="Movie poster">
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/200x300" alt="Movie poster">
+                </div>
+                <div class="movie-card">
+                    <img src="https://via.placeholder.com/200x300" alt="Movie poster">
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
