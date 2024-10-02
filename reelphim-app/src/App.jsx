@@ -119,7 +119,7 @@ const App = () => {
         <main>
           <MovieSection
             title="Tiếp tục xem"
-            description="Tiếp tục hành trình khám phá những câu chuyện đang dở."
+            description="Tiếp tục hành trình khám phá những câu chuyện đang dang dở."
             movies={continueWatching}
           />
           <MovieSection
