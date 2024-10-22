@@ -26,4 +26,4 @@
 - [x] (Front end) Trang xem thông tin phim, hiển thị các chương tập (tạm thời)
 - [x] (Front end) fix Chức năng cuộn phim: khi cuộn sẽ không ấn nhầm vào link
 ## Notes
-- 
+- redux
