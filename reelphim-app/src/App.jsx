@@ -4,6 +4,10 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import GenrePage from './pages/GenrePage';
+import TVShowsPage from './pages/TVShowsPage';
+import MoviesPage from './pages/MoviesPage';
+import SearchResultsPage from './pages/SearchResultsPage';
+import MovieDetailPage from './pages/MovieDetailPage';
 
 const App = () => {
   return (
@@ -14,6 +18,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/genres" element={<GenrePage />} />
+            <Route path="/tv-shows" element={<TVShowsPage />} />
+            <Route path="/movies" element={<MoviesPage />} />
+            <Route path="/search" element={<SearchResultsPage />} />
+            <Route path="/movie/:id" element={<MovieDetailPage />} />
           </Routes>
         </div>
         <Footer />

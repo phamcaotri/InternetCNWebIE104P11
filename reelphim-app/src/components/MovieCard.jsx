@@ -1,15 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CARD_WIDTH = 190;
 const CARD_HEIGHT = CARD_WIDTH * 1.5;
 
-const MovieCard = ({ title, year, imageUrl }) => {
+const MovieCard = ({ id, title, year, imageUrl }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const navigate = useNavigate();
+  const isMoving = useRef(false);
+
+  const handleMouseDown = () => {
+    isMoving.current = false;
+  };
+
+  const handleMouseMove = () => {
+    isMoving.current = true;
+  };
+
+  const handleClick = (e) => {
+    if (!isMoving.current) {
+      navigate(`/movie/${id}`);
+    }
+  };
 
   return (
     <div 
-      className="relative overflow-hidden rounded-md transition-transform hover:scale-105 group select-none"
+      className="block relative overflow-hidden rounded-md transition-transform hover:scale-105 group select-none cursor-pointer"
       style={{ width: `${CARD_WIDTH}px`, height: `${CARD_HEIGHT}px` }}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onClick={handleClick}
+      draggable="false"
     >
       <img 
         src={imageUrl} 

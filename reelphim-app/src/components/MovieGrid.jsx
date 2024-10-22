@@ -6,7 +6,7 @@ import useDragScroll from '../hooks/useDragScroll';
 const MovieGrid = ({ movies }) => {
   const scrollRef = useDragScroll();
   // Tính toán khoảng cách scroll dựa trên chiều rộng của container.
-  const scrollPercentage = 0.8;
+  const scrollPercentage = 0.4;
   const scrollDistance = () => {
     if (scrollRef.current) {
       return scrollRef.current.offsetWidth * scrollPercentage;

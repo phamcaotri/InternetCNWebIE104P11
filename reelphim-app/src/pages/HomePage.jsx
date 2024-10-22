@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
-import { continueWatching, mostWatched, newReleases, recommended } from '../data/movieData';
+import { continueWatching, mostWatched, newReleases, recommended } from '../data/homeData';
 
 const HomePage = () => {
   return (
