@@ -38,14 +38,14 @@ const MovieGrid = ({ movies }) => {
         ))}
       </div>
       <button
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-80 hover:opacity-100 select-none"
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-secondary text-text p-2 rounded-full opacity-80 hover:opacity-100 select-none"
         onClick={scrollLeft}
         draggable="false"
       >
         &lt;
       </button>
       <button
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-80 hover:opacity-100 select-none"
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-secondary text-text p-2 rounded-full opacity-80 hover:opacity-100 select-none"
         onClick={scrollRight}
         draggable="false"
       >
