@@ -2,7 +2,7 @@
 
 ## High Priority
 - [ ] Implement real authentication with backend integration
-
+- [ ] (Front end) Trang user profile, icon user
 
 
 ## Medium Priority
@@ -18,8 +18,9 @@
 - [ ] Optimize performance with lazy loading and code splitting
 - [ ] Implement dark mode toggle
 - [ ] Implement state management (consider using Redux or React Context)
-- [ ] (Front end) Xem xét lại bảng màu web
+- [ ] (Front end) Xem xét lại bảng màu website, các nút
 - [ ] (Front end) Trang Về chúng tôi, Điều khoản sử dụng, Chính sách bảo mật, Liên hệ
+- [ ] (Front end) Trang tùy chỉnh
 
 ## Completed
 - [trí] Header, Footer
