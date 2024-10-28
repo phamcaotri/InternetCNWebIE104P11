@@ -1,7 +1,7 @@
 # Cấu trúc thư mục dự án Reelphim
 
 ## Tổng quan
-Reelphim là một ứng dụng web xem phim trực tuyến được xây dựng bằng React + Vite. Dự án sử dụng TailwindCSS cho styling và được tổ chức theo cấu trúc module rõ ràng.
+Reelphim là một ứng dụng web xem phim trực tuyến được xây dựng bằng React + Vite. Dự án sử dụng TailwindCSS cho styling và được tổ chức theo cấu trúc module.
 
 ## Cấu trúc thư mục
 
@@ -19,7 +19,8 @@ reelphim-app/
 │   ├── main.jsx       # Entry point
 │   └── index.css      # Global styles
 ├── public/            # Tài nguyên công khai
-└── package.json       # Dependencies và scripts
+├── package.json       # Dependencies và scripts
+└── node_modules/      # Thư mục chứa các dependencies
 ```
 
 ## Chi tiết các thành phần chính
@@ -69,11 +70,12 @@ reelphim-app/
 5. Responsive design
 6. Drag-to-scroll UI
 
-## Hướng dẫn phát triển
+## Hướng dẫn sử dụng
 1. Clone repository
-2. Cài đặt dependencies: `npm install`
-3. Chạy development server: `npm run dev`
-4. Build production: `npm run build`
+2. Vào thư mục project: `cd reelphim-app`
+3. Cài đặt dependencies: `npm install`
+4. Chạy development server: `npm run dev`
+5. Build production: `npm run build`
 
 ## Công nghệ sử dụng
 - React 18
