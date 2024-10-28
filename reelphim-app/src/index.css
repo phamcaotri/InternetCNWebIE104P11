@@ -10,3 +10,33 @@
 .hide-scrollbar::-webkit-scrollbar {
     display: none; /* WebKit */
 }
+
+
+@layer components {
+    .input-field {
+        @apply appearance-none rounded-none relative block w-full px-3 py-2 border 
+        border-secondary-gray placeholder-secondary-placeholder text-text bg-background 
+        focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm;
+    }
+    .btn-primary {
+        @apply w-full flex justify-center py-2 px-4 border border-transparent 
+        text-sm font-medium rounded-md text-white bg-primary 
+        hover:bg-primary-hover focus:outline-none focus:ring-2 
+        focus:ring-offset-2 focus:ring-primary;
+    }
+    .btn-secondary {
+        @apply w-full flex justify-center py-2 px-4 border border-transparent 
+        text-sm font-medium rounded-md text-white bg-secondary 
+        hover:bg-secondary-hover focus:outline-none focus:ring-2 
+        focus:ring-offset-2 focus:ring-secondary;
+    }
+    .btn-tertiary {
+        @apply w-full flex justify-center py-2 px-4 border-none
+        text-sm font-medium text-primary bg-transparent 
+        hover:text-primary-hover focus:outline-none;
+    }
+    .form-container {
+        @apply max-w-md w-full space-y-8 p-10 bg-background 
+        bg-opacity-80 rounded-xl shadow-lg relative z-20;
+    }
+}

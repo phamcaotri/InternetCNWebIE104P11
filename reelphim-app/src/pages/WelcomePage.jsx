@@ -10,7 +10,7 @@ const WelcomePage = () => {
         style={{ backgroundImage: `url(${backgroundImage})` }}
       ></div>
       <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
-      <div className="max-w-md w-full space-y-8 p-10 bg-background bg-opacity-80 rounded-xl shadow-lg relative z-20">
+      <div className="form-container">
         <div className="text-center">
           <h2 className="mt-6 text-4xl font-extrabold text-text">
             Welcome to ReelPhim
@@ -23,7 +23,7 @@ const WelcomePage = () => {
           <div>
             <Link
               to="/login"
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-150 ease-in-out"
+              className="btn-primary"
             >
               Sign In
             </Link>
@@ -31,7 +31,7 @@ const WelcomePage = () => {
           <div>
             <Link
               to="/register"
-              className="w-full flex justify-center py-3 px-4 border border-primary rounded-md shadow-sm text-sm font-medium text-primary bg-transparent hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-150 ease-in-out"
+              className="btn-secondary"
             >
               Create an Account
             </Link>

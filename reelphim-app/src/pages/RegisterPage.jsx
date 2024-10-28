@@ -25,7 +25,7 @@ const RegisterPage = () => {
         style={{ backgroundImage: `url(${backgroundImage})` }}
       ></div>
       <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
-      <div className="max-w-md w-full space-y-8 p-10 bg-background bg-opacity-80 rounded-xl shadow-lg relative z-20">
+      <div className="form-container">
         <div className="text-center">
           <h2 className="mt-6 text-4xl font-extrabold text-text">
             Create an Account
@@ -46,7 +46,7 @@ const RegisterPage = () => {
                 name="name"
                 type="text"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-secondary-gray placeholder-secondary-placeholder text-text bg-background focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="input-field"
                 placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -62,7 +62,7 @@ const RegisterPage = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-secondary-gray placeholder-secondary-placeholder text-text bg-background focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="input-field"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -78,7 +78,7 @@ const RegisterPage = () => {
                 type="password"
                 autoComplete="new-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-text bg-background focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="input-field"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -94,7 +94,7 @@ const RegisterPage = () => {
                 type="password"
                 autoComplete="new-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-secondary-gray placeholder-secondary-placeholder text-text bg-background focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="input-field"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -105,14 +105,14 @@ const RegisterPage = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              className="btn-primary"
             >
               Create Account
             </button>
           </div>
         </form>
         <div className="text-sm text-center">
-          <Link to="/login" className="font-medium text-primary hover:text-primary-hover">
+          <Link to="/login" className="btn-tertiary">
             Already have an account? Sign in
           </Link>
         </div>
