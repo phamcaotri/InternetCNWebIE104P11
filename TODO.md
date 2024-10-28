@@ -22,18 +22,21 @@
 - [ ] (Front end) Trang Về chúng tôi, Điều khoản sử dụng, Chính sách bảo mật, Liên hệ
 
 ## Completed
-- [x] Header, Footer
-- [x] Chức năng Search (tạm thời)
-- [x] Các tab cơ bản của trang
-- [x] Fix một số vấn đề hiển thị (Độ lớn của thẻ Movie Card, Thanh scroll, Nút cuộn, lỗi select)
-- [x] Chức năng mờ khi load ảnh chưa xong
-- [x] Chuyển đổi thành các module
-- [x] Dời các hằng số vào siteConfig.js
-- [x] Nút trang chủ và icon logo
-- [x] Ẩn và hiện Header tự động
-- [x] (Front end) Trang xem thông tin phim, hiển thị các chương tập (tạm thời)
-- [x] (Front end) fix Chức năng cuộn phim: khi cuộn sẽ không ấn nhầm vào link
-- [x] Tạo font family
-- [x] (Front end) Thêm Trang chủ
-- [x] (Front end) Thêm đăng nhập đăng ký
+- [trí] Header, Footer
+- [trí] Chức năng Search (tạm thời)
+- [trí] Các tab cơ bản của trang
+- [trí] Fix một số vấn đề hiển thị (Độ lớn của thẻ Movie Card, Thanh scroll, Nút cuộn, lỗi select)
+- [trí] Chức năng mờ khi load ảnh chưa xong
+- [trí] Chuyển đổi thành các module
+- [trí] Dời các hằng số vào siteConfig.js
+- [trí] Nút trang chủ và icon logo
+- [trí] Ẩn và hiện Header tự động
+- [trí] (Front end) Trang xem thông tin phim, hiển thị các chương tập (tạm thời)
+- [trí] (Front end) fix Chức năng cuộn phim: khi cuộn sẽ không ấn nhầm vào link
+- [trí] Tạo font family
+- [trí] (Front end) Thêm Trang chủ
+- [trí] (Front end) Thêm đăng nhập đăng ký
+- [trí] (Front end) Fix lại các nút, chuẩn hóa các css
+- [trí] (Front end) fix các vấn đề hiển thị về responsive của movie card
+- [trí] Bổ sung project structure
 ## Notes
