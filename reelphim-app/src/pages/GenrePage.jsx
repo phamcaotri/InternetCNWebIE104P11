@@ -5,7 +5,7 @@ import { action, comedy, drama, sciFi } from '../data/genreData';
 const GenrePage = () => {
   return (
     <main>
-      <h1 className="text-3xl font-bold mb-8">Thể loại phim</h1>
+      <h1 className="text-3xl font-bold mb-8 text-text">Thể loại phim</h1>
       <MovieSection
         title="Hành động"
         description="Những bộ phim gay cấn và đầy kịch tính."

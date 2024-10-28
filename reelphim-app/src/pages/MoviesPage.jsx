@@ -4,8 +4,8 @@ import { popularMovies, newMovies, classicMovies } from '../data/movieData';
 
 const MoviesPage = () => {
   return (
-    <main className="py-8">
-      <h1 className="text-3xl font-bold mb-8">Movies</h1>
+    <main>
+      <h1 className="text-3xl font-bold mb-8 text-text">Movies</h1>
       <MovieSection
         title="Phổ biến"
         description="Những bộ phim đang gây sốt trên màn ảnh rộng."

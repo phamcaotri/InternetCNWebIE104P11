@@ -33,12 +33,12 @@ const SearchResultsPage = () => {
   }, [searchTerm]);
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-bold my-8">Kết quả tìm kiếm cho "{searchTerm}"</h1>
+    <div>
+      <h1 className="text-3xl font-bold my-8 text-text">Kết quả tìm kiếm cho "{searchTerm}"</h1>
       {searchResults.length > 0 ? (
         <MovieList movies={searchResults} />
       ) : (
-        <p className="text-lg">Không tìm thấy kết quả phù hợp.</p>
+        <p className="text-lg text-text-muted">Không tìm thấy kết quả phù hợp.</p>
       )}
     </div>
   );

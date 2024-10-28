@@ -4,8 +4,8 @@ import { popularTVShows, newTVShows, topRatedTVShows } from '../data/tvShowData'
 
 const TVShowsPage = () => {
   return (
-    <main className="py-8">
-      <h1 className="text-3xl font-bold mb-8">TV Shows</h1>
+    <main>
+      <h1 className="text-3xl font-bold mb-8 text-text">TV Shows</h1>
       <MovieSection
         title="Phổ biến"
         description="Những series TV đang được yêu thích nhất hiện nay."
