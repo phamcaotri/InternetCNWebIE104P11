@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* ĐỊNH NGHĨA CSS ĐỂ ẨN SCROLLBAR */
 .hide-scrollbar {
     scrollbar-width: none;  /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
