@@ -40,9 +40,9 @@ const MovieCard = ({ id, title, year, imageUrl }) => {
         onLoad={() => setImageLoaded(true)}
       />
       {!imageLoaded && (
-        <div className="absolute inset-0 bg-secondary-light animate-pulse"></div>
+        <div className="absolute inset-0 bg-background-light animate-pulse"></div>
       )}
-      <div className="absolute bottom-0 left-0 right-0 bg-secondary bg-opacity-70 p-2 transform translate-y-full transition-transform group-hover:translate-y-0">
+      <div className="absolute bottom-0 left-0 right-0 bg-background bg-opacity-70 p-2 transform translate-y-full transition-transform group-hover:translate-y-0">
         <div className="font-bold text-sm mb-1">{title}</div>
         <div className="text-xs opacity-80 mb-1">{year}</div>
       </div>

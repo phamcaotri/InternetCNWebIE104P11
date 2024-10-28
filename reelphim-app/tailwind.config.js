@@ -15,6 +15,8 @@ module.exports = {
           DEFAULT: '#2A2A2A',
           light: '#3A3A3A',
           hover: '#454545',
+          gray: '#D1D1CD',
+          placeholder: '#6b7280',
         },
         accent: {
           DEFAULT: '#E5E5E1',

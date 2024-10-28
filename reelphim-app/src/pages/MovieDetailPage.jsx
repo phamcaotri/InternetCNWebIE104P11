@@ -19,15 +19,15 @@ const MovieDetailPage = () => {
       <div className="mb-8">
         <img src={movie.coverImage} alt={movie.title} className="w-full h-64 object-cover rounded-lg shadow-lg mb-4" />
         <h1 className="text-3xl font-bold mb-2">{movie.title}</h1>
-        <p className="text-gray-600 mb-4">{movie.description}</p>
+        <p className="text-text-muted mb-4">{movie.description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {movie.tags.map((tag, index) => (
-            <span key={index} className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm">
+            <span key={index} className="bg-secondary-light text-text-muted px-2 py-1 rounded-full text-sm">
               {tag}
             </span>
           ))}
         </div>
-        <button className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition duration-300">
+        <button className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-hover transition duration-300">
           Phát
         </button>
       </div>
@@ -37,7 +37,7 @@ const MovieDetailPage = () => {
           <h2 className="text-2xl font-bold mb-4">Danh sách tập</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {Array.from({ length: movie.episodes }, (_, i) => (
-              <div key={i} className="bg-gray-200 p-4 rounded-lg text-center">
+              <div key={i} className="bg-secondary-light p-4 rounded-lg text-center">
                 Tập {i + 1}
               </div>
             ))}
