@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'Reelphim';
+    src: url('fonts/Overpass-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'Overpass Italic';
+    src: url('fonts/Overpass-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+  }

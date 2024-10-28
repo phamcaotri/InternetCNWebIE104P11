@@ -1,7 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import MainLayout from './layouts/MainLayout';
+import PrivateRoute from './components/PrivateRoute';
+import WelcomePage from './pages/WelcomePage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import GenrePage from './pages/GenrePage';
 import TVShowsPage from './pages/TVShowsPage';
@@ -11,22 +15,24 @@ import MovieDetailPage from './pages/MovieDetailPage';
 
 const App = () => {
   return (
-    <Router>
-      <div className="min-h-screen bg-background text-white flex flex-col">
-        <Header />
-        <div className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/genres" element={<GenrePage />} />
-            <Route path="/tv-shows" element={<TVShowsPage />} />
-            <Route path="/movies" element={<MoviesPage />} />
-            <Route path="/search" element={<SearchResultsPage />} />
-            <Route path="/movie/:id" element={<MovieDetailPage />} />
-          </Routes>
-        </div>
-        <Footer />
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route element={<MainLayout />}>
+            <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
+            <Route path="/genres" element={<PrivateRoute><GenrePage /></PrivateRoute>} />
+            <Route path="/tv-shows" element={<PrivateRoute><TVShowsPage /></PrivateRoute>} />
+            <Route path="/movies" element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
+            <Route path="/search" element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
+            <Route path="/movie/:id" element={<PrivateRoute><MovieDetailPage /></PrivateRoute>} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 

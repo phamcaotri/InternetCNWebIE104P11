@@ -15,7 +15,7 @@ export const SITE_CONFIG = {
   
   export const NAVIGATION = {
     MAIN_MENU: [
-      { name: 'Trang chủ', path: '/' },
+      { name: 'Trang chủ', path: '/home' },
       { name: 'Phim lẻ', path: '/movies' },
       { name: 'Phim bộ', path: '/tv-shows' },
       { name: 'Thể loại', path: '/genres' },

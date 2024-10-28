@@ -32,6 +32,9 @@ module.exports = {
           hover: '#FFFFFF',
         },
       },
+      fontFamily: {
+        reelphim: ['Reelphim', 'Roboto', 'sans-serif'],
+      },
     },
   },
   plugins: [],
