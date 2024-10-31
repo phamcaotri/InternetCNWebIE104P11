@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/movie_poster_background.jpg';
+import { Eye, EyeOff } from 'lucide-react';
 
 const LoginPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,30 +53,50 @@ const LoginPage = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="input-field"
+                className="input-field w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 
+                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
+                  transition-colors text-white placeholder-gray-400
+                  hover:border-red-200 caret-red-500 selection:bg-red-500/30 bottom-3"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div>
+            <div className='relative'>
               <label htmlFor="password" className="sr-only">
                 Password
               </label>
               <input
                 id="password"
                 name="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 required
-                className="input-field"
+                className="input-field w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 
+                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
+                  transition-colors text-white placeholder-gray-400
+                  hover:border-red-200 caret-red-500 selection:bg-red-500/30 pr-12"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2
+                text-gray-400 hover:text-white focus:outline-none
+                p-1 rounded-lg hover:bg-gray-700 transition-colors"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? (
+                  <EyeOff size={20} />
+                ) : (
+                  <Eye size={20} />
+                )}
+              </button>
             </div>
           </div>
-
+          
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
@@ -83,7 +105,8 @@ const LoginPage = () => {
                 type="checkbox"
                 className="h-4 w-4 text-primary focus:ring-primary border-secondary-gray rounded"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-text-muted">
+              <label htmlFor="remember-me" 
+               className="ml-2 block text-sm text-text-muted">
                 Remember me
               </label>
             </div>
