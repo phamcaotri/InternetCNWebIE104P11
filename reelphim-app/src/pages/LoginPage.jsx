@@ -121,7 +121,7 @@ const LoginPage = () => {
           <div>
             <button
               type="submit"
-              className="btn-primary"
+              className="btn-primary w-full py-2.5 rounded-lg text-lg font-semibold"
             >
               Sign in
             </button>
