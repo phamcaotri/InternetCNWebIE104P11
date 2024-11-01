@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { tmdbConfig } from '../config/tmdb.config';
+import { MovieResponse } from '../types/movie.types';
 
 const tmdbApi = axios.create({
   baseURL: tmdbConfig.baseUrl,
@@ -10,7 +11,7 @@ const tmdbApi = axios.create({
 
 export const tmdbService = {
   // Movies
-  getMoviesList: async (type, params) => {
+  getMoviesList: async (type, params): Promise<MovieResponse> => {
     const response = await tmdbApi.get(`/movie/${type}`, { params });
     return response.data;
   },
