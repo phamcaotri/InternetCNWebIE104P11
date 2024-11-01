@@ -21,9 +21,12 @@ const tmdbApi = axios.create({
 
 export const tmdbService = {
   /** Get the list of movies in theaters.
-  * Parameters:
-  * - type: string - The type of movie list to retrieve.
-  * - params: any - Additional parameters for the request.
+  * Common type:
+  * - now_playing: Get the list of movies in theaters.
+  * - upcoming: Get the list of upcoming movies.
+  * - top_rated: Get the list of top-rated movies.
+  * - popular: Get the list of popular movies.
+  * - latest: Get the list of latest movies.
   */
   getMoviesList: async (type: string, params: any): Promise<MovieResponse> => {
     const response = await tmdbApi.get(`/movie/${type}`, { params });
