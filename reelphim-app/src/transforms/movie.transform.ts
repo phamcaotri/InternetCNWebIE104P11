@@ -1,20 +1,20 @@
 import { tmdbConfig } from '../config/tmdb.config';
-import type { Movie } from '../types/movie.types';
+import type { Movie, TMDBMovie } from '../types/movie.types';
 
-export const transformMovie = (movie: Movie): Movie => ({
+export const transformMovie = (movie: TMDBMovie): Movie => ({
   id: movie.id,
   title: movie.title,
-  originalTitle: movie.originalTitle,
+  originalTitle: movie.original_title,
   overview: movie.overview,
-  posterPath: movie.posterPath ? `${tmdbConfig.imageBaseUrl}/w500${movie.posterPath}` : null,
-  backdropPath: movie.backdropPath ? `${tmdbConfig.imageBaseUrl}/original${movie.backdropPath}` : null,
-  releaseDate: movie.releaseDate,
-  voteAverage: movie.voteAverage,
-  voteCount: movie.voteCount,
+  posterPath: movie.poster_path ? `${tmdbConfig.imageBaseUrl}/w500${movie.poster_path}` : null,
+  backdropPath: movie.backdrop_path ? `${tmdbConfig.imageBaseUrl}/original${movie.backdrop_path}` : null,
+  releaseDate: movie.release_date,
+  voteAverage: movie.vote_average,
+  voteCount: movie.vote_count,
   popularity: movie.popularity,
   genres: movie.genres || [],
   adult: movie.adult,
-  originalLanguage: movie.originalLanguage,
+  originalLanguage: movie.original_language,
   video: movie.video,
 });
 
