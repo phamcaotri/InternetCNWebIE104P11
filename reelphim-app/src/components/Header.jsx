@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE_CONFIG, NAVIGATION } from '../config/siteConfig';
 import Search from './Search';
-import { useTMDB } from '../hooks/useMovie';
+import { useTMDB } from '../hooks/useTMDB';
 
 const Header = () => {
   const location = useLocation();
