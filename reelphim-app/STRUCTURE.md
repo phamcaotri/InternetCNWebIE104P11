@@ -77,6 +77,14 @@ reelphim-app/
 4. Chạy development server: `npm run dev`
 5. Build production: `npm run build`
 
+# Quy tắc phát triển dự án
+## Quy tắc commit
+- Ghi rõ lý do commit
+
+## Quy tắc thêm tính năng
+- Tạo branch mới từ main
+- Khi hoàn thành task, tạo PR và merge vào main
+
 ## Công nghệ sử dụng
 - React 18
 - Vite

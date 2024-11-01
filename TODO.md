@@ -1,5 +1,7 @@
 # TODO List for Reelphim Project
 
+## Issues
+
 ## High Priority
 - [ ] Implement real authentication with backend integration
 - [ ] (Front end) Trang user profile, icon user
@@ -12,6 +14,9 @@
 - [ ] Add user profile page and functionality
 - [ ] Implement movie rating and review system
 - [ ] Enhance error handling and add loading states for API calls
+- [ ] (Front end) Thêm components phim nổi bật cho trang chủ
+- [ ] 
+
 
 
 ## Low Priority
@@ -21,6 +26,7 @@
 - [ ] (Front end) Xem xét lại bảng màu website, các nút
 - [ ] (Front end) Trang Về chúng tôi, Điều khoản sử dụng, Chính sách bảo mật, Liên hệ
 - [ ] (Front end) Trang tùy chỉnh
+- [ ] Thêm logo của the movie db nếu như có dùng API
 
 ## Completed
 - [trí] Header, Footer
