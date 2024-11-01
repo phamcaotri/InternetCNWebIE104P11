@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { tmdbConfig } from '../configs/tmdb.config';
+import { tmdbConfig } from '../config/tmdb.config';
 
 const tmdbApi = axios.create({
   baseURL: tmdbConfig.baseUrl,
