@@ -20,7 +20,11 @@ const tmdbApi = axios.create({
 // });
 
 export const tmdbService = {
-  // Movies
+  /** Get the list of movies in theaters.
+  * Parameters:
+  * - type: string - The type of movie list to retrieve.
+  * - params: any - Additional parameters for the request.
+  */
   getMoviesList: async (type: string, params: any): Promise<MovieResponse> => {
     const response = await tmdbApi.get(`/movie/${type}`, { params });
     return response.data;
@@ -48,12 +52,12 @@ export const tmdbService = {
     return response.data;
   },
 
-  // Categories/Genres
+  // Get the list of official genres for movies or TV shows.
   getGenres: async (mediaType: string): Promise<any> => {
     const response = await tmdbApi.get(`/genre/${mediaType}/list`);
     return response.data;
   },
-  // Trending
+  // Get the daily, weekly, or monthly trending items.
   getTrending: async (mediaType: string, timeWindow: string = 'day', params: any = {}): Promise<any> => {
     const response = await tmdbApi.get(`/trending/${mediaType}/${timeWindow}`, { params });
     return response.data;
