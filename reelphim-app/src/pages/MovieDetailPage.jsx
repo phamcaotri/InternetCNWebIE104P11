@@ -22,7 +22,8 @@ const MovieDetailPage = () => {
         <p className="text-text-muted mb-4">{movie.description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {movie.tags.map((tag, index) => (
-            <span key={index} className="bg-secondary-light text-text-muted px-2 py-1 rounded-full text-sm">
+            <span key={index} className="bg-secondary-light text-text-muted px-2 py-1 rounded-full text-sm
+                                        filmrel-selection-hover">
               {tag}
             </span>
           ))}
@@ -37,7 +38,8 @@ const MovieDetailPage = () => {
           <h2 className="text-2xl font-bold mb-4">Danh sách tập</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {Array.from({ length: movie.episodes }, (_, i) => (
-              <div key={i} className="bg-secondary-light p-4 rounded-lg text-center">
+              <div key={i} className="bg-secondary-light p-4 rounded-lg text-center
+                                    filmrel-selection-hover active:bg-red-500">
                 Tập {i + 1}
               </div>
             ))}
