@@ -20,12 +20,12 @@ const tmdbApi = axios.create({
 // });
 
 export const tmdbService = {
-  /** Get the list of movies in theaters.
+  /**
   * Common type:
-  * - now_playing: Get the list of movies in theaters.
-  * - upcoming: Get the list of upcoming movies.
-  * - top_rated: Get the list of top-rated movies.
-  * - popular: Get the list of popular movies.
+  * - now_playing: Get the list of movies currently in theatres.
+  * - upcoming: Get the list of movies that are being released soon.
+  * - top_rated: Get the list of movies ordered by rating.
+  * - popular: Get the list of movies ordered by popularity.
   * - latest: Get the list of latest movies.
   */
   getMoviesList: async (type: string, params: any): Promise<MovieResponse> => {
