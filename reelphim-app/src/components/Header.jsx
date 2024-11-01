@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE_CONFIG, NAVIGATION } from '../config/siteConfig';
 import Search from './Search';
-import { useTrending } from '../hooks/useMovie';
+import { useMovies } from '../hooks/useMovie';
 
 const Header = () => {
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const { usePopularMovies } = useTrending('movie', 'week');
+  const { useLatestMovies } = useMovies();
   const handleTestAPI = async () => {
     try {
-      const data = await usePopularMovies();
+      const data = await useLatestMovies();
       
       // Tạo một Blob chứa dữ liệu JSON
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'text/plain' });

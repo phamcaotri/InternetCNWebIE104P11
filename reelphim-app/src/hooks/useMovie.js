@@ -2,45 +2,40 @@ import { useQuery } from '@tanstack/react-query';
 import { tmdbService } from '../services/tmdb.service.ts';
 
 export const useMovies = () => {
-  // Trending
-  const useTrending = (mediaType, timeWindow = 'day', params = {}) => {
+  // Latest
+  const useLatestMovies = (params = {}) => {
     return useQuery({
-      queryKey: ['trending', mediaType, timeWindow, params],
-      queryFn: () => tmdbService.getTrending(mediaType, timeWindow, params),
+      queryFn: () => tmdbService.getMoviesList('latest', params),
     });
   };
 
   // Movies
   const useNowPlayingMovies = (params = {}) => {
     return useQuery({
-      queryKey: ['movies', 'now-playing', params],
-      queryFn: () => tmdbService.getNowPlayingMovies(params),
+      queryFn: () => tmdbService.getMoviesList('now_playing', params),
     });
   };
 
   const usePopularMovies = (params = {}) => {
     return useQuery({
-      queryKey: ['movies', 'popular', params],
-      queryFn: () => tmdbService.getPopularMovies(params),
+      queryFn: () => tmdbService.getMoviesList('popular', params),
     });
   };
 
   const useUpcomingMovies = (params = {}) => {
     return useQuery({
-      queryKey: ['movies', 'upcoming', params],
-      queryFn: () => tmdbService.getUpcomingMovies(params),
+      queryFn: () => tmdbService.getMoviesList('upcoming', params),
     });
   };
 
   const useTopRatedMovies = (params = {}) => {
     return useQuery({
-      queryKey: ['movies', 'top-rated', params],
-      queryFn: () => tmdbService.getTopRatedMovies(params),
+      queryFn: () => tmdbService.getMoviesList('top_rated', params),
     });
   };
 
   return {
-    useTrending,
+    useLatestMovies,
     useNowPlayingMovies,
     usePopularMovies,
     useUpcomingMovies,
