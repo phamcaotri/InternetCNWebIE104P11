@@ -1,3 +1,10 @@
+export interface MovieResponse {
+    page: number | null;
+    results: Movie[] | null;
+    totalPages: number | null;
+    totalResults: number | null;
+}
+
 export interface Movie {
     id: number | null;
     title: string | null;
@@ -13,11 +20,4 @@ export interface Movie {
     adult: boolean | null;
     originalLanguage: string | null;
     video: boolean | null;
-}
-  
-export interface MovieResponse {
-    page: number | null;
-    results: Movie[] | null;
-    totalPages: number | null;
-    totalResults: number | null;
 }
