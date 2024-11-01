@@ -9,10 +9,10 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const { useLatestMovies } = useMovies();
+  const latestMovies = useLatestMovies();
   const handleTestAPI = async () => {
     try {
-      const data = await useLatestMovies();
-      console.log(data);
+      const data = await latestMovies;
       
       // Tạo một Blob chứa dữ liệu JSON
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'text/plain' });
