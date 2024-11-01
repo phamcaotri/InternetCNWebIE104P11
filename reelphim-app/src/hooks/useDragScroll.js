@@ -6,7 +6,7 @@ const useDragScroll = () => {
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
-
+  const scrollSpeed = 1;
   useEffect(() => {
     const slider = scrollRef.current;
     if (!slider) return;
@@ -25,7 +25,7 @@ const useDragScroll = () => {
       if (!isDragging.current) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX.current) * 2;
+      const walk = (x - startX.current) * scrollSpeed;
       slider.scrollLeft = scrollLeft.current - walk;
     };
 

@@ -41,3 +41,4 @@
 - [trí] (Front end) fix các vấn đề hiển thị về responsive của movie card
 - [trí] Bổ sung project structure
 ## Notes
+This [product] uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB
