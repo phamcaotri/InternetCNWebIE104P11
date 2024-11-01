@@ -1,23 +1,23 @@
 export interface Movie {
-    id: number;
+    id: number | null;
     title: string | null;
     originalTitle: string | null;
     overview: string | null;
     posterPath: string | null;
     backdropPath: string | null;
     releaseDate: string | null;
-    voteAverage: number;
-    voteCount: number;
-    popularity: number;
-    genres: number[];
-    adult: boolean;
+    voteAverage: number | null;
+    voteCount: number | null;
+    popularity: number | null;
+    genres: number[] | null;
+    adult: boolean | null;
+    originalLanguage: string | null;
+    video: boolean | null;
   }
   
-
-  
   export interface MovieResponse {
-    page: number;
-    results: Movie[];
-    totalPages: number;
-    totalResults: number;
+    page: number | null;
+    results: Movie[] | null;
+    totalPages: number | null;
+    totalResults: number | null;
   }
