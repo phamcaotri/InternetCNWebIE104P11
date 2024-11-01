@@ -15,6 +15,7 @@
 - [đang làm] xử lý lỗi nếu có khi load api
 - [đang làm] lazy load ảnh
 - [đang làm] paging ảnh api
+- [đang làm] thêm secondary language để dữ liệu load về tiếng anh nếu không có tiếng việt
 - [ ] (?) load dữ liệu theo thứ tự ưu tiên trên xuống
 - [ ] Implement pagination or infinite scrolling for movie lists
 - [ ] Add user profile page and functionality
