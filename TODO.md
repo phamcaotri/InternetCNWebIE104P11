@@ -11,7 +11,10 @@
 
 
 ## Medium Priority
-- [ ] Replace placeholder movie data with actual API calls to IMDB or a similar service
+- [đang làm gần xong] Replace placeholder movie data with actual API calls to IMDB or a similar service
+- [đang làm] xử lý lỗi nếu có khi load api
+- [đang làm] lazy load ảnh
+- [đang làm] paging ảnh api
 - [ ] (?) load dữ liệu theo thứ tự ưu tiên trên xuống
 - [ ] Implement pagination or infinite scrolling for movie lists
 - [ ] Add user profile page and functionality
