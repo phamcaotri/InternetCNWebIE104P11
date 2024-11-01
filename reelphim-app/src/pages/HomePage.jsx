@@ -1,10 +1,12 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
+import Dashboard from '../components/Dashboard';
 import { continueWatching, mostWatched, newReleases, recommended } from '../data/homeData';
 
 const HomePage = () => {
   return (
     <main>
+      <Dashboard />
       <MovieSection
         title="Tiếp tục xem"
         description="Tiếp tục hành trình khám phá những câu chuyện đang dang dở."
