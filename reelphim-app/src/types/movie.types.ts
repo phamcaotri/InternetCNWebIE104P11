@@ -9,13 +9,11 @@ export interface Movie {
     voteAverage: number;
     voteCount: number;
     popularity: number;
-    genres: Genre[];
+    genres: number[];
+    adult: boolean;
   }
   
-  export interface Genre {
-    id: number;
-    name: string;
-  }
+
   
   export interface MovieResponse {
     page: number;
