@@ -95,3 +95,6 @@ reelphim-app/
 - Trang web được cấu trúc thành nhiều module tái sử dụng. Mỗi module có cùng chức năng sẽ được đặt ở một thư mục riêng (được trình bày ở trên). Tuân thủ quy tắc này và không viết trực tiếp module vào `App.jsx` cũng như các module khác.
 - Không dùng css bừa bãi. Bảng màu đã được định nghĩa sẵn ở `tailwind.config.js`, nên chỉ được phép sử dụng, thay đổi các màu đã được định nghĩa trong đó. Các component có css tái sử dụng phải dùng css tái sử dụng.
 - Đối với css, các css tái sử dụng được đặt trong `index.css`. Còn lại những css dùng 1 lần ghi trực tiếp vào trong file đó.
+
+# Giải quyết một số lỗi
+- Nếu sau khi đã chạy `npm run dev` và bị hiện lỗi tương tự như ` Could not resolve "../createLucideIcon.js"`, hãy chạy lệnh `npm uninstall lucide-react` rồi `npm install lucide-react` rồi chạy lại lệnh `npm run dev`
