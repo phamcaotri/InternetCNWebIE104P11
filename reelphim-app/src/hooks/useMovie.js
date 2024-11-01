@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { tmdbService } from '../services/tmdb.service';
+import { tmdbService } from '../services/tmdb.service.ts';
 
 export const useMovies = () => {
   // Trending

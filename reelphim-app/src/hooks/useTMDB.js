@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { tmdbService } from '../services/tmdb.service';
+import { tmdbService } from '../services/tmdb.service.ts';
 
 export const useTMDB = () => {
   const [loading, setLoading] = useState(false);
