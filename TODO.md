@@ -1,6 +1,9 @@
 # TODO List for Reelphim Project
 
 ## Issues
+- [trí] nút đăng nhập, đăng ký ở trang chủ kích thước nhỏ hơn ở trang đăng nhập, đăng ký 
+
+## Solved Issues 
 
 ## High Priority
 - [ ] Implement real authentication with backend integration
@@ -15,7 +18,6 @@
 - [ ] Implement movie rating and review system
 - [ ] Enhance error handling and add loading states for API calls
 - [ ] (Front end) Thêm components phim nổi bật cho trang chủ
-- [ ] 
 
 
 
