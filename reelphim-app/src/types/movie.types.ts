@@ -13,11 +13,11 @@ export interface Movie {
     adult: boolean | null;
     originalLanguage: string | null;
     video: boolean | null;
-  }
+}
   
-  export interface MovieResponse {
+export interface MovieResponse {
     page: number | null;
     results: Movie[] | null;
     totalPages: number | null;
     totalResults: number | null;
-  }
+}
