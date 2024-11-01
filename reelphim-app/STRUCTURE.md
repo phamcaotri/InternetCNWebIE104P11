@@ -5,14 +5,15 @@ Reelphim là một ứng dụng web xem phim trực tuyến được xây dựng
 
 ## Cấu trúc thư mục
 
-```
 reelphim-app/
 ├── src/
 │   ├── assets/         # Chứa tài nguyên tĩnh (hình ảnh, logo)
 │   ├── components/     # Components tái sử dụng
 │   ├── config/         # Cấu hình ứng dụng
+│   ├── contexts/       # React contexts
 │   ├── data/          # Dữ liệu mẫu
 │   ├── hooks/         # Custom hooks
+│   ├── layouts/       # Layout components
 │   ├── pages/         # Các trang của ứng dụng
 │   ├── fonts/         # Font chữ
 │   ├── App.jsx        # Component gốc
@@ -21,7 +22,6 @@ reelphim-app/
 ├── public/            # Tài nguyên công khai
 ├── package.json       # Dependencies và scripts
 └── node_modules/      # Thư mục chứa các dependencies
-```
 
 ## Chi tiết các thành phần chính
 
@@ -32,6 +32,7 @@ reelphim-app/
 - **MovieGrid.jsx**: Grid layout cho danh sách phim
 - **MovieSection.jsx**: Section hiển thị nhóm phim
 - **Search.jsx**: Component tìm kiếm
+- **PrivateRoute.jsx**: Route bảo vệ cho người dùng đã đăng nhập
 
 ### Pages (`/src/pages`)
 - **HomePage.jsx**: Trang chủ
@@ -41,6 +42,11 @@ reelphim-app/
 - **MovieDetailPage.jsx**: Chi tiết phim
 - **SearchResultsPage.jsx**: Kết quả tìm kiếm
 - **WelcomePage.jsx**: Trang chào mừng
+- **LoginPage.jsx**: Trang đăng nhập
+- **RegisterPage.jsx**: Trang đăng ký
+
+### Contexts (`/src/contexts`)
+- **AuthContext.jsx**: Quản lý trạng thái đăng nhập
 
 ### Configuration (`/src/config`)
 - **siteConfig.js**: Cấu hình chung của website
@@ -69,6 +75,7 @@ reelphim-app/
 4. Xem chi tiết phim
 5. Responsive design
 6. Drag-to-scroll UI
+7. Xác thực người dùng (đăng nhập/đăng ký)
 
 ## Hướng dẫn sử dụng
 1. Clone repository
@@ -88,14 +95,3 @@ reelphim-app/
 - Trang web được cấu trúc thành nhiều module tái sử dụng. Mỗi module có cùng chức năng sẽ được đặt ở một thư mục riêng (được trình bày ở trên). Tuân thủ quy tắc này và không viết trực tiếp module vào `App.jsx` cũng như các module khác.
 - Không dùng css bừa bãi. Bảng màu đã được định nghĩa sẵn ở `tailwind.config.js`, nên chỉ được phép sử dụng, thay đổi các màu đã được định nghĩa trong đó. Các component có css tái sử dụng phải dùng css tái sử dụng.
 - Đối với css, các css tái sử dụng được đặt trong `index.css`. Còn lại những css dùng 1 lần ghi trực tiếp vào trong file đó.
-
-## Quy tắc thêm tính năng
-- Tạo branch mới từ main
-- Khi hoàn thành task, tạo PR và merge vào main
-
-## Công nghệ sử dụng
-- React 18
-- Vite
-- TailwindCSS
-- React Router DOM
-- Lucide React (icons)
