@@ -1,8 +1,6 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
 import { continueWatching, mostWatched, newReleases, recommended } from '../data/homeData';
-import { useState, useEffect } from 'react';
-import { useTMDB } from '../hooks/useTMDB';
 
 
 const HomePage = () => {
