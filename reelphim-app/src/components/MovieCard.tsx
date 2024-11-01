@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import type { Movie } from '../types/movie.types';
 const CARD_WIDTH = 190;
 const CARD_HEIGHT = CARD_WIDTH * 1.5;
 
-const MovieCard = ({ id, title, year, imageUrl }) => {
+interface MovieCardProps extends Movie {}
+const MovieCard = ({ id, title, releaseDate, posterPath }: MovieCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const navigate = useNavigate();
   const isMoving = useRef(false);
@@ -33,7 +34,7 @@ const MovieCard = ({ id, title, year, imageUrl }) => {
       draggable="false"
     >
       <img 
-        src={imageUrl} 
+        src={posterPath || ''} 
         alt={`${title} poster`} 
         className={`w-full h-full object-cover pointer-events-none transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
         draggable="false"
@@ -44,7 +45,7 @@ const MovieCard = ({ id, title, year, imageUrl }) => {
       )}
       <div className="absolute bottom-0 left-0 right-0 bg-background bg-opacity-70 p-2 transform translate-y-full transition-transform group-hover:translate-y-0">
         <div className="font-bold text-sm mb-1">{title}</div>
-        <div className="text-xs opacity-80 mb-1">{year}</div>
+        <div className="text-xs opacity-80 mb-1">{releaseDate}</div>
       </div>
     </div>
   );
