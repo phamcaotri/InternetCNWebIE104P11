@@ -12,6 +12,7 @@ const Header = () => {
   const handleTestAPI = async () => {
     try {
       const data = await useLatestMovies();
+      console.log(data);
       
       // Tạo một Blob chứa dữ liệu JSON
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'text/plain' });
