@@ -34,7 +34,7 @@ const RegisterPage = () => {
             Join ReelPhim for unlimited entertainment
           </p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-10" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -46,7 +46,10 @@ const RegisterPage = () => {
                 name="name"
                 type="text"
                 required
-                className="input-field"
+                className="input-field w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 
+                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
+                  transition-colors text-white placeholder-gray-400
+                  hover:border-red-200 caret-red-500 selection:bg-red-500/30"
                 placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -62,7 +65,10 @@ const RegisterPage = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="input-field"
+                className="input-field w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 
+                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
+                  transition-colors text-white placeholder-gray-400
+                  hover:border-red-200 caret-red-500 selection:bg-red-500/30 top-2"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -78,7 +84,10 @@ const RegisterPage = () => {
                 type="password"
                 autoComplete="new-password"
                 required
-                className="input-field"
+                className="input-field w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 
+                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
+                  transition-colors text-white placeholder-gray-400
+                  hover:border-red-200 caret-red-500 selection:bg-red-500/30 top-4"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -94,7 +103,10 @@ const RegisterPage = () => {
                 type="password"
                 autoComplete="new-password"
                 required
-                className="input-field"
+                className="input-field w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 
+                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
+                  transition-colors text-white placeholder-gray-400
+                  hover:border-red-200 caret-red-500 selection:bg-red-500/30 top-6"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -105,7 +117,7 @@ const RegisterPage = () => {
           <div>
             <button
               type="submit"
-              className="btn-primary"
+              className="btn-primary w-full py-2.5 rounded-lg text-lg font-semibold"
             >
               Create Account
             </button>
