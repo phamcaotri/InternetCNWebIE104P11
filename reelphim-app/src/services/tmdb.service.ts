@@ -7,6 +7,15 @@ const tmdbApi = axios.create({
     api_key: tmdbConfig.apiKey,
   },
 });
+// const tmdbApi = axios.create({
+//   baseURL: tmdbConfig.baseUrl,
+//   params: {
+//     api_key: tmdbConfig.apiKey,
+//     language: 'vi-VN',  // Ngôn ngữ mặc định là tiếng Việt
+//     include_adult: false,  // Loại bỏ nội dung người lớn
+//     include_video: true,  // Bao gồm thông tin video nếu có
+//   },
+// });
 
 export const tmdbService = {
   // Movies
