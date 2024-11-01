@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { tmdbConfig } from '../config/tmdb.config';
+import { SITE_CONFIG } from '../config/siteConfig';
 import { MovieResponse, Movie } from '../types/movie.types';
 const tmdbApi = axios.create({
   baseURL: tmdbConfig.baseUrl,
   params: {
     api_key: tmdbConfig.apiKey,
+    language: SITE_CONFIG.LANGUAGE,
   },
 });
 // const tmdbApi = axios.create({
@@ -56,47 +58,10 @@ export const tmdbService = {
     const response = await tmdbApi.get(`/trending/${mediaType}/${timeWindow}`, { params });
     return response.data;
   },
-
-  // Movies Extended
-  getNowPlayingMovies: async (params: any): Promise<any> => {
-    const response = await tmdbApi.get('/movie/now_playing', { params });
+  // Get the list of countries (ISO 3166-1 tags) used throughout TMDB.
+  getCountries: async (): Promise<any> => {
+    const response = await tmdbApi.get('/configuration/countries');
     return response.data;
   },
 
-  getPopularMovies: async (params: any): Promise<any> => {
-    const response = await tmdbApi.get('/movie/popular', { params });
-    return response.data;
-  },
-
-  getUpcomingMovies: async (params: any): Promise<any> => {
-    const response = await tmdbApi.get('/movie/upcoming', { params });
-    return response.data;
-  },
-
-  getTopRatedMovies: async (params) => {
-    const response = await tmdbApi.get('/movie/top_rated', { params });
-    return response.data;
-  },
-
-  // TV Shows Extended
-  getOnAirTvShows: async (params) => {
-    const response = await tmdbApi.get('/tv/on_the_air', { params });
-    return response.data;
-  },
-
-  getPopularTvShows: async (params) => {
-    const response = await tmdbApi.get('/tv/popular', { params });
-    return response.data;
-  },
-
-  getAiringTodayTvShows: async (params) => {
-    const response = await tmdbApi.get('/tv/airing_today', { params });
-    return response.data;
-  },
-
-  getTopRatedTvShows: async (params) => {
-    const response = await tmdbApi.get('/tv/top_rated', { params });
-    return response.data;
-  },
-};
-
+}

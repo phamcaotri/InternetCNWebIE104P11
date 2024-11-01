@@ -11,6 +11,7 @@ export const SITE_CONFIG = {
     },
     CONTACT_EMAIL: 'support@reelphim.com',
     SUPPORT_PHONE: '+84 123 456 789',
+    LANGUAGE: 'vi-VN',
   };
   
   export const NAVIGATION = {
