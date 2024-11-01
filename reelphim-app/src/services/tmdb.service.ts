@@ -9,20 +9,11 @@ const tmdbApi = axios.create({
     language: SITE_CONFIG.LANGUAGE,
   },
 });
-// const tmdbApi = axios.create({
-//   baseURL: tmdbConfig.baseUrl,
-//   params: {
-//     api_key: tmdbConfig.apiKey,
-//     language: 'vi-VN',  // Ngôn ngữ mặc định là tiếng Việt
-//     include_adult: false,  // Loại bỏ nội dung người lớn
-//     include_video: true,  // Bao gồm thông tin video nếu có
-//   },
-// });
 
 export const tmdbService = {
   /**
   * Common type:
-  * - now_playing: Get the list of movies currently in theatres.
+  * - now_playing: Get the list of movies currently in theatres. params: page, region
   * - upcoming: Get the list of movies that are being released soon.
   * - top_rated: Get the list of movies ordered by rating.
   * - popular: Get the list of movies ordered by popularity.
