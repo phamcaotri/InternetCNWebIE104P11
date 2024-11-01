@@ -2,6 +2,7 @@ import axios from 'axios';
 import { tmdbConfig } from '../config/tmdb.config';
 import { SITE_CONFIG } from '../config/siteConfig';
 import { MovieResponse, Movie } from '../types/movie.types';
+import { transformMovie } from '../transforms/movie.transform';
 const tmdbApi = axios.create({
   baseURL: tmdbConfig.baseUrl,
   params: {
@@ -23,25 +24,7 @@ export const tmdbService = {
     const response = await tmdbApi.get(`/movie/${type}`, { params });
     return {
       page: response.data.page,
-      results: {
-        ...response.data,
-        results: response.data.results.map((movie: any) => ({
-          id: movie.id,
-          title: movie.title,
-          originalTitle: movie.original_title,
-          overview: movie.overview,
-          posterPath: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null,
-          backdropPath: movie.backdrop_path ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}` : null,
-          releaseDate: movie.release_date,
-          voteAverage: movie.vote_average,
-          voteCount: movie.vote_count,
-          popularity: movie.popularity,
-          genres: movie.genres || [],
-          adult: movie.adult,
-          originalLanguage: movie.original_language,
-          video: movie.video,
-        })),
-      },
+      results: response.data.results.map(transformMovie),
       totalPages: response.data.total_pages,
       totalResults: response.data.total_results,
     };
