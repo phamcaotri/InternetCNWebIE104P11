@@ -1,5 +1,5 @@
 import { tmdbConfig } from '../config/tmdb.config';
-import type { Movie, TMDBMovie } from '../types/movie.types';
+import type { Movie, TMDBMovie, MovieResponse, TMDBMovieResponse } from '../types/movie.types';
 
 export const transformMovie = (movie: TMDBMovie): Movie => ({
   id: movie.id,
@@ -16,6 +16,13 @@ export const transformMovie = (movie: TMDBMovie): Movie => ({
   adult: movie.adult,
   originalLanguage: movie.original_language,
   video: movie.video,
+});
+
+export const transformMovieResponse = (response: TMDBMovieResponse): MovieResponse => ({
+  page: response.page,  
+  results: response.results?.map((movie: TMDBMovie) => transformMovie(movie)) || [],
+  totalPages: response.total_pages,
+  totalResults: response.total_results,
 });
 
 export const isValidMovie = (movie: Movie): boolean => {

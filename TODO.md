@@ -53,5 +53,7 @@
 - [trí] (Front end) fix các vấn đề hiển thị về responsive của movie card
 - [trí] Bổ sung project structure
 - [trí] Bổ sung React Query
+- [trí] Cache API bằng React Query
+- [trí] API cho trang chủ
 ## Notes
 This [product] uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB

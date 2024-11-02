@@ -2,7 +2,7 @@ import axios from 'axios';
 import { tmdbConfig } from '../config/tmdb.config';
 import { SITE_CONFIG } from '../config/siteConfig';
 import { MovieResponse, Movie } from '../types/movie.types';
-import { transformMovie } from '../transforms/movie.transform';
+import { transformMovieResponse } from '../transforms/movie.transform';
 const tmdbApi = axios.create({
   baseURL: tmdbConfig.baseUrl,
   params: {
@@ -22,12 +22,7 @@ export const tmdbService = {
   */
   getMoviesList: async (type: string, params: any): Promise<MovieResponse> => {
     const response = await tmdbApi.get(`/movie/${type}`, { params });
-    return {
-      page: response.data.page,
-      results: response.data.results.map(transformMovie),
-      totalPages: response.data.total_pages,
-      totalResults: response.data.total_results,
-    };
+    return transformMovieResponse(response.data);
   },
   
   getMovieDetails: async (id: number): Promise<Movie> => {

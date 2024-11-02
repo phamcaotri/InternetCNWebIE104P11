@@ -26,6 +26,7 @@ const MovieCard = ({ id, title, releaseDate, posterPath }: MovieCardProps) => {
 
   return (
     <div 
+    // todo: dời css inline ra ngoài
       className="block relative overflow-hidden rounded-md transition-transform hover:scale-105 group select-none cursor-pointer"
       style={{ width: `${CARD_WIDTH}px`, height: `${CARD_HEIGHT}px` }}
       onMouseDown={handleMouseDown}
