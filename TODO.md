@@ -1,6 +1,9 @@
 # TODO List for Reelphim Project
 
 ## Issues
+- [trí] nút đăng nhập, đăng ký ở trang chủ kích thước nhỏ hơn ở trang đăng nhập, đăng ký 
+
+## Solved Issues 
 
 ## High Priority
 - [ ] Implement real authentication with backend integration
@@ -8,14 +11,17 @@
 
 
 ## Medium Priority
-- [ ] Replace placeholder movie data with actual API calls to IMDB or a similar service
+- [đang làm gần xong] Replace placeholder movie data with actual API calls to IMDB or a similar service
+- [đang làm] xử lý lỗi nếu có khi load api
+- [đang làm] lazy load ảnh
+- [đang làm] paging ảnh api
+- [đang làm] thêm secondary language để dữ liệu load về tiếng anh nếu không có tiếng việt
 - [ ] (?) load dữ liệu theo thứ tự ưu tiên trên xuống
 - [ ] Implement pagination or infinite scrolling for movie lists
 - [ ] Add user profile page and functionality
 - [ ] Implement movie rating and review system
 - [ ] Enhance error handling and add loading states for API calls
 - [ ] (Front end) Thêm components phim nổi bật cho trang chủ
-- [ ] 
 
 
 
@@ -46,5 +52,8 @@
 - [trí] (Front end) Fix lại các nút, chuẩn hóa các css
 - [trí] (Front end) fix các vấn đề hiển thị về responsive của movie card
 - [trí] Bổ sung project structure
+- [trí] Bổ sung React Query
+- [trí] Cache API bằng React Query
+- [trí] API cho trang chủ
 ## Notes
 This [product] uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB
