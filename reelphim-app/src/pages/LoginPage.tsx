@@ -53,10 +53,7 @@ const LoginPage = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="input-field w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 
-                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
-                  transition-colors text-white placeholder-gray-400
-                  hover:border-red-200 caret-red-500 selection:bg-red-500/30 bottom-3"
+                className="input-field py-3 bottom"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -72,10 +69,7 @@ const LoginPage = () => {
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 required
-                className="input-field w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 
-                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
-                  transition-colors text-white placeholder-gray-400
-                  hover:border-red-200 caret-red-500 selection:bg-red-500/30 pr-12"
+                className="input-field py-3 pr-12"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

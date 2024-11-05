@@ -46,10 +46,7 @@ const RegisterPage = () => {
                 name="name"
                 type="text"
                 required
-                className="input-field w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 
-                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
-                  transition-colors text-white placeholder-gray-400
-                  hover:border-red-200 caret-red-500 selection:bg-red-500/30"
+                className="input-field"
                 placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -65,10 +62,7 @@ const RegisterPage = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="input-field w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 
-                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
-                  transition-colors text-white placeholder-gray-400
-                  hover:border-red-200 caret-red-500 selection:bg-red-500/30 top-2"
+                className="input-field top-2"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -84,10 +78,7 @@ const RegisterPage = () => {
                 type="password"
                 autoComplete="new-password"
                 required
-                className="input-field w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 
-                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
-                  transition-colors text-white placeholder-gray-400
-                  hover:border-red-200 caret-red-500 selection:bg-red-500/30 top-4"
+                className="input-field top-4"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -103,10 +94,7 @@ const RegisterPage = () => {
                 type="password"
                 autoComplete="new-password"
                 required
-                className="input-field w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 
-                  focus:ring-2 focus:ring-red-500 focus:border-red-500 
-                  transition-colors text-white placeholder-gray-400
-                  hover:border-red-200 caret-red-500 selection:bg-red-500/30 top-6"
+                className="input-field top-6"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
