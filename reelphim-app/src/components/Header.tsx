@@ -2,11 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE_CONFIG, NAVIGATION } from '../config/siteConfig';
 import Search from './Search';
+import { usePopularMovies } from '../hooks/useMovie';
 
 const Header = () => {
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const popularMovies = usePopularMovies();
+  const handleTestAPI = async () => {
+    try {
+      const data = await popularMovies;
+      
+      // Tạo một Blob chứa dữ liệu JSON
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'text/plain' });
+      
+      // Tạo URL cho Blob
+      const url = window.URL.createObjectURL(blob);
+      
+      // Tạo một thẻ a ẩn để download
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'api-response.txt';
+      
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+      
+      // Cleanup
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('API Test Error:', error);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,6 +80,14 @@ const Header = () => {
               ))}
             </ul>
           </nav>
+          <div className="flex items-center space-x-4">
+              <button
+                onClick={handleTestAPI}
+                className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-hover"
+              >
+                Test API
+              </button>
+          </div>
           <div className="w-64">
             <Search />
           </div>
