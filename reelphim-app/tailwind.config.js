@@ -34,6 +34,42 @@ module.exports = {
           hover: '#FFFFFF',
         },
       },
+      Light: {
+        primary: {
+          DEFAULT: '#E50914',
+          dark: '#8B0000',
+          light: '#E50914',
+          hover: '#C00000',
+        },
+        primary: {
+          DEFAULT: '#E50914',
+          dark: '#8B0000',
+          light: '#E50914',
+          hover: '#C00000',
+        },
+        secondary: {
+          DEFAULT: '#F5F5F5',
+          light: '#E5E5E5',
+          hover: '#DADADA',
+          gray: '#2E2E32',
+          placeholder: '#94979F',
+        },
+        accent: {
+          DEFAULT: '#1A1A1E',
+          dark: '#2E2E32',
+          hover: '#0A0A0E',
+        },
+        background: {
+          DEFAULT: '#FFFFFF',
+          light: '#F5F5F5',
+          hover: '#EFEFEF',
+        },
+        text: {
+          DEFAULT: '#0F0F0F',
+          muted: '#5F5F5F',
+          hover: '#000000',
+        },
+      },
       fontFamily: {
         reelphim: ['Reelphim', 'Roboto', 'sans-serif'],
       },

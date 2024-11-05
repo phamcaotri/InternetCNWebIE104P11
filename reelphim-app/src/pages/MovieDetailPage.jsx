@@ -39,7 +39,7 @@ const MovieDetailPage = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {Array.from({ length: movie.episodes }, (_, i) => (
               <div key={i} className="bg-secondary-light p-4 rounded-lg text-center
-                                    filmrel-selection-hover active:bg-red-500">
+                                    filmrel-selection-hover">
                 Tập {i + 1}
               </div>
             ))}
