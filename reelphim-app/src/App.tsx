@@ -19,7 +19,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000, // Data được coi là "fresh" trong 5 phút
-      cacheTime: 30 * 60 * 1000, // Cache được giữ trong 30 phút
+      // cacheTime: 30 * 60 * 1000, // Cache được giữ trong 30 phút
       refetchOnWindowFocus: false, // Không fetch lại khi focus window
       retry: 1, // Số lần retry khi request thất bại
     },

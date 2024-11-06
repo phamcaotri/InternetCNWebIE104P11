@@ -13,11 +13,11 @@ const HomePage = () => {
   const { data: popularMovies, isLoading: isPopularLoading } = usePopularMovies();
   const { data: nowPlayingMovies, isLoading: isNowPlayingLoading } = useNowPlayingMovies();
   const { data: topRatedMovies, isLoading: isTopRatedLoading } = useTopRatedMovies();
-
-  // Loading state
-  if (isLatestLoading || isPopularLoading || isNowPlayingLoading || isTopRatedLoading) {
-    return <div>Loading...</div>; // Có thể thay bằng loading spinner
-  }
+ 
+  // // Loading state
+  // if (isLatestLoading || isPopularLoading || isNowPlayingLoading || isTopRatedLoading) {
+  //   return <div>Loading...</div>; // Có thể thay bằng loading spinner
+  // }
 
   return (
     <main>
