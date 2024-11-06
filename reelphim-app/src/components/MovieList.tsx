@@ -2,6 +2,11 @@ import React from 'react';
 import MovieCard from './MovieCard';
 
 const MovieList = ({ movies, title }) => {
+  /** @author @phantruowngthanhtrung
+   * Định nghĩa nội dung của MovieList:
+   * - Hiển thị danh sách các bộ phim
+   * Lấy thông tin từ file MovieCard.tsx
+   */
   return (
     <div className="my-8">
       {title && <h2 className="text-2xl font-bold mb-4">{title}</h2>}
