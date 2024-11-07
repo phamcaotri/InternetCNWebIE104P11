@@ -3,6 +3,7 @@ import { tmdbConfig } from '../config/tmdb.config';
 import { SITE_CONFIG } from '../config/siteConfig';
 import { MovieResponse, Movie } from '../types/movie.types';
 import { transformMovieResponse } from '../transforms/movie.transform';
+
 const tmdbApi = axios.create({
   baseURL: tmdbConfig.baseUrl,
   params: {
