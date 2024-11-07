@@ -8,7 +8,7 @@ const Header = () => {
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const popularMovies = tmdbapi.PopularMovies();
+  const popularMovies = tmdbapi.SearchMovies({ query: 'joker' });
   const handleTestAPI = async () => {
     try {
       const data = await popularMovies;
