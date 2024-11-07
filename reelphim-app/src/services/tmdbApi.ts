@@ -63,6 +63,27 @@ class TMDBApi {
   TopRatedMovies(params = {}) {
     return useMovieQuery('top_rated', params);
   }
+  LatestTvShows(params = {}) {
+    return useTvShowQuery('latest', params);
+  }
+  PopularTvShows(params = {}) {
+    return useTvShowQuery('popular', params);
+  }
+  UpcomingTvShows(params = {}) {
+    return useTvShowQuery('upcoming', params);
+  }
+  TopRatedTvShows(params = {}) {
+    return useTvShowQuery('top_rated', params);
+  }
+  SearchMovies(params = {}) {
+    return useSearchQuery('movie', params);
+  }
+  SearchTvShows(params = {}) {
+    return useSearchQuery('tv', params);
+  }
+  Search(params = {}) {
+    return useSearchQuery('', params);
+  }
 }
 
 export const tmdbapi = new TMDBApi();
