@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { tmdbService } from './tmdb.service.ts';
+import { tmdbService } from './tmdb.service';
 import { QUERY_KEYS } from '../constants/tmdb.querykeys';
 
-export const useMovieQuery = (type: string, params = {}) => {
+export const useMovieQuery = (type: string, params = {}) =>  {
   return useQuery({
     queryKey: QUERY_KEYS.MOVIES.LIST(type),
     queryFn: () => tmdbService.getMoviesList(type, params),

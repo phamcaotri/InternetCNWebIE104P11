@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE_CONFIG, NAVIGATION } from '../config/siteConfig';
 import Search from './Search';
-import { usePopularMovies } from '../hooks/useMovie';
+import { tmdbapi } from '../services/tmdbApi';
 
 const Header = () => {
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const popularMovies = usePopularMovies();
+  const popularMovies = tmdbapi.PopularMovies();
   const handleTestAPI = async () => {
     try {
       const data = await popularMovies;
