@@ -52,3 +52,17 @@ export const useTopRatedMovies = (params = {}) => {
     queryFn: () => tmdbService.getMoviesList('top_rated', params),
   });
 };
+
+export const useNewMovies = (params = {}) => {
+  return useQuery({
+    queryKey: QUERY_KEYS.MOVIES.LIST('new'),
+    queryFn: () => tmdbService.getMoviesList('new', params),
+  });
+};
+
+export const useClassicMovies = (params = {}) => { 
+  return useQuery({
+    queryKey: QUERY_KEYS.MOVIES.LIST('classic'),
+    queryFn: () => tmdbService.getMoviesList('classic', params),
+  });
+};
