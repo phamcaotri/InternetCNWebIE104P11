@@ -1,12 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Movie } from '../types/movie.types';
-import { SITE_CONFIG } from '../config/siteConfig';
-const CARD_WIDTH = 190;
-const CARD_HEIGHT = CARD_WIDTH * 1.5;
+import { MediaItem } from '../types/media.types';
+import { UI_CONFIG } from '../config';
+const CARD_WIDTH = UI_CONFIG.CARD.WIDTH;
+const CARD_HEIGHT = CARD_WIDTH * UI_CONFIG.CARD.ASPECT_RATIO;
 
-interface MovieCardProps extends Movie {}
-const MovieCard = ({ id, title, releaseDate, posterPath }: MovieCardProps) => {
+interface MovieCardProps extends MediaItem {}
+const MovieCard = ({ id, title, releaseDateFormatted, posterPath }: MovieCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const navigate = useNavigate();
@@ -25,12 +25,8 @@ const MovieCard = ({ id, title, releaseDate, posterPath }: MovieCardProps) => {
     }
   };
 
-  const releaseDateString = new Date(releaseDate).toLocaleDateString(SITE_CONFIG.LANGUAGE, { year: 'numeric', month: 'long', day: 'numeric' });
-
   return (
-    <div 
-    // todo: dời css inline ra ngoài
-      className="block relative overflow-hidden rounded-md transition-transform hover:scale-105 group select-none cursor-pointer"
+    <div className="block relative overflow-hidden rounded-md transition-transform hover:scale-105 group select-none cursor-pointer"
       style={{ width: `${CARD_WIDTH}px`, height: `${CARD_HEIGHT}px` }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
@@ -49,7 +45,7 @@ const MovieCard = ({ id, title, releaseDate, posterPath }: MovieCardProps) => {
       )}
       <div className="absolute bottom-0 left-0 right-0 bg-background bg-opacity-80 p-2 transform translate-y-full transition-transform group-hover:translate-y-0">
         <div className="font-bold text-sm mb-1">{title}</div>
-        <div className="text-xs opacity-80 mb-1">{releaseDateString}</div>
+        <div className="text-xs opacity-80 mb-1">{releaseDateFormatted}</div>
       </div>
     </div>
   );

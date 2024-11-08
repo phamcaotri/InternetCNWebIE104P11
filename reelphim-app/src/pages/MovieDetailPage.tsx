@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-
+import { UI_CONFIG } from '../config';
 const MovieDetailPage = () => {
   const { id } = useParams(); // Lấy id phim từ URL
 
@@ -27,8 +27,8 @@ const MovieDetailPage = () => {
             </span>
           ))}
         </div>
-        <button className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-hover transition duration-300">
-          Phát
+        <button className={`bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-hover transition duration-${UI_CONFIG.ANIMATION.DURATION} ${UI_CONFIG.ANIMATION.TIMING}`}>
+        Phát
         </button>
       </div>
 

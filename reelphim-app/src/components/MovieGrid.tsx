@@ -2,11 +2,12 @@
 import React from 'react';
 import MovieCard from './MovieCard';
 import useDragScroll from '../hooks/useDragScroll';
+import { UI_CONFIG } from '../config';
 
 const MovieGrid = ({ movies }) => {
   const scrollRef = useDragScroll();
   // Tính toán khoảng cách scroll dựa trên chiều rộng của container.
-  const scrollPercentage = 0.4;
+  const scrollPercentage = UI_CONFIG.SCROLL.PERCENTAGE;
   const scrollDistance = () => {
     if (scrollRef.current) {
       return scrollRef.current.offsetWidth * scrollPercentage;
@@ -15,13 +16,13 @@ const MovieGrid = ({ movies }) => {
   };
   const scrollLeft = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -scrollDistance(), behavior: 'smooth' });
+      scrollRef.current.scrollBy({ left: -scrollDistance(), behavior: UI_CONFIG.SCROLL.BEHAVIOR });
     }
   };
   
   const scrollRight = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: scrollDistance(), behavior: 'smooth' });
+      scrollRef.current.scrollBy({ left: scrollDistance(), behavior: UI_CONFIG.SCROLL.BEHAVIOR });
     }
   };
   return (
@@ -32,8 +33,8 @@ const MovieGrid = ({ movies }) => {
         draggable="false"
       >
         {movies.map((movie, index) => (
-          <div key={index} className="flex-shrink-0 w-48" draggable="false">
-            <MovieCard {...movie} />
+          <div key={index} className={`flex-shrink-0 w-[${UI_CONFIG.CARD.WIDTH}px]`} draggable="false">
+          <MovieCard {...movie} />
           </div>
         ))}
       </div>
