@@ -1,6 +1,5 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
-import { usePoppularTVShows, useNewTVShows, useTopRatedTVShows } from '../hooks/useTVShows';
 
 const TVShowsPage = () => {
   // Fetch data từ API
