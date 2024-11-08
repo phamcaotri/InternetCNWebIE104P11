@@ -5,6 +5,13 @@ import useDragScroll from '../hooks/useDragScroll';
 import { UI_CONFIG } from '../config';
 
 const MovieGrid = ({ movies }) => {
+  /** @author @phantruowngthanhtrung
+   * Định nghĩa nội dung của MovieGrid:
+   * - Bố trí các MovieCard theo dạng lưới
+   * Lấy thông tin từ file MovieCard.tsx
+   * - Sử dụng hook useDragScroll để tạo hiệu ứng scroll khi kéo chuột
+   * Lấy thông tin từ file useDragScroll.ts
+   */
   const scrollRef = useDragScroll();
   // Tính toán khoảng cách scroll dựa trên chiều rộng của container.
   const scrollPercentage = UI_CONFIG.SCROLL.PERCENTAGE;

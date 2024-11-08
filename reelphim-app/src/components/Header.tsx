@@ -5,6 +5,17 @@ import Search from './SearchBar';
 import { useSearchMoviesQuery } from '../services/tmdbApi';
 
 const Header = () => {
+  /** @author @phantruowngthanhtrung
+   * Định nghĩa nội dung của Header:
+   * - Liên kết
+   * Lấy thông tin từ file index.d.ts
+   * - Thanh điều hướng
+   * Lấy thông tin từ file siteConfig.ts
+   * - Tìm kiếm
+   * Lấy thông tin từ file Search.tsx
+   * - Phim phổ biến
+   * Lấy thông tin từ file useMovie.ts
+   */
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);

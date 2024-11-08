@@ -7,6 +7,13 @@ const CARD_HEIGHT = CARD_WIDTH * UI_CONFIG.CARD.ASPECT_RATIO;
 
 interface MovieCardProps extends MediaItem {}
 const MovieCard = ({ id, title, releaseDateFormatted, posterPath }: MovieCardProps) => {
+    /** @author @phantruowngthanhtrung
+   * Định nghĩa nội dung của MovieCard:
+   * - Hiển thị thông tin của một bộ phim
+   * Lây thông tin từ file movie.types.ts
+   * - Chuyển hướng đến trang chi tiết bộ phim khi click
+   * Lấy thông tin từ file index.d.ts
+   */
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const navigate = useNavigate();

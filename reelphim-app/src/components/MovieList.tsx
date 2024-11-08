@@ -10,6 +10,11 @@ const MovieList = ({
   limit?: number;  // Optional limit prop
 }) => {
   // Slice movies array if limit is provided
+    /** @author @phantruowngthanhtrung
+   * Định nghĩa nội dung của MovieList:
+   * - Hiển thị danh sách các bộ phim
+   * Lấy thông tin từ file MovieCard.tsx
+   */
   const displayedMovies = limit ? movies.slice(0, limit) : movies;
 
   return (
