@@ -1,16 +1,12 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
 
-const MoviesPage = () => {
-  // Fetch data từ API
-  const { data: popularMovies, isLoading: isPopularLoading } = usePopularMovies();
-  const { data: newMovies, isLoading: isNewLoading } = useNewMovies();
-  const { data: classicMovies, isLoading: isClassicLoading } = useClassicMovies();
 
-  // Loading state
-  if (isPopularLoading || isNewLoading || isClassicLoading) {
-    return <div>Loading...</div>;
-  }
+
+const MoviesPage = () => {
+  const popularMovies = [];
+  const newMovies = [];
+  const classicMovies = [];
 
   return (
     <main>

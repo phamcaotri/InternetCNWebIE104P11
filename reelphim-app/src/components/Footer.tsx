@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG, NAVIGATION } from '../config/site.config';
+import ModeButton from './ModeButton';
 
 const Footer = () => {
   /** @author @phantruowngthanhtrung
