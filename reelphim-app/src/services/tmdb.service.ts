@@ -1,14 +1,23 @@
 import axios from 'axios';
-import { tmdbConfig } from '../config/tmdb.config';
-import { SITE_CONFIG } from '../config/siteConfig';
-import { MovieResponse, Movie } from '../types/movie.types';
-import { transformMovieResponse } from '../transforms/movie.transform';
-
+import { TMDB_CONFIG } from '../config';
+import { SITE_CONFIG } from '../config/site.config';
+import { transformMovieItem, transformTvItem, transformMovieResponse, transformTvResponse } from '../transforms/media.transform';
+import { 
+  MovieItem, 
+  TvItem,
+  MovieResponse,
+  TvResponse,
+  TMDBMovieResponse,
+  TMDBTvResponse,
+  TMDBMovie,
+  TMDBTv
+} from '../types/media.types';
 const tmdbHttpRequest = axios.create({
-  baseURL: tmdbConfig.baseUrl,
+  baseURL: TMDB_CONFIG.baseUrl,
   params: {
-    api_key: tmdbConfig.apiKey,
+    api_key: TMDB_CONFIG.apiKey,
     language: SITE_CONFIG.LANGUAGE,
+    include_adult: TMDB_CONFIG.includeAdult,
   },
 });
 
@@ -22,32 +31,35 @@ export const tmdbService = {
   * - latest: Get the list of latest movies.
   */
   getMoviesList: async (type: string, params: any): Promise<MovieResponse> => {
-    const response = await tmdbHttpRequest.get(`/movie/${type}`, { params });
+    const response = await tmdbHttpRequest.get<TMDBMovieResponse>(`/movie/${type}`, { params });
     return transformMovieResponse(response.data);
   },
   
-  getMovieDetails: async (id: number): Promise<Movie> => {
-    const response = await tmdbHttpRequest.get(`/movie/${id}`);
-    return response.data;
+  getMovieDetails: async (id: number): Promise<MovieItem> => {
+    const response = await tmdbHttpRequest.get<TMDBMovie>(`/movie/${id}`);
+    return transformMovieItem(response.data);
   },
   
-  // TV Shows
-  getTvList: async (type: string, params: any): Promise<MovieResponse> => {
-    const response = await tmdbHttpRequest.get(`/tv/${type}`, { params });
-    return response.data;
+  getTvList: async (type: string, params: any): Promise<TvResponse> => {
+    const response = await tmdbHttpRequest.get<TMDBTvResponse>(`/tv/${type}`, { params });
+    return transformTvResponse(response.data);
   },
   
-  getTvDetails: async (id: number): Promise<Movie> => {
-    const response = await tmdbHttpRequest.get(`/tv/${id}`);
-    return response.data;
+  getTvDetails: async (id: number): Promise<TvItem> => {
+    const response = await tmdbHttpRequest.get<TMDBTv>(`/tv/${id}`);
+    return transformTvItem(response.data);
   },
   
-  // Search
-  search: async (type: string, params: any): Promise<MovieResponse> => {
-    const response = await tmdbHttpRequest.get(`/search/${type}`, { params });
+  searchMovies: async (type: string, params: any): Promise<MovieResponse> => {
+    const response = await tmdbHttpRequest.get<TMDBMovieResponse>(`/search/${type}`, { params });
     return transformMovieResponse(response.data);
   },
 
+  searchTv: async (type: string, params: any): Promise<TvResponse> => {
+    const response = await tmdbHttpRequest.get<TMDBTvResponse>(`/search/${type}`, { params });
+    return transformTvResponse(response.data);
+  },
+  
   // Get the list of official genres for movies or TV shows.
   getGenres: async (mediaType: string): Promise<any> => {
     const response = await tmdbHttpRequest.get(`/genre/${mediaType}/list`);

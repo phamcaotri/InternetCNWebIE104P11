@@ -1,8 +1,17 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
-import { popularTVShows, newTVShows, topRatedTVShows } from '../data/tvShowData';
 
 const TVShowsPage = () => {
+  // Fetch data từ API
+  const { data: popularTVShows, isLoading: isPopularLoading } = usePopularTVShows();
+  const { data: newTVShows, isLoading: isNewLoading } = useNewTVShows();
+  const { data: topRatedTVShows, isLoading: isTopRatedLoading } = useTopRatedTVShows();
+
+  // Loading state
+  if (isPopularLoading || isNewLoading || isTopRatedLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <main>
       <h1 className="text-3xl font-bold mb-8 text-text">TV Shows</h1>

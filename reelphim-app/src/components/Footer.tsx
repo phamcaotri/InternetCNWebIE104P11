@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { SITE_CONFIG, NAVIGATION } from '../config/siteConfig';
-import ModeButton from './ModeButton';
-
+import { SITE_CONFIG, NAVIGATION } from '../config/site.config';
 
 const Footer = () => {
+  /** @author @phantruowngthanhtrung
+   * Định ngĩa nội dung của Footer:
+   * - Thông tin liên hệ
+   * Lấy thông tin từ file siteConfig.ts
+   * - Liên kết
+   * Lấy thông tin từ file index.d.ts
+   */
   return (
     <footer className="bg-background text-text w-full mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

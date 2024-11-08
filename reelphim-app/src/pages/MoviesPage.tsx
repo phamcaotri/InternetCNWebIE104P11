@@ -1,8 +1,17 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
-import { popularMovies, newMovies, classicMovies } from '../data/movieData';
 
 const MoviesPage = () => {
+  // Fetch data từ API
+  const { data: popularMovies, isLoading: isPopularLoading } = usePopularMovies();
+  const { data: newMovies, isLoading: isNewLoading } = useNewMovies();
+  const { data: classicMovies, isLoading: isClassicLoading } = useClassicMovies();
+
+  // Loading state
+  if (isPopularLoading || isNewLoading || isClassicLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <main>
       <h1 className="text-3xl font-bold mb-8 text-text">Movies</h1>
