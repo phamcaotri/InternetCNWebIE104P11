@@ -30,31 +30,38 @@ reelphim-app/
 ## Chi tiết các thành phần chính
 
 ### Components (`/src/components`)
-- **Header.jsx**: Navigation bar và tìm kiếm
-- **Footer.jsx**: Thông tin liên hệ và links
+- **Header.tsx**: Navigation bar và tìm kiếm
+- **Footer.tsx**: Thông tin liên hệ và links
 - **MovieCard.tsx**: Hiển thị thông tin phim
 - **MovieGrid.tsx**: Grid layout cho danh sách phim với tính năng drag-to-scroll
-- **MovieSection.jsx**: Section hiển thị nhóm phim
-- **Search.jsx**: Component tìm kiếm
-- **PrivateRoute.jsx**: Route bảo vệ cho người dùng đã đăng nhập
+- **MovieSection.tsx**: Section hiển thị nhóm phim
+- **Search.tsx**: Component tìm kiếm
+- **PrivateRoute.tsx**: Route bảo vệ cho người dùng đã đăng nhập
 
 ### Services (`/src/services`)
-- **tmdb.service.ts**: Service gọi API từ TMDB
+- **tmdbApi.ts**: Service gọi API từ TMDB
 - **auth.service.ts**: Service xử lý authentication
 
-### Transforms (`/src/transforms`)
-- **movie.transform.ts**: Transform data từ TMDB API sang định dạng ứng dụng
-
-### Types (`/src/types`)
-- **movie.types.ts**: TypeScript interfaces cho movie data
-- **auth.types.ts**: TypeScript interfaces cho authentication
-
 ### Configuration (`/src/config`)
-- **tmdb.config.ts**: Cấu hình cho TMDB API
-- **siteConfig.ts**: Cấu hình chung của website
-  - Thông tin website
+- **site.config.ts**: Cấu hình chung của website
+  - Thông tin website (tên, logo, tagline)
   - Navigation links
   - Thông tin liên hệ
+  - Social media links
+
+### Data (`/src/data`)
+- **movieData.js**: Dữ liệu phim mẫu
+- **tvShowData.js**: Dữ liệu phim bộ mẫu
+- **genreData.js**: Dữ liệu thể loại phim
+- **homeData.js**: Dữ liệu cho trang chủ
+
+### Pages (`/src/pages`)
+- **HomePage.tsx**: Trang chủ với các section phim
+- **MovieDetailPage.tsx**: Chi tiết phim
+- **GenrePage.tsx**: Danh sách phim theo thể loại
+- **TVShowsPage.tsx**: Danh sách phim bộ
+- **MoviesPage.tsx**: Danh sách phim lẻ
+- **SearchResultsPage.tsx**: Kết quả tìm kiếm
 
 ### Styling
 - Sử dụng TailwindCSS
@@ -66,6 +73,9 @@ reelphim-app/
   - Buttons
   - Form containers
   - Scrollbar hiding
+- Font chữ trong `fonts.css`
+  - Reelphim (Overpass)
+  - Overpass Italic
 
 ## API Integration
 - Sử dụng TMDB API cho dữ liệu phim
