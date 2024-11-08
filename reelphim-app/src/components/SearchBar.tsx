@@ -6,6 +6,13 @@ import debounce from 'lodash/debounce';
 import SearchSuggestions from './SearchSuggestions';
 
 const Search = () => {
+    /** @author @phantruowngthanhtrung
+   * Định nghĩa nội dung của Search:
+   * - Tìm kiếm phim
+   * Lấy thông tin từ file lucide-react.d.ts
+   * - Chuyển hướng đến trang kết quả tìm kiếm
+   * Lấy thông tin từ file index.d.ts
+   */
   const [searchTerm, setSearchTerm] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
