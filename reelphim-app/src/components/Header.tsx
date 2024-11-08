@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { SITE_CONFIG, NAVIGATION } from '../config/siteConfig';
+import { SITE_CONFIG, UI_CONFIG, NAVIGATION } from '../config';
 import Search from './SearchBar';
 import { useSearchMoviesQuery } from '../services/tmdbApi';
 
@@ -42,7 +42,7 @@ const Header = () => {
       
       if (currentScrollY < lastScrollY) {
         setIsVisible(true);
-      } else if (currentScrollY > 100 && currentScrollY > lastScrollY) {
+      } else if (currentScrollY > UI_CONFIG.SCROLL.HEADER_HIDE_OFFSET && currentScrollY > lastScrollY) {
         setIsVisible(false);
       }
       

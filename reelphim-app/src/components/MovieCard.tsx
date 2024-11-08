@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MediaItem } from '../types/media.types';
-const CARD_WIDTH = 190;
-const CARD_HEIGHT = CARD_WIDTH * 1.5;
+import { UI_CONFIG } from '../config';
+const CARD_WIDTH = UI_CONFIG.CARD.WIDTH;
+const CARD_HEIGHT = CARD_WIDTH * UI_CONFIG.CARD.ASPECT_RATIO;
 
 interface MovieCardProps extends MediaItem {}
 const MovieCard = ({ id, title, releaseDateFormatted, posterPath }: MovieCardProps) => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { tmdbConfig } from '../config/tmdb.config';
-import { SITE_CONFIG } from '../config/siteConfig';
+import { TMDB_CONFIG } from '../config';
+import { SITE_CONFIG } from '../config/site.config';
 import { transformMovieItem, transformTvItem, transformMovieResponse, transformTvResponse } from '../transforms/media.transform';
 import { 
   MovieItem, 
@@ -13,10 +13,11 @@ import {
   TMDBTv
 } from '../types/media.types';
 const tmdbHttpRequest = axios.create({
-  baseURL: tmdbConfig.baseUrl,
+  baseURL: TMDB_CONFIG.baseUrl,
   params: {
-    api_key: tmdbConfig.apiKey,
+    api_key: TMDB_CONFIG.apiKey,
     language: SITE_CONFIG.LANGUAGE,
+    include_adult: TMDB_CONFIG.includeAdult,
   },
 });
 

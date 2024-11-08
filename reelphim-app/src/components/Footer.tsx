@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SITE_CONFIG, NAVIGATION } from '../config/siteConfig';
+import { SITE_CONFIG, NAVIGATION } from '../config/site.config';
 
 const Footer = () => {
   return (
