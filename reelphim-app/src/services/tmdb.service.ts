@@ -45,7 +45,7 @@ export const tmdbService = {
   // Search
   search: async (type: string, params: any): Promise<MovieResponse> => {
     const response = await tmdbHttpRequest.get(`/search/${type}`, { params });
-    return response.data;
+    return transformMovieResponse(response.data);
   },
 
   // Get the list of official genres for movies or TV shows.

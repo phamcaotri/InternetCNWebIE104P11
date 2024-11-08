@@ -24,17 +24,17 @@ export const useTvShowQuery = (type: string, params = {}) => {
   });
 };
 
-
 export const useSearchQuery = (type: string, params = {}) => {
-  return useQuery({
-    queryKey: QUERY_KEYS.SEARCH(type),
-    queryFn: () => tmdbService.search(type, params),
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 60 * 1, // 1 hour
-    retry: 2,
-    retryDelay: 1000,
-  });
-};
+    return useQuery({
+      // Add params to queryKey to ensure it updates when search params change
+      queryKey: [...QUERY_KEYS.SEARCH(type), params],
+      queryFn: () => tmdbService.search(type, params),
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      gcTime: 1000 * 60 * 60 * 1, // 1 hour
+      retry: 2,
+      retryDelay: 1000,
+    });
+  };
 
 // export const useTrendingQuery = (mediaType: string, timeWindow: string, params = {}) => {
 //   return useQuery({
