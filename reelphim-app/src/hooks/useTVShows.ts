@@ -1,47 +1,42 @@
-import { useQuery } from '@tanstack/react-query';
-import { tmdbService } from '../services/tmdb.service.ts';
+// @author @phamcaotri
+// deprecated and will be removed soon
 
-export const useTvShows = () => {
-  const useOnAirTvShows = (params = {}) => {
-    return useQuery({
-      queryKey: ['tv', 'on-air', params],
-      queryFn: () => tmdbService.getOnAirTvShows(params),
-    });
-  };
+// import { useQuery } from '@tanstack/react-query';
+// import { tmdbService } from '../services/tmdb.service.ts';
 
-  const usePopularTvShows = (params = {}) => {
-    return useQuery({
-      queryKey: ['tv', 'popular', params],
-      queryFn: () => tmdbService.getPopularTvShows(params),
-    });
-  };
+// export const useTvShows = () => {
+//   const useOnAirTvShows = (params = {}) => {
+//     return useQuery({
+//       queryKey: ['tv', 'on-air', params],
+//       queryFn: () => tmdbService.getOnAirTvShows(params),
+//     });
+//   };
 
-  const useAiringTodayTvShows = (params = {}) => {
-    return useQuery({
-      queryKey: ['tv', 'airing-today', params],
-      queryFn: () => tmdbService.getAiringTodayTvShows(params),
-    });
-  };
+//   const usePopularTvShows = (params = {}) => {
+//     return useQuery({
+//       queryKey: ['tv', 'popular', params],
+//       queryFn: () => tmdbService.getPopularTvShows(params),
+//     });
+//   };
 
-  const useTopRatedTvShows = (params = {}) => {
-    return useQuery({
-      queryKey: ['tv', 'top-rated', params],
-      queryFn: () => tmdbService.getTopRatedTvShows(params),
-    });
-  };
+//   const useAiringTodayTvShows = (params = {}) => {
+//     return useQuery({
+//       queryKey: ['tv', 'airing-today', params],
+//       queryFn: () => tmdbService.getAiringTodayTvShows(params),
+//     });
+//   };
 
-  const useNewTvShow = (params = {}) => {
-    return useQuery({
-      queryKey: ['tv', 'new', params],
-      queryFn: () => tmdbService.getNewTvShows(params),
-    });
-  };
+//   const useTopRatedTvShows = (params = {}) => {
+//     return useQuery({
+//       queryKey: ['tv', 'top-rated', params],
+//       queryFn: () => tmdbService.getTopRatedTvShows(params),
+//     });
+//   };
 
-  return {
-    useOnAirTvShows,
-    usePopularTvShows,
-    useAiringTodayTvShows,
-    useTopRatedTvShows,
-    useNewTvShow,
-  };
-};
+//   return {
+//     useOnAirTvShows,
+//     usePopularTvShows,
+//     useAiringTodayTvShows,
+//     useTopRatedTvShows,
+//   };
+// };
