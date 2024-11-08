@@ -6,32 +6,32 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#E50914',
-          dark: '#8B0000',
-          light: '#E50914',
-          hover: '#C00000',
+          DEFAULT: 'var(--color-primary-default)',
+          dark: 'var(--color-primary-dark)',
+          light: 'var(--color-primary-light)',
+          hover: 'var(--color-primary-hover)',
         },
         secondary: {
-          DEFAULT: '#2A2A2A',
-          light: '#3A3A3A',
-          hover: '#454545',
-          gray: '#D1D1CD',
-          placeholder: '#6b7280',
+          DEFAULT: 'var(--color-secondary-default)',
+          light: 'var(--color-secondary-light)',
+          hover: 'var(--color-secondary-hover)',
+          gray: 'var(--color-secondary-gray)',
+          placeholder: 'var(--color-secondary-placeholder)',
         },
         accent: {
-          DEFAULT: '#E5E5E1',
-          dark: '#D1D1CD',
-          hover: '#F5F5F1',
+          DEFAULT: 'var(--color-accent-default)',
+          dark: 'var(--color-accent-dark)',
+          hover: 'var(--color-accent-hover)',
         },
         background: {
-          DEFAULT: '#1A1A1A',
-          light: '#252525',
-          hover: '#303030',
+          DEFAULT: 'var(--color-background-default)',
+          light: 'var(--color-background-light)',
+          hover: 'var(--color-background-hover)',
         },
         text: {
-          DEFAULT: '#F0F0F0',
-          muted: '#A0A0A0',
-          hover: '#FFFFFF',
+          DEFAULT: 'var(--color-text-default)', 
+          muted: 'var(--color-text-muted)',
+          hover: 'var(--color-text-hover)',
         },
       },
       fontFamily: {
@@ -40,4 +40,5 @@ module.exports = {
     },
   },
   plugins: [],
+  darkMode: 'class',
 }
