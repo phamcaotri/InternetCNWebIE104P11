@@ -1,30 +1,34 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
-import { 
-  useLatestMovies,
-  useNowPlayingMovies,
-  usePopularMovies,
-  useTopRatedMovies 
-} from '../hooks/useMovie';
+import { tmdbapi } from '../services/tmdbApi';
 
 const HomePage = () => {
+  /** @author @phamcaotri
+   * Định nghĩa nội dung trang homepage, với 4 section chính:
+   * - Đang chiếu
+   * - Được xem nhiều nhất
+   * - Sắp ra mắt
+   * - Đánh giá cao
+   * Mỗi section lấy thông tin movie từ API trong ../hooks/useMovie.ts
+   * 
+   */
   // Fetch data từ API
-  const { data: latestMovies, isLoading: isLatestLoading } = useLatestMovies();
-  const { data: popularMovies, isLoading: isPopularLoading } = usePopularMovies();
-  const { data: nowPlayingMovies, isLoading: isNowPlayingLoading } = useNowPlayingMovies();
-  const { data: topRatedMovies, isLoading: isTopRatedLoading } = useTopRatedMovies();
-
-  // Loading state
-  if (isLatestLoading || isPopularLoading || isNowPlayingLoading || isTopRatedLoading) {
-    return <div>Loading...</div>; // Có thể thay bằng loading spinner
-  }
+  const { data: upcomingMovies } =  tmdbapi.UpcomingMovies();
+  const { data: popularMovies } = tmdbapi.PopularMovies();
+  const { data: nowPlayingMovies } = tmdbapi.NowPlayingMovies();
+  const { data: topRatedMovies } = tmdbapi.TopRatedMovies();
+ 
+  // // Loading state
+  // if (isLatestLoading || isPopularLoading || isNowPlayingLoading || isTopRatedLoading) {
+  //   return <div>Loading...</div>; // Có thể thay bằng loading spinner
+  // }
 
   return (
     <main>
       {nowPlayingMovies?.results && (
         <MovieSection
-          title="Tiếp tục xem"
-          description="Tiếp tục hành trình khám phá những câu chuyện đang dang dở."
+          title="Đang chiếu"
+          description="Thưởng thức những bộ phim hot nhất như đang ở rạp."
           movies={nowPlayingMovies.results}
         />
       )}
@@ -37,18 +41,18 @@ const HomePage = () => {
         />
       )}
       
-      {latestMovies?.results && (
+      {upcomingMovies?.results && (
         <MovieSection
-          title="Mới phát hành"
+          title="Sắp ra mắt"
           description="Đừng bỏ lỡ cơ hội thưởng thức những bộ phim mới nhất."
-          movies={latestMovies.results}
+          movies={upcomingMovies.results}
         />
       )}
       
       {topRatedMovies?.results && (
         <MovieSection
-          title="Đề xuất"
-          description="Khám phá những bộ phim mà bạn sẽ yêu thích."
+          title="Đánh giá cao"
+          description="Khám phá những bộ phim bất hủ."
           movies={topRatedMovies.results}
         />
       )}

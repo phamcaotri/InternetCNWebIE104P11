@@ -4,69 +4,74 @@
 Reelphim là một ứng dụng web xem phim trực tuyến được xây dựng bằng React + Vite. Dự án sử dụng TailwindCSS cho styling và được tổ chức theo cấu trúc module.
 
 ## Cấu trúc thư mục
-
+``` text
 reelphim-app/
 ├── src/
 │   ├── assets/         # Chứa tài nguyên tĩnh (hình ảnh, logo)
 │   ├── components/     # Components tái sử dụng
 │   ├── config/         # Cấu hình ứng dụng
+│   ├── constants/      # Các hằng số
 │   ├── contexts/       # React contexts
 │   ├── data/          # Dữ liệu mẫu
 │   ├── hooks/         # Custom hooks
 │   ├── layouts/       # Layout components
 │   ├── pages/         # Các trang của ứng dụng
+│   ├── services/      # Các service gọi API
+│   ├── transforms/    # Transform data
+│   ├── types/         # TypeScript types
 │   ├── fonts/         # Font chữ
-│   ├── App.jsx        # Component gốc
+│   ├── App.tsx        # Component gốc
 │   ├── main.jsx       # Entry point
 │   └── index.css      # Global styles
 ├── public/            # Tài nguyên công khai
 ├── package.json       # Dependencies và scripts
 └── node_modules/      # Thư mục chứa các dependencies
-
+```
 ## Chi tiết các thành phần chính
 
 ### Components (`/src/components`)
 - **Header.jsx**: Navigation bar và tìm kiếm
 - **Footer.jsx**: Thông tin liên hệ và links
-- **MovieCard.jsx**: Hiển thị thông tin phim
-- **MovieGrid.jsx**: Grid layout cho danh sách phim
+- **MovieCard.tsx**: Hiển thị thông tin phim
+- **MovieGrid.tsx**: Grid layout cho danh sách phim với tính năng drag-to-scroll
 - **MovieSection.jsx**: Section hiển thị nhóm phim
 - **Search.jsx**: Component tìm kiếm
 - **PrivateRoute.jsx**: Route bảo vệ cho người dùng đã đăng nhập
 
-### Pages (`/src/pages`)
-- **HomePage.jsx**: Trang chủ
-- **MoviesPage.jsx**: Danh sách phim lẻ
-- **TVShowsPage.jsx**: Danh sách phim bộ
-- **GenrePage.jsx**: Thể loại phim
-- **MovieDetailPage.jsx**: Chi tiết phim
-- **SearchResultsPage.jsx**: Kết quả tìm kiếm
-- **WelcomePage.jsx**: Trang chào mừng
-- **LoginPage.jsx**: Trang đăng nhập
-- **RegisterPage.jsx**: Trang đăng ký
+### Services (`/src/services`)
+- **tmdb.service.ts**: Service gọi API từ TMDB
+- **auth.service.ts**: Service xử lý authentication
 
-### Contexts (`/src/contexts`)
-- **AuthContext.jsx**: Quản lý trạng thái đăng nhập
+### Transforms (`/src/transforms`)
+- **movie.transform.ts**: Transform data từ TMDB API sang định dạng ứng dụng
+
+### Types (`/src/types`)
+- **movie.types.ts**: TypeScript interfaces cho movie data
+- **auth.types.ts**: TypeScript interfaces cho authentication
 
 ### Configuration (`/src/config`)
-- **siteConfig.js**: Cấu hình chung của website
+- **tmdb.config.ts**: Cấu hình cho TMDB API
+- **siteConfig.ts**: Cấu hình chung của website
   - Thông tin website
   - Navigation links
   - Thông tin liên hệ
 
-### Data (`/src/data`)
-- **homeData.js**: Dữ liệu cho trang chủ
-- **movieData.js**: Dữ liệu phim lẻ
-- **tvShowData.js**: Dữ liệu phim bộ
-- **genreData.js**: Dữ liệu theo thể loại
-
-### Hooks (`/src/hooks`)
-- **useDragScroll.js**: Hook xử lý scroll bằng drag
-
 ### Styling
 - Sử dụng TailwindCSS
 - Custom theme trong `tailwind.config.js`
-- Font chữ riêng được định nghĩa trong `fonts.css`
+  - Colors: primary, secondary, accent, background, text
+  - Font family: Reelphim (Overpass)
+- Utility classes trong `index.css`
+  - Input fields
+  - Buttons
+  - Form containers
+  - Scrollbar hiding
+
+## API Integration
+- Sử dụng TMDB API cho dữ liệu phim
+- React Query cho state management và caching
+- Custom hooks cho data fetching
+- Transform layer để chuẩn hóa data
 
 ## Các tính năng chính
 1. Xem danh sách phim theo nhiều tiêu chí
