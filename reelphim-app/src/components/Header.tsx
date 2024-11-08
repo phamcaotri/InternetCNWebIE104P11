@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE_CONFIG, NAVIGATION } from '../config/siteConfig';
-import Search from './Search';
-import { tmdbapi } from '../services/tmdbApi';
+import Search from './SearchBar';
+import { useSearchMoviesQuery } from '../services/tmdbApi';
 
 const Header = () => {
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const popularMovies = tmdbapi.SearchMovies({ query: 'joker' });
+  const popularMovies = useSearchMoviesQuery('movie', { query: 'look back', page: 1 });
   const handleTestAPI = async () => {
     try {
       const data = await popularMovies;

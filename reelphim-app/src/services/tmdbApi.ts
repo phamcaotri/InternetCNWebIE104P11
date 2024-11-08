@@ -24,17 +24,28 @@ export const useTvShowQuery = (type: string, params = {}) => {
   });
 };
 
-export const useSearchQuery = (type: string, params = {}) => {
+export const useSearchMoviesQuery = (type: string, params = {}) => {
     return useQuery({
       // Add params to queryKey to ensure it updates when search params change
       queryKey: [...QUERY_KEYS.SEARCH(type), params],
-      queryFn: () => tmdbService.search(type, params),
+      queryFn: () => tmdbService.searchMovies(type, params),
       staleTime: 1000 * 60 * 5, // 5 minutes
       gcTime: 1000 * 60 * 60 * 1, // 1 hour
       retry: 2,
       retryDelay: 1000,
     });
   };
+
+export const useSearchTvQuery = (type: string, params = {}) => {
+  return useQuery({
+    queryKey: [...QUERY_KEYS.SEARCH(type), params],
+    queryFn: () => tmdbService.searchTv(type, params),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 60 * 1, // 1 hour
+    retry: 2,
+    retryDelay: 1000,
+  });
+};
 
 // export const useTrendingQuery = (mediaType: string, timeWindow: string, params = {}) => {
 //   return useQuery({
@@ -76,13 +87,13 @@ class TMDBApi {
     return useTvShowQuery('top_rated', params);
   }
   SearchMovies(params = {}) {
-    return useSearchQuery('movie', params);
+    return useSearchMoviesQuery('movie', params);
   }
   SearchTvShows(params = {}) {
-    return useSearchQuery('tv', params);
+    return useSearchTvQuery('tv', params);
   }
   Search(params = {}) {
-    return useSearchQuery('', params);
+    return useSearchMoviesQuery('multi', params);
   }
 }
 
