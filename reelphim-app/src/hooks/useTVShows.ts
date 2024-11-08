@@ -30,10 +30,18 @@ export const useTvShows = () => {
     });
   };
 
+  const useNewTvShow = (params = {}) => {
+    return useQuery({
+      queryKey: ['tv', 'new', params],
+      queryFn: () => tmdbService.getNewTvShows(params),
+    });
+  };
+
   return {
     useOnAirTvShows,
     usePopularTvShows,
     useAiringTodayTvShows,
     useTopRatedTvShows,
+    useNewTvShow,
   };
 };
