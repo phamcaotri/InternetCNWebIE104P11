@@ -86,6 +86,15 @@ class TMDBApi {
   TopRatedTvShows(params = {}) {
     return useTvShowQuery('top_rated', params);
   }
+  PopularTVShows(params = {}) {
+    return useTvShowQuery('popular', params);
+  }
+  NowPlayingTVShows(params = {}) {
+    return useTvShowQuery('now_playing', params);
+  }
+  TopRatedTVShows(params = {}) {
+    return useTvShowQuery('top_rated', params);
+  }
   SearchMovies(params = {}) {
     return useSearchMoviesQuery('movie', params);
   }

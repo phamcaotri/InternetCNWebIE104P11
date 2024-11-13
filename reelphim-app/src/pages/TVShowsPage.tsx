@@ -1,10 +1,11 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
+import { tmdbapi } from '../services/tmdbApi';
 
 const TVShowsPage = () => {
-  const popularTVShows = [];
-  const newTVShows = [];
-  const topRatedTVShows = [];
+  const { data: popularTVShows } = tmdbapi.PopularTVShows();
+  const { data: newTVShows } = tmdbapi.NowPlayingTVShows();
+  const { data: topRatedTVShows } = tmdbapi.TopRatedTVShows();
 
   return (
     <main>
