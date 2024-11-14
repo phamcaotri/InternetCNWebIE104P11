@@ -22,10 +22,19 @@ export const animes = [
 const styles = {
     container: {
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: '20px'
+    },
+    info: {
+        marginRight: '20px'
     },
     image: {
+        width: '300px',
+        height: '200px'
+    },
+    image: {
+
         width: '300px',
         height: '200px'
     },
@@ -66,9 +75,13 @@ export const Dashboard = () => {
 
     return (
         <div style={styles.container} ref={containerRef}>
-            <h1>{animes[currentIndex].title}</h1>
-            <p>{animes[currentIndex].summary}</p>
-            <img src={animes[currentIndex].imageURL} alt={animes[currentIndex].title} style={styles.image} />
+            <div style={styles.animeContainer}>
+                <div style={styles.info}>
+                    <h1>{animes[currentIndex].title}</h1>
+                    <p>{animes[currentIndex].summary}</p>
+                </div>
+                <img src={animes[currentIndex].imageURL} alt={animes[currentIndex].title} style={styles.image}/>
+            </div>
             <div>
                 <button
                     className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-secondary text-text p-2 rounded-full opacity-80 hover:opacity-100 select-none"
