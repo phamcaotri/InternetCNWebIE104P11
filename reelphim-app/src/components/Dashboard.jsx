@@ -24,16 +24,26 @@ const styles = {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: '20px'
+        marginBottom: '20px',
+        justifyContent: 'space-between',
+        width: '100%',
+        position: 'relative', // Add relative positioning to the container
+        minWidth: '300px' // Ensure the container has a minimum width
     },
     info: {
+        flex: 1,
         marginRight: '20px'
     },
     image: {
-        width: '300px',
-        height: '200px'
+        width: '50%',
+        maxWidth: '500px',
+        height: '50%',
+        maxHeight: '500px'
     },
     button: {
+        position: 'absolute', // Use absolute positioning for the buttons
+        top: '50%', // Center the buttons vertically
+        transform: 'translateY(-50%)', // Adjust for vertical centering
         margin: '10px',
         padding: '10px',
         backgroundColor: '#007bff',
@@ -41,6 +51,12 @@ const styles = {
         border: 'none',
         borderRadius: '5px',
         cursor: 'pointer'
+    },
+    buttonLeft: {
+        left: '-50px', // Position the left button outside the container
+    },
+    buttonRight: {
+        right: '-50px', // Position the right button outside the container
     }
 };
 
@@ -70,29 +86,25 @@ export const Dashboard = () => {
 
     return (
         <div style={styles.container} ref={containerRef}>
-            <div style={styles.animeContainer}>
-                <div style={styles.info}>
-                    <h1>{animes[currentIndex].title}</h1>
-                    <p>{animes[currentIndex].summary}</p>
-                </div>
-                <img src={animes[currentIndex].imageURL} alt={animes[currentIndex].title} style={styles.image}/>
+            <div style={styles.info}>
+                <h1>{animes[currentIndex].title}</h1>
+                <p>{animes[currentIndex].summary}</p>
             </div>
-            <div>
-                <button
-                    className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-secondary text-text p-2 rounded-full opacity-80 hover:opacity-100 select-none"
-                    onClick={handlePrev}
-                    draggable="false"
-                >
-                    &lt;
-                </button>
-                <button
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-secondary text-text p-2 rounded-full opacity-80 hover:opacity-100 select-none"
-                    onClick={handleNext}
-                    draggable="false"
-                >
-                    &gt;
-                </button>
-            </div>
+            <img src={animes[currentIndex].imageURL} alt={animes[currentIndex].title} style={styles.image} />
+            <button
+                style={{ ...styles.button, ...styles.buttonLeft }}
+                onClick={handlePrev}
+                draggable="false"
+            >
+                &lt;
+            </button>
+            <button
+                style={{ ...styles.button, ...styles.buttonRight }}
+                onClick={handleNext}
+                draggable="false"
+            >
+                &gt;
+            </button>
         </div>
     );
 };
