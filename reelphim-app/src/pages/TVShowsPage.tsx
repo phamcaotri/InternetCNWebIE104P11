@@ -1,8 +1,11 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
-import { popularTVShows, newTVShows, topRatedTVShows } from '../data/tvShowData';
 
 const TVShowsPage = () => {
+  const popularTVShows = [];
+  const newTVShows = [];
+  const topRatedTVShows = [];
+
   return (
     <main>
       <h1 className="text-3xl font-bold mb-8 text-text">TV Shows</h1>

@@ -1,8 +1,13 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
-import { popularMovies, newMovies, classicMovies } from '../data/movieData';
+
+
 
 const MoviesPage = () => {
+  const popularMovies = [];
+  const newMovies = [];
+  const classicMovies = [];
+
   return (
     <main>
       <h1 className="text-3xl font-bold mb-8 text-text">Movies</h1>
