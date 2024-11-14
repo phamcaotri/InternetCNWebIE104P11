@@ -33,11 +33,6 @@ const styles = {
         width: '300px',
         height: '200px'
     },
-    image: {
-
-        width: '300px',
-        height: '200px'
-    },
     button: {
         margin: '10px',
         padding: '10px',
