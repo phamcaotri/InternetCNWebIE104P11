@@ -21,6 +21,7 @@ export const SITE_CONFIG = {
       { name: 'Phim lẻ', path: '/movies' },
       { name: 'Phim bộ', path: '/tv-shows' },
       { name: 'Thể loại', path: '/genres' },
+      { name: 'Tài khoản', path: '/user' },
     ],
     FOOTER_LINKS: [
       { name: 'Về chúng tôi', path: '/about' },
