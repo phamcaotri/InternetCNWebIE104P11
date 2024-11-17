@@ -52,7 +52,7 @@ const Search = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative border border-primary rounded-lg">
       <form onSubmit={handleSearch} className="relative">
         <input
           type="text"
