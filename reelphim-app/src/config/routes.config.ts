@@ -11,6 +11,7 @@ export const ROUTES_CONFIG = {
       MOVIES: '/movies',
       SEARCH: '/search',
       MOVIE_DETAIL: '/movie/:id',
+      USER: '/user',
     },
     NAVIGATION: {
       DEFAULT_REDIRECT: '/',
