@@ -42,3 +42,30 @@ module.exports = {
   plugins: [],
   darkMode: 'class',
 }
+
+// DEFAULT: '#E50914',
+// light: '#FF1A1A',
+// dark: '#CC0000',
+// hover: '#FF0000',
+// },
+// neutral: {
+// 50: '#FAFAF9',  // trắng ngà nhạt
+// 100: '#F5F5F4', // trắng ngà
+// 200: '#E7E5E4',
+// 300: '#D6D3D1',
+// 400: '#A8A29E',
+// 500: '#78716C',
+// 600: '#57534E',
+// 700: '#44403C',
+// 800: '#292524', // đen than nhạt
+// 900: '#1C1917', // đen than đậm
+// },
+// surface: {
+// light: '#FAFAF9',  // light mode background
+// dark: '#1C1917',   // dark mode background
+// },
+// text: {
+// light: '#1C1917',  // light mode text
+// dark: '#F5F5F4',   // dark mode text
+// muted: '#78716C',
+// hover: '#E50914',
