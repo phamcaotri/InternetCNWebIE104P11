@@ -14,21 +14,21 @@ const TVShowsPage = () => {
       <MovieSection
         title="Phổ biến"
         description="Những series TV đang được yêu thích nhất hiện nay."
-        movies={popularTVShows}
+        movies={popularTVShows.results}
       />
       )}
       {newTVShows?.results && (
       <MovieSection
         title="Mới phát hành"
         description="Các series TV mới nhất, đừng bỏ lỡ tập nào."
-        movies={newTVShows}
+        movies={newTVShows.results}
       />
       )}
       {topRatedTVShows?.results && (
       <MovieSection
         title="Đánh giá cao nhất"
         description="Những series TV được đánh giá cao nhất mọi thời đại."
-        movies={topRatedTVShows}
+        movies={topRatedTVShows.results}
       />
       )}
     </main>
