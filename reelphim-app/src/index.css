@@ -11,7 +11,7 @@
     display: none; /* WebKit */
 }
 @layer base {
-    * {
+    /* * {
         @apply transition-colors duration-200;
       }
       
@@ -25,7 +25,7 @@
       
       a {
         @apply text-text hover:text-primary-hover;
-      }
+      } */
     :root {
         /* Dark theme (default) */
         --color-primary-default: #E50914;
