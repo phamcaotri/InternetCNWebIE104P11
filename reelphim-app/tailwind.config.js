@@ -6,32 +6,32 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: 'var(--color-primary-default)',
-          dark: 'var(--color-primary-dark)',
-          light: 'var(--color-primary-light)',
-          hover: 'var(--color-primary-hover)',
+          DEFAULT: '#E50914',
+          hover: '#C00000',
         },
         secondary: {
-          DEFAULT: 'var(--color-secondary-default)',
-          light: 'var(--color-secondary-light)',
-          hover: 'var(--color-secondary-hover)',
-          gray: 'var(--color-secondary-gray)',
-          placeholder: 'var(--color-secondary-placeholder)',
+          DEFAULT: '#2A2A2A',
+          light: '#3A3A3A',
+          hover: '#454545',
+          gray: '#D1D1CD',
+          placeholder: '#6b7280',
         },
         accent: {
-          DEFAULT: 'var(--color-accent-default)',
-          dark: 'var(--color-accent-dark)',
-          hover: 'var(--color-accent-hover)',
+          DEFAULT: '#E5E5E1',
+          dark: '#D1D1CD',
+          hover: '#F5F5F1',
         },
         background: {
-          DEFAULT: 'var(--color-background-default)',
-          light: 'var(--color-background-light)',
-          hover: 'var(--color-background-hover)',
+          DEFAULT: '#1A1A1A',
+          light: '#252525',
+          hover: '#303030',
         },
         text: {
-          DEFAULT: 'var(--color-text-default)', 
-          muted: 'var(--color-text-muted)',
-          hover: 'var(--color-text-hover)',
+          DEFAULT: '#F5F5F4', // will soon be deprecated
+          black: '#1C1917',
+          white: '#F5F5F4',
+          muted: '#78716C',
+          hover: '#FFFFFF',
         },
       },
       fontFamily: {
@@ -42,3 +42,34 @@ module.exports = {
   plugins: [],
   darkMode: 'class',
 }
+
+// colors: {
+//   primary: {
+//     DEFAULT: '#E50914',
+//     light: '#FF1A1A',
+//     dark: '#CC0000',
+//     hover: '#FF0000',
+//   },
+//   neutral: {
+//     50: '#FAFAF9',  // trắng ngà nhạt
+//     100: '#F5F5F4', // trắng ngà
+//     200: '#E7E5E4',
+//     300: '#D6D3D1',
+//     400: '#A8A29E',
+//     500: '#78716C',
+//     600: '#57534E',
+//     700: '#44403C',
+//     800: '#292524', // đen than nhạt
+//     900: '#1C1917', // đen than đậm
+//   },
+//   surface: {
+//     light: '#FAFAF9',  // light mode background
+//     dark: '#1C1917',   // dark mode background
+//   },
+//   text: {
+//     light: '#1C1917',  // light mode text
+//     dark: '#F5F5F4',   // dark mode text
+//     muted: '#78716C',
+//     hover: '#E50914',
+//   }
+// },
