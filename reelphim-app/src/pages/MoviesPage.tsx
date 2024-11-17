@@ -1,12 +1,12 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
-
+import { tmdbapi } from '../services/tmdbApi';
 
 
 const MoviesPage = () => {
-  const popularMovies = [];
-  const newMovies = [];
-  const classicMovies = [];
+  const { data: popularMovies } = tmdbapi.PopularMovies();
+  const { data: newMovies } = tmdbapi.NowPlayingMovies();
+  const { data: classicMovies } = tmdbapi.TopRatedMovies();
 
   return (
     <main>
