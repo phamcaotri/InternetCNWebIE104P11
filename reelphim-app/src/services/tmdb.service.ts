@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { TMDB_CONFIG } from '../config';
 import { SITE_CONFIG } from '../config/site.config';
-import { transformMovieItem, transformTvItem, transformMovieResponse, transformTvResponse } from '../transforms/media.transform';
+import { transformMovieItem, transformTvItem, transformMovieResponse, transformTvResponse, transformMovieDetails, transformTvDetails } from '../transforms/media.transform';
 import { 
   MovieItem, 
   TvItem,
@@ -10,7 +10,10 @@ import {
   TMDBMovieResponse,
   TMDBTvResponse,
   TMDBMovie,
-  TMDBTv
+  TMDBTv,
+  MovieDetails,
+  TvDetails,
+  TMDBMovieDetails
 } from '../types/media.types';
 const tmdbHttpRequest = axios.create({
   baseURL: TMDB_CONFIG.baseUrl,
@@ -35,9 +38,9 @@ export const tmdbService = {
     return transformMovieResponse(response.data);
   },
   
-  getMovieDetails: async (id: number): Promise<MovieItem> => {
-    const response = await tmdbHttpRequest.get<TMDBMovie>(`/movie/${id}`);
-    return transformMovieItem(response.data);
+  getMovieDetails: async (id: number): Promise<MovieDetails> => {
+    const response = await tmdbHttpRequest.get<TMDBMovieDetails>(`/movie/${id}`);
+    return transformMovieDetails(response.data);
   },
   
   getTvList: async (type: string, params: any): Promise<TvResponse> => {

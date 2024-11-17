@@ -47,6 +47,28 @@ export const useSearchTvQuery = (type: string, params = {}) => {
   });
 };
 
+export const useGetMovieDetailsQuery = (id: number) => {
+  return useQuery({
+    queryKey: QUERY_KEYS.MOVIES.DETAILS(id),
+    queryFn: () => tmdbService.getMovieDetails(id),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 60 * 1, // 1 hour
+    retry: 2,
+    retryDelay: 1000,
+  });
+};
+
+export const useGetTvDetailsQuery = (id: number) => {
+  return useQuery({
+    queryKey: QUERY_KEYS.TV.DETAILS(id),
+    queryFn: () => tmdbService.getTvDetails(id),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 60 * 1, // 1 hour
+    retry: 2,
+    retryDelay: 1000,
+  });
+};
+
 // export const useTrendingQuery = (mediaType: string, timeWindow: string, params = {}) => {
 //   return useQuery({
 //     queryKey: QUERY_KEYS.TRENDING(mediaType, timeWindow),
@@ -103,6 +125,12 @@ class TMDBApi {
   }
   Search(params = {}) {
     return useSearchMoviesQuery('multi', params);
+  }
+  GetMovieDetails(id: number) {
+    return useGetMovieDetailsQuery(id);
+  }
+  GetTvDetails(id: number) {
+    return useGetTvDetailsQuery(id);
   }
 }
 

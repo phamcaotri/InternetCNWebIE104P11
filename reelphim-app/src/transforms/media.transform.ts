@@ -7,7 +7,10 @@ import {
   MovieItem, 
   TvItem, 
   MovieResponse, 
-  TvResponse 
+  TvResponse,
+  MovieDetails,
+  TvDetails,
+  TMDBMovieDetails
 } from '../types/media.types';
 
 export const isMovie = (item: TMDBMovie | TMDBTv): item is TMDBMovie => {
@@ -94,4 +97,44 @@ export const transformTvItem = (item: TMDBTv): TvItem => {
     originalLanguage: item.original_language || '',
     mediaType: item.media_type || 'tv',
   }
+}
+
+export const transformMovieDetails = (item: TMDBMovieDetails): MovieDetails => {
+  return {
+    ...transformMovieItem(item),
+    genres: item.genres,
+    productionCompanies: item.production_companies?.map(company => ({
+      id: company.id,
+      logoPath: company.logo_path,
+      name: company.name,
+      originCountry: company.origin_country,  
+    })),
+    productionCountries: item.production_countries?.map(country => ({
+      iso_3166_1: country.iso_3166_1,
+      name: country.name,
+    })),
+    spokenLanguages: item.spoken_languages?.map(language => ({
+      englishName: language.english_name,
+      iso_639_1: language.iso_639_1,
+      name: language.name,
+    })),
+    tagline: item.tagline,
+    revenue: item.revenue,
+    runtime: item.runtime,
+    status: item.status,
+    belongsToCollection: item.belongs_to_collection ? {
+      id: item.belongs_to_collection.id,
+      name: item.belongs_to_collection.name,
+      posterPath: item.belongs_to_collection.poster_path,
+      backdropPath: item.belongs_to_collection.backdrop_path,
+    } : null,
+    budget: item.budget,
+    homepage: item.homepage,
+    imdbId: item.imdb_id,
+    originalTitle: item.original_title,
+  }
+}
+
+export const transformTvDetails = (item: TMDBTv): TvDetails => {
+  return transformTvItem(item);
 }

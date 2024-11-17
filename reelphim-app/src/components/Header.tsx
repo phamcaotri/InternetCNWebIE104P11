@@ -67,7 +67,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="h-[128px]" />
+      <div className="h-[100px]" />
       <header className={`bg-background text-text w-full fixed top-0 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`} style={{ zIndex: 9999 }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6">
