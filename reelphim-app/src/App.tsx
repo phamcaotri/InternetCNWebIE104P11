@@ -9,9 +9,9 @@ import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
-import GenrePage from './pages/GenrePage';
 import TVShowsPage from './pages/TVShowsPage';
 import MoviesPage from './pages/MoviesPage';
+import UserPage from './pages/UserPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import MovieDetailPage from './pages/MovieDetailPage';
 import WatchMoviePage from './pages/WatchMoviePage';
@@ -41,7 +41,7 @@ const App = () => {
           {/* Main Layout Routes */}
           <Route element={<MainLayout />}>
             <Route path={ROUTES_CONFIG.PRIVATE.HOME} element={<PrivateRoute><HomePage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.GENRES} element={<PrivateRoute><GenrePage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.USER} element={<PrivateRoute><UserPage /></PrivateRoute>} />
             <Route path={ROUTES_CONFIG.PRIVATE.TV_SHOWS} element={<PrivateRoute><TVShowsPage /></PrivateRoute>} />
             <Route path={ROUTES_CONFIG.PRIVATE.MOVIES} element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
             <Route path={ROUTES_CONFIG.PRIVATE.SEARCH} element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
