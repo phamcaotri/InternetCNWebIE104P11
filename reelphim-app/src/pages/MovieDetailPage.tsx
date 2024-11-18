@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { tmdbapi } from '../services/tmdbApi';
 import { Play } from 'lucide-react';
 import { SITE_CONFIG } from '../config/site.config';
+
 const MovieDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ const MovieDetailPage = () => {
               className="btn-primary px-6 py-3 w-full flex items-center justify-center gap-2"
             >
               <Play size={20} />
-              Phát
+              Xem phim
             </button>
           </div>
 
@@ -69,21 +70,29 @@ const MovieDetailPage = () => {
                 className="h-24 object-contain mb-4"
               />
             ) : (
-              <h1 className="text-4xl font-bold mb-2">{movie?.title}</h1>
+              <h1 className="text-3xl font-bold mb-2">{movie?.title}</h1>
             )}
 
-            <div className="space-y-6 pt-3">
+            <div className="space-y-6">
+              <div className="flex gap-4 text-sm text-gray-400">
+                <span>{movie?.releaseDateFormatted}</span>
+                <span>{movie?.runtime} phút</span>
+                <span>{movie?.voteAverage?.toFixed(1)} ⭐</span>
+              </div>
+
               <section>
-                <h2 className="text-2xl font-bold mb-4">Nội dung</h2>
-                <p className="text-text-muted">{movie?.overview || 'Đang cập nhật...'}</p>
+                <h2 className="text-xl font-semibold mb-2">Nội dung</h2>
+                <p className="text-gray-300">{movie?.overview || 'Đang cập nhật...'}</p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4">Thông tin</h2>
-                <div className="space-y-2">
-                  <p><span className="font-semibold">Trạng thái:</span> {movie?.status}</p>
-                  <p><span className="font-semibold">Thời lượng:</span> {movie?.runtime} phút</p>
-                  <p><span className="font-semibold">Điểm đánh giá:</span> {movie?.voteAverage?.toFixed(1)}/10</p>
+                <h2 className="text-xl font-semibold mb-2">Thể loại</h2>
+                <div className="flex gap-2 flex-wrap">
+                  {movie?.genres?.map((genre) => (
+                    <span key={genre.id} className="px-3 py-1 bg-primary rounded-full text-sm">
+                      {genre.name}
+                    </span>
+                  ))}
                 </div>
               </section>
             </div>
