@@ -62,7 +62,7 @@ const MovieDetailPage = () => {
 
           {/* Right Column - Details */}
           <div className="md:col-span-2 text-text pt-6">
-            {movie?.images?.logos ? (
+            {movie?.images?.logos && movie.images.logos.length > 0 ? (
               <img 
                 src={movie.images.logos[0].file_path}
                 alt={movie?.title}
@@ -75,7 +75,7 @@ const MovieDetailPage = () => {
             <div className="space-y-6 pt-3">
               <section>
                 <h2 className="text-2xl font-bold mb-4">Nội dung</h2>
-                <p className="text-text-muted">{movie?.overview}</p>
+                <p className="text-text-muted">{movie?.overview || 'Đang cập nhật...'}</p>
               </section>
 
               <section>

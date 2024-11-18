@@ -6,7 +6,7 @@ export const ROUTES_CONFIG = {
     },
     PRIVATE: {
       HOME: '/home',
-      GENRES: '/genres',
+      USER: '/user',
       TV_SHOWS: '/tv-shows',
       MOVIES: '/movies',
       SEARCH: '/search',

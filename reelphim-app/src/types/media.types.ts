@@ -163,7 +163,7 @@ export interface TMDBMovieDetails extends TMDBMovie {
       vote_average: number;
       vote_count: number;
       width: number;
-    }[];
+    }[] | null;
     logos: {
       aspect_ratio: number;
       height: number;
@@ -172,7 +172,7 @@ export interface TMDBMovieDetails extends TMDBMovie {
       vote_average: number;
       vote_count: number;
       width: number;
-    }[];
+    }[] | null;
     posters: {
       aspect_ratio: number;
       height: number;
@@ -181,7 +181,7 @@ export interface TMDBMovieDetails extends TMDBMovie {
       vote_average: number;
       vote_count: number;
       width: number;
-    }[];
+    }[] | null;
   };
 }
 export interface MovieDetails extends MovieItem {
@@ -227,7 +227,7 @@ export interface MovieDetails extends MovieItem {
       vote_average: number;
       vote_count: number;
       width: number;
-    }[];
+    }[] | null;
     logos: {
       aspect_ratio: number;
       height: number;
@@ -236,7 +236,7 @@ export interface MovieDetails extends MovieItem {
       vote_average: number;
       vote_count: number;
       width: number;
-    }[];
+    }[] | null;
     posters: {
       aspect_ratio: number;
       height: number;
@@ -245,7 +245,7 @@ export interface MovieDetails extends MovieItem {
       vote_average: number;
       vote_count: number;
       width: number;
-    }[];
+    }[] | null;
   } | null;
 }
 
