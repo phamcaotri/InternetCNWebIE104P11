@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE_CONFIG, UI_CONFIG, NAVIGATION } from '../config';
 import Search from './SearchBar';
-import { useSearchMoviesQuery } from '../services/tmdbApi';
+import { useGetMovieDetailsQuery } from '../services/tmdbApi';
 
 const Header = () => {
   /** @author @phantruowngthanhtrung
@@ -19,7 +19,7 @@ const Header = () => {
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const popularMovies = useSearchMoviesQuery('movie', { query: 'look back', page: 1 });
+  const popularMovies = useGetMovieDetailsQuery(19995);
   const handleTestAPI = async () => {
     try {
       const data = await popularMovies;
