@@ -132,6 +132,35 @@ export const transformMovieDetails = (item: TMDBMovieDetails): MovieDetails => {
     homepage: item.homepage,
     imdbId: item.imdb_id,
     originalTitle: item.original_title,
+    images: item.images ? {
+      backdrops: item.images.backdrops?.map(backdrop => ({
+        aspect_ratio: backdrop.aspect_ratio,
+        height: backdrop.height,
+        iso_639_1: backdrop.iso_639_1,
+        file_path: TMDB_CONFIG.originalImage(backdrop.file_path),
+        vote_average: backdrop.vote_average,
+        vote_count: backdrop.vote_count,
+        width: backdrop.width,
+      })),
+      logos: item.images.logos?.map(logo => ({
+        aspect_ratio: logo.aspect_ratio,
+        height: logo.height,
+        iso_639_1: logo.iso_639_1,
+        file_path: TMDB_CONFIG.originalImage(logo.file_path),
+        vote_average: logo.vote_average,
+        vote_count: logo.vote_count,
+        width: logo.width,
+      })),
+      posters: item.images.posters?.map(poster => ({
+        aspect_ratio: poster.aspect_ratio,
+        height: poster.height,
+        iso_639_1: poster.iso_639_1,
+        file_path: TMDB_CONFIG.originalImage(poster.file_path),
+        vote_average: poster.vote_average,
+        vote_count: poster.vote_count,
+        width: poster.width,
+      })),
+    } : null,
   }
 }
 

@@ -11,7 +11,8 @@ export const ROUTES_CONFIG = {
       MOVIES: '/movies',
       SEARCH: '/search',
       MOVIE_DETAIL: '/movie/:id',
-      USER: '/user',
+      TV_SHOW_DETAIL: '/tv/:id',
+      WATCH_MOVIE: '/movie/watch/:id',
     },
     NAVIGATION: {
       DEFAULT_REDIRECT: '/',
