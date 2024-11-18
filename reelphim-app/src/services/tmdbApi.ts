@@ -6,6 +6,10 @@ export const useMovieQuery = (type: string, params = {}) =>  {
   return useQuery({
     queryKey: QUERY_KEYS.MOVIES.LIST(type),
     queryFn: () => tmdbService.getMoviesList(type, params),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 60 * 1, // 1 hour
+    retry: 2,
+    retryDelay: 1000,
   });
 };
 
@@ -13,6 +17,10 @@ export const useTvShowQuery = (type: string, params = {}) => {
   return useQuery({
     queryKey: QUERY_KEYS.TV.LIST(type),
     queryFn: () => tmdbService.getTvList(type, params),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 60 * 1, // 1 hour
+    retry: 2,
+    retryDelay: 1000,
   });
 };
 
@@ -21,6 +29,10 @@ export const useSearchMoviesQuery = (type: string, params = {}) => {
       // Add params to queryKey to ensure it updates when search params change
       queryKey: [...QUERY_KEYS.SEARCH(type), params],
       queryFn: () => tmdbService.searchMovies(type, params),
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      gcTime: 1000 * 60 * 60 * 1, // 1 hour
+      retry: 2,
+      retryDelay: 1000,
     });
   };
 
@@ -28,20 +40,32 @@ export const useSearchTvQuery = (type: string, params = {}) => {
   return useQuery({
     queryKey: [...QUERY_KEYS.SEARCH(type), params],
     queryFn: () => tmdbService.searchTv(type, params),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 60 * 1, // 1 hour
+    retry: 2,
+    retryDelay: 1000,
   });
 };
 
-export const useGetMovieDetailsQuery = (id: number, params = {}) => {
+export const useGetMovieDetailsQuery = (id: number) => {
   return useQuery({
-    queryKey: [...QUERY_KEYS.MOVIES.DETAILS(id), params],
-    queryFn: () => tmdbService.getMovieDetails(id, params),
+    queryKey: QUERY_KEYS.MOVIES.DETAILS(id),
+    queryFn: () => tmdbService.getMovieDetails(id),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 60 * 1, // 1 hour
+    retry: 2,
+    retryDelay: 1000,
   });
 };
 
-export const useGetTvDetailsQuery = (id: number, params = {}) => {
+export const useGetTvDetailsQuery = (id: number) => {
   return useQuery({
     queryKey: QUERY_KEYS.TV.DETAILS(id),
     queryFn: () => tmdbService.getTvDetails(id),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 60 * 1, // 1 hour
+    retry: 2,
+    retryDelay: 1000,
   });
 };
 
@@ -102,11 +126,11 @@ class TMDBApi {
   Search(params = {}) {
     return useSearchMoviesQuery('multi', params);
   }
-  GetMovieDetails(id: number, params = {}) {
-    return useGetMovieDetailsQuery(id, params);
+  GetMovieDetails(id: number) {
+    return useGetMovieDetailsQuery(id);
   }
-  GetTvDetails(id: number, params = {}) {
-    return useGetTvDetailsQuery(id, params);
+  GetTvDetails(id: number) {
+    return useGetTvDetailsQuery(id);
   }
 }
 

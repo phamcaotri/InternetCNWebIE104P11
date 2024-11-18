@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import MainLayout from './layouts/MainLayout';
-import MovieDetailLayout from './layouts/MovieDetailLayout';
 import PrivateRoute from './components/PrivateRoute';
 import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
@@ -14,7 +13,7 @@ import TVShowsPage from './pages/TVShowsPage';
 import MoviesPage from './pages/MoviesPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import MovieDetailPage from './pages/MovieDetailPage';
-import WatchMoviePage from './pages/WatchMoviePage';
+import UserPage from './pages/UserPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { UI_CONFIG, ROUTES_CONFIG } from './config';
 
@@ -33,28 +32,21 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <Router>
         <AuthProvider>
-        <Routes>
-          <Route path={ROUTES_CONFIG.PUBLIC.WELCOME} element={<WelcomePage />} />
-          <Route path={ROUTES_CONFIG.PUBLIC.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
-          
-          {/* Main Layout Routes */}
-          <Route element={<MainLayout />}>
-            <Route path={ROUTES_CONFIG.PRIVATE.HOME} element={<PrivateRoute><HomePage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.GENRES} element={<PrivateRoute><GenrePage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.TV_SHOWS} element={<PrivateRoute><TVShowsPage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.MOVIES} element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.SEARCH} element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.WATCH_MOVIE} element={<PrivateRoute><WatchMoviePage /></PrivateRoute>} />
-          </Route>
-
-          {/* Movie Detail Layout Route */}
-          <Route element={<MovieDetailLayout />}>
-            <Route path={ROUTES_CONFIG.PRIVATE.MOVIE_DETAIL} element={<PrivateRoute><MovieDetailPage /></PrivateRoute>} />
-          </Route>
-
-          <Route path="*" element={<Navigate to={ROUTES_CONFIG.NAVIGATION.DEFAULT_REDIRECT} replace />} />
-        </Routes>
+          <Routes>
+            <Route path={ROUTES_CONFIG.PUBLIC.WELCOME} element={<WelcomePage />} />
+            <Route path={ROUTES_CONFIG.PUBLIC.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
+            <Route element={<MainLayout />}>
+              <Route path={ROUTES_CONFIG.PRIVATE.HOME} element={<PrivateRoute><HomePage /></PrivateRoute>} />
+              <Route path={ROUTES_CONFIG.PRIVATE.GENRES} element={<PrivateRoute><GenrePage /></PrivateRoute>} />
+              <Route path={ROUTES_CONFIG.PRIVATE.TV_SHOWS} element={<PrivateRoute><TVShowsPage /></PrivateRoute>} />
+              <Route path={ROUTES_CONFIG.PRIVATE.MOVIES} element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
+              <Route path={ROUTES_CONFIG.PRIVATE.SEARCH} element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
+              <Route path={ROUTES_CONFIG.PRIVATE.MOVIE_DETAIL} element={<PrivateRoute><MovieDetailPage /></PrivateRoute>} />
+              <Route path={ROUTES_CONFIG.PRIVATE.USER} element={<PrivateRoute><UserPage /></PrivateRoute>} />
+            </Route>
+            <Route path="*" element={<Navigate to={ROUTES_CONFIG.NAVIGATION.DEFAULT_REDIRECT} replace />} />
+          </Routes>
         </AuthProvider>
       </Router>
     </QueryClientProvider>
