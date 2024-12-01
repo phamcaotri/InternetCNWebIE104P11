@@ -3,6 +3,7 @@
     "@types/node": "^22.9.0"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.46.2",
     "@types/webtorrent": "^0.110.0",
     "webtorrent": "^2.5.6"
   }
