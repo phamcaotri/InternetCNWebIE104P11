@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import backgroundImage from '../assets/movie_poster_background.jpg';
+import backgroundImage from '../assets/01.webp';
+import logoReelphim from '../assets/logoreelphim.png';
 
 const WelcomePage = () => {
   return (
@@ -9,14 +10,17 @@ const WelcomePage = () => {
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       ></div>
+
       <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
       <div className="form-container">
         <div className="text-center">
-          <h2 className="mt-6 text-4xl font-extrabold text-text">
-            Welcome to ReelPhim
-          </h2>
-          <p className="mt-2 text-sm text-text-muted">
-            Your ultimate destination for movies and TV shows
+
+        <img 
+          src={logoReelphim}
+          alt="Chào mừng tới Reelphim" 
+          className="mt-2 mx-auto max-w-[150px] h-auto"/>
+          <p className="mt-6 text-sm text-text-muted">
+            Điểm dến của những chương trình truyền hình, phim không giới hạn
           </p>
         </div>
         <div className="mt-8 space-y-6">
@@ -25,7 +29,7 @@ const WelcomePage = () => {
               to="/login"
               className="btn-primary"
             >
-              Sign In
+              Đăng nhập
             </Link>
           </div>
           <div>
@@ -33,7 +37,7 @@ const WelcomePage = () => {
               to="/register"
               className="btn-secondary"
             >
-              Create an Account
+              Không có? Tạo tài khoản?
             </Link>
           </div>
         </div>
