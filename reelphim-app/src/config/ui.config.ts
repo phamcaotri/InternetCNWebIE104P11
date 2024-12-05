@@ -7,7 +7,7 @@ export const UI_CONFIG = {
     },
     QUERY: {
       STALE_TIME: 5 * 60 * 1000, // 5 minutes
-      RETRY_COUNT: 1,
+      RETRY_COUNT: 0,
       REFETCH_ON_WINDOW_FOCUS: false,
       CACHE_TIME: 30 * 60 * 1000, // 30 minutes
     },
