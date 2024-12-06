@@ -19,6 +19,7 @@ import WatchMovieLayout from './layouts/WatchMovieLayout';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { UI_CONFIG, ROUTES_CONFIG } from './config';
 import CategoryPage from './pages/CategoryPage';
+import TVShowDetailPage from './pages/TVShowsDetailPage';
 
 
 const queryClient = new QueryClient({
@@ -55,6 +56,7 @@ const App = () => {
           {/* Movie Detail Layout Route */}
           <Route element={<MovieDetailLayout />}>
             <Route path={ROUTES_CONFIG.PRIVATE.MOVIE_DETAIL} element={<PrivateRoute><MovieDetailPage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.TV_SHOW_DETAIL} element={<PrivateRoute><TVShowDetailPage /></PrivateRoute>} />
           </Route>
 
           {/* Watch Movie Layout Route */}

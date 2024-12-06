@@ -40,8 +40,8 @@ export const useGetMovieDetailsQuery = (id: number, params = {}) => {
 
 export const useGetTvDetailsQuery = (id: number, params = {}) => {
   return useQuery({
-    queryKey: QUERY_KEYS.TV.DETAILS(id),
-    queryFn: () => tmdbService.getTvDetails(id),
+    queryKey: [...QUERY_KEYS.TV.DETAILS(id), params],
+    queryFn: () => tmdbService.getTvDetails(id, params),
   });
 };
 
@@ -72,25 +72,16 @@ class TMDBApi {
   TopRatedMovies(params = {}) {
     return useMovieQuery('top_rated', params);
   }
-  LatestTvShows(params = {}) {
-    return useTvShowQuery('latest', params);
+  AiringTodayTvShows(params = {}) {
+    return useTvShowQuery('airing_today', params);
+  }
+  OnTheAirTvShows(params = {}) {
+    return useTvShowQuery('on_the_air', params);
   }
   PopularTvShows(params = {}) {
     return useTvShowQuery('popular', params);
   }
-  UpcomingTvShows(params = {}) {
-    return useTvShowQuery('upcoming', params);
-  }
   TopRatedTvShows(params = {}) {
-    return useTvShowQuery('top_rated', params);
-  }
-  PopularTVShows(params = {}) {
-    return useTvShowQuery('popular', params);
-  }
-  NowPlayingTVShows(params = {}) {
-    return useTvShowQuery('now_playing', params);
-  }
-  TopRatedTVShows(params = {}) {
     return useTvShowQuery('top_rated', params);
   }
   SearchMovies(params = {}) {

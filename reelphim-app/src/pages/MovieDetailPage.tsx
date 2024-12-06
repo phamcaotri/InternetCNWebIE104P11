@@ -12,7 +12,6 @@ const MovieDetailPage = () => {
   const navigate = useNavigate();
   const mainLanguage = SITE_CONFIG.DEFAULT_LANGUAGE;
   const otherLanguages = [SITE_CONFIG.OTHER_LANGUAGES, 'null'];
-  // https://api.themoviedb.org/3/movie/372058?api_key=03a74cc85c3209f8f9990542dcffb68a&language=vi-VN&include_adult=false&append_to_response=images,alternative_titles&include_image_language=en,null&country=US
   const { data: movie, isLoading, error } = tmdbapi.GetMovieDetails(Number(id), { append_to_response: 'images,alternative_titles', include_image_language: mainLanguage + ',' + otherLanguages.join(','), country: 'US' });
 
   const [searchResults, setSearchResults] = useState<TorrentResult[]>([]);
@@ -29,7 +28,10 @@ const MovieDetailPage = () => {
     
     setIsSearching(true);
     try {
-      const results = await searchTorrents(movie.alternativeTitles?.titles?.[0]?.title?.toLowerCase().replace(/\s+/g, '+') || '', selectedProvider);
+      const title = movie.originalLanguage === 'en' 
+        ? movie.originalTitle?.toLowerCase().replace(/\s+/g, '+')
+        : movie.alternativeTitles?.titles?.find(t => t.iso_3166_1 === 'US')?.title?.toLowerCase().replace(/\s+/g, '+') || movie.originalTitle?.toLowerCase().replace(/\s+/g, '+');
+      const results = await searchTorrents(title + '+' + movie.releaseDate.substring(0,4), selectedProvider);
       setSearchResults(results);
     } catch (error) {
       console.error('Search failed:', error);
