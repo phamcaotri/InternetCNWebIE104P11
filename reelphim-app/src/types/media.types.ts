@@ -182,7 +182,13 @@ export interface TMDBMovieDetails extends TMDBMovie {
       vote_count: number;
       width: number;
     }[] | null;
-  };
+  } | null;
+  alternative_titles: {
+    titles: {
+      iso_3166_1: string;
+      title: string;
+    }[] | null;
+  } | null;
 }
 export interface MovieDetails extends MovieItem {
   genres: {
@@ -245,6 +251,12 @@ export interface MovieDetails extends MovieItem {
       vote_average: number;
       vote_count: number;
       width: number;
+    }[] | null;
+  } | null;
+  alternativeTitles: {
+    titles: {
+      iso_3166_1: string;
+      title: string;
     }[] | null;
   } | null;
 }
