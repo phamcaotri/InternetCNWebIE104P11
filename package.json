@@ -1,9 +1,0 @@
-{
-  "devDependencies": {
-    "@types/node": "^22.9.0"
-  },
-  "dependencies": {
-    "@types/webtorrent": "^0.110.0",
-    "webtorrent": "^2.5.6"
-  }
-}

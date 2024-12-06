@@ -39,7 +39,7 @@ export const tmdbService = {
   },
   
   getMovieDetails: async (id: number, params: any): Promise<MovieDetails> => {
-    const response = await tmdbHttpRequest.get<TMDBMovieDetails>(`/movie/${id}`, { params: { append_to_response: 'images', include_image_language: 'en,null' } });
+    const response = await tmdbHttpRequest.get<TMDBMovieDetails>(`/movie/${id}`, { params });
     return transformMovieDetails(response.data);
   },
   

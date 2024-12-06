@@ -15,6 +15,7 @@ import UserPage from './pages/UserPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import MovieDetailPage from './pages/MovieDetailPage';
 import WatchMoviePage from './pages/WatchMoviePage';
+import WatchMovieLayout from './layouts/WatchMovieLayout';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { UI_CONFIG, ROUTES_CONFIG } from './config';
 import CategoryPage from './pages/CategoryPage';
@@ -54,6 +55,11 @@ const App = () => {
           {/* Movie Detail Layout Route */}
           <Route element={<MovieDetailLayout />}>
             <Route path={ROUTES_CONFIG.PRIVATE.MOVIE_DETAIL} element={<PrivateRoute><MovieDetailPage /></PrivateRoute>} />
+          </Route>
+
+          {/* Watch Movie Layout Route */}
+          <Route element={<WatchMovieLayout />}>
+            <Route path={ROUTES_CONFIG.PRIVATE.WATCH_MOVIE} element={<PrivateRoute><WatchMoviePage /></PrivateRoute>} />
           </Route>
 
           <Route path="*" element={<Navigate to={ROUTES_CONFIG.NAVIGATION.DEFAULT_REDIRECT} replace />} />
