@@ -161,6 +161,12 @@ export const transformMovieDetails = (item: TMDBMovieDetails): MovieDetails => {
         width: poster.width,
       })),
     } : null,
+    alternativeTitles: item.alternative_titles ? {
+      titles: item.alternative_titles.titles?.map(title => ({
+        iso_3166_1: title.iso_3166_1,
+        title: title.title,
+      })),
+    } : null,
   }
 }
 

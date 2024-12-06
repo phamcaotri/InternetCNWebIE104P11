@@ -1,6 +1,9 @@
 import express from 'express';
 import WebTorrent from 'webtorrent';
 import cors from 'cors';
+import TorrentSearchApi from 'torrent-search-api';
+import axios from 'axios';
+import cheerio from 'cheerio';
 
 const app = express();
 
@@ -32,9 +35,8 @@ const client = new WebTorrent({
 });
 const activeTorrents = new Map();
 const activeStreams = new Map();
-const uniqueTorrents = new Set();
 
-app.get('/stream/:infoHash', async (req, res) => {
+app.get('/stream/:infoHash', (req, res) => {
   const clientIP = req.headers['x-forwarded-for'] || 
                   req.ip || 
                   req.socket.remoteAddress || 
@@ -52,28 +54,13 @@ app.get('/stream/:infoHash', async (req, res) => {
     return;
   }
 
-  // Clean up existing torrents with the same hash
-  if (uniqueTorrents.has(infoHash)) {
-    console.log(`Cleaning up existing torrent with hash: ${infoHash}`);
-    const existingTorrent = client.torrents.find(t => t.infoHash === infoHash);
-    if (existingTorrent) {
-      await new Promise(resolve => client.remove(existingTorrent, resolve));
-    }
-    uniqueTorrents.delete(infoHash);
-    activeTorrents.delete(infoHash);
-  }
-
-  // Add new torrent
   client.add(magnet, (torrent) => {
-    uniqueTorrents.add(infoHash);
     activeTorrents.set(infoHash, torrent);
-    torrent.lastAccessed = Date.now();
     streamTorrent(torrent, req, res);
     
     // Handle torrent events
     torrent.on('error', (err) => {
       console.error('Torrent error:', err);
-      uniqueTorrents.delete(infoHash);
       activeTorrents.delete(infoHash);
       if (!res.headersSent) {
         res.status(500).send('Torrent error');
@@ -94,19 +81,6 @@ function streamTorrent(torrent, req, res) {
     streamId,
     clients: activeStreams.has(streamId) ? activeStreams.get(streamId).clients : 0
   });
-
-  const getContentType = (filename) => {
-    const ext = filename.split('.').pop().toLowerCase();
-    const mimeTypes = {
-      'mp4': 'video/mp4',
-      'webm': 'video/webm',
-      'mkv': 'video/x-matroska',
-      'avi': 'video/x-msvideo',
-      'mov': 'video/quicktime',
-      'm4v': 'video/x-m4v'
-    };
-    return mimeTypes[ext] || 'application/octet-stream';
-  };
 
   handleDirectStream(streamId, file, req, res);
 }
@@ -230,14 +204,15 @@ app.get('/stats/:infoHash', (req, res) => {
 
 // Cleanup function to remove inactive torrents
 function cleanupTorrents() {
+
   for (const [infoHash, torrent] of activeTorrents.entries()) {
+    // Remove torrent if it's done or hasn't been accessed in 5 minutes
     const shouldRemove = torrent.done || 
       (Date.now() - torrent.lastAccessed > 5 * 60 * 1000);
     
     if (shouldRemove) {
       console.log(`Removing torrent: ${infoHash}`);
       client.remove(torrent);
-      uniqueTorrents.delete(infoHash);
       activeTorrents.delete(infoHash);
     }
   }
@@ -258,3 +233,112 @@ process.on('SIGINT', () => {
 app.listen(port, '0.0.0.0', () => {
   console.log(`Torrent streaming server running on port ${port}`);
 });
+
+// Khởi tạo TorrentSearchApi
+TorrentSearchApi.enableProvider('1337x');
+TorrentSearchApi.enableProvider('eztv');
+TorrentSearchApi.enableProvider('kickasstorrents');
+TorrentSearchApi.enableProvider('limetorrents');
+TorrentSearchApi.enableProvider('rarbg');
+TorrentSearchApi.enableProvider('thepiratebay');
+TorrentSearchApi.enableProvider('torrent9');
+TorrentSearchApi.enableProvider('torrentproject');
+TorrentSearchApi.enableProvider('torrentz2');
+TorrentSearchApi.enableProvider('yts');
+// Thêm các provider khác nếu cần
+
+app.get('/search', async (req, res) => {
+  try {
+    const { query, category = 'Movies', limit = 20 } = req.query;
+    
+    if (!query) {
+      return res.status(400).json({ error: 'Search query is required' });
+    }
+
+    const torrents = await TorrentSearchApi.search(query, category, limit);
+    const formattedResults = torrents.map(torrent => ({
+      title: torrent.title,
+      size: torrent.size,
+      seeds: torrent.seeds || 0,
+      peers: torrent.peers || 0,
+      magnet: torrent.magnet || '',
+      provider: torrent.provider
+    }));
+    console.log(formattedResults);
+    res.json(formattedResults);
+    
+  } catch (error) {
+    console.error('Search error:', error);
+    res.status(500).json({ error: 'Search failed' });
+  }
+});
+
+async function torrent1337x(query, page = '1') {
+  const allTorrent = [];
+  const url = `https://1337x.to/search/${query}/${page}/`;
+  
+  try {
+    const html = await axios.get(url);
+    const $ = cheerio.load(html.data);
+
+    const links = $('td.name').map((_, element) => {
+      const link = 'https://1337x.to' + $(element).find('a').next().attr('href');
+      return link;
+    }).get();
+
+    await Promise.all(links.map(async (element) => {
+      const data = {};
+      const labels = [
+        'Category', 'Type', 'Language', 'Size', 'UploadedBy',
+        'Downloads', 'LastChecked', 'DateUploaded', 'Seeders', 'Leechers'
+      ];
+
+      try {
+        const html = await axios.get(element);
+        const $ = cheerio.load(html.data);
+        
+        data.Name = $('.box-info-heading h1').text().trim();
+        data.Magnet = $('.clearfix ul li a').attr('href') || "";
+        
+        const poster = $('div.torrent-image img').attr('src');
+        if (poster) {
+          data.Poster = poster.startsWith('http') ? poster : `https:${poster}`;
+        } else {
+          data.Poster = '';
+        }
+
+        $('div .clearfix ul li > span').each((i, element) => {
+          const $list = $(element);
+          data[labels[i]] = $list.text();
+        });
+        
+        data.Url = element;
+        allTorrent.push(data);
+      } catch (error) {
+        console.error(`Error scraping torrent details: ${element}`, error);
+      }
+    }));
+
+    return allTorrent;
+  } catch (error) {
+    console.error('Error scraping search results:', error);
+    return null;
+  }
+}
+
+// Add this to your existing Express server
+app.get('/api/torrents/search', async (req, res) => {
+  try {
+    const { query } = req.query;
+    if (!query) {
+      return res.status(400).json({ error: 'Query parameter is required' });
+    }
+    console.log("Search query:", query);
+    const results = await torrent1337x(query);
+    res.json(results || []);
+  } catch (error) {
+    console.error('Search error:', error);
+    res.status(500).json({ error: 'Search failed' });
+  }
+});
+
