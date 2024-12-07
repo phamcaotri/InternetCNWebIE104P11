@@ -1,5 +1,4 @@
-import supabase from "../config/supabaseclient.js";
-
+import supabase from "./supabaseClient";
 const fetchVideoLinks = async () => {
   try {
     console.log("Fetching files from bucket...");

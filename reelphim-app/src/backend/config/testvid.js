@@ -1,5 +1,4 @@
-import supabase from "../config/supabaseclient.js";
-
+import supabase from "./supabaseClient";
 const fetchFiles = async () => {
     try {
       const { data, error } = await supabase.storage.from("storage").list("", { limit: 100 });

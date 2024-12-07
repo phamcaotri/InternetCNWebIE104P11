@@ -1,5 +1,4 @@
-import supabase from "../config/supabaseclient.js"; // Assuming you already have the Supabase client set up
-
+import supabase from "./supabaseClient";
 //fetch film
 // Function to fetch specific movie data from TMDB and import it into the `content` table
 const fetchFromTMDBAndImportToContent = async () => {

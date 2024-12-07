@@ -1,5 +1,3 @@
-import supabase from "../config/supabaseclient.js"; // Đảm bảo bạn đã thiết lập Supabase client
-
 /* const fetchActorsAndDirectors = async (movieId) => {
   const url = `https://api.themoviedb.org/3/movie/${movieId}/credits`;
   const options = {
@@ -370,7 +368,7 @@ const processSeriesActors = async () => {
 // Run the function
 processSeriesActors();
  */
-
+import supabase from "./supabaseClient";
 //import director (creator) for series
 const fetchDirectorsForSeries = async (seriesId) => {
   const url = `https://api.themoviedb.org/3/tv/${seriesId}?language=en-US`;
