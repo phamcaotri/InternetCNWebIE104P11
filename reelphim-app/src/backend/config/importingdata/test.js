@@ -79,7 +79,7 @@ const tmdbFilmMappings = [
   }
 })();
  */
-import supabase from "./supabaseClient";
+import supabase from "../supabaseClient";
 // Fetch the total number of seasons for a series
 const fetchSeasonCount = async (seriesId) => {
   const url = `https://api.themoviedb.org/3/tv/${seriesId}?language=en-US`;

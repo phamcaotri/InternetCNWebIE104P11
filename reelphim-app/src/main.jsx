@@ -5,13 +5,8 @@ import App from './App.tsx';
 import './index.css';
 import './fonts.css';
 
-// Import Supabase Provider (nếu có)
-import { SupabaseProvider } from './contexts/SupabaseProvider.jsx';
-
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <SupabaseProvider>
       <App />
-    </SupabaseProvider>
   </StrictMode>,
 );

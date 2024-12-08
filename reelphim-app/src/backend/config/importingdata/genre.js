@@ -223,7 +223,7 @@ const processGenres = async () => {
 };
 
 processGenres();*/
-import supabase from "./supabaseClient";
+import supabase from "../supabaseClient";
 const fetchGenresForSeries = async (seriesId) => {
   const url = `https://api.themoviedb.org/3/tv/${seriesId}?language=en-US`;
   const options = {

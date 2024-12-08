@@ -368,7 +368,7 @@ const processSeriesActors = async () => {
 // Run the function
 processSeriesActors();
  */
-import supabase from "./supabaseClient";
+import supabase from "../supabaseClient";
 //import director (creator) for series
 const fetchDirectorsForSeries = async (seriesId) => {
   const url = `https://api.themoviedb.org/3/tv/${seriesId}?language=en-US`;
