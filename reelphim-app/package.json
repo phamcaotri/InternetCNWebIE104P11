@@ -57,7 +57,6 @@
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
-<<<<<<< HEAD
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
     "vite": "^5.4.10"
@@ -66,10 +65,4 @@
   "keywords": [],
   "author": "",
   "license": "ISC"
-=======
-    "ts-jest": "^29.2.5",
-    "vite": "^5.4.10",
-    "webtorrent": "^2.5.7"
-  }
->>>>>>> origin/main
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import supabase from '../config/supabaseclient';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/01.webp';
 import logoReelphim from '../assets/logoreelphim.png';
