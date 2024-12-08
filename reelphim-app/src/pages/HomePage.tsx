@@ -13,9 +13,9 @@ const HomePage = () => {
    * 
    */
   // Fetch data từ API
-  const { data: upcomingMovies } =  tmdbapi.UpcomingMovies();
-  const { data: popularMovies } = tmdbapi.PopularMovies();
-  const { data: nowPlayingMovies } = tmdbapi.NowPlayingMovies();
+  const { data: upcomingMovies } =  tmdbapi.UpcomingMovies({ page: 1 });
+  const { data: popularMovies } = tmdbapi.PopularMovies({ page: 2 });
+  const { data: nowPlayingMovies } = tmdbapi.NowPlayingMovies({ page: 1 });
   const { data: topRatedMovies } = tmdbapi.TopRatedMovies();
  
   // // Loading state

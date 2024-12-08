@@ -15,8 +15,12 @@ import UserPage from './pages/UserPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import MovieDetailPage from './pages/MovieDetailPage';
 import WatchMoviePage from './pages/WatchMoviePage';
+import WatchMovieLayout from './layouts/WatchMovieLayout';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { UI_CONFIG, ROUTES_CONFIG } from './config';
+import CategoryPage from './pages/CategoryPage';
+import TVShowDetailPage from './pages/TVShowsDetailPage';
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,11 +50,18 @@ const App = () => {
             <Route path={ROUTES_CONFIG.PRIVATE.MOVIES} element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
             <Route path={ROUTES_CONFIG.PRIVATE.SEARCH} element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
             <Route path={ROUTES_CONFIG.PRIVATE.WATCH_MOVIE} element={<PrivateRoute><WatchMoviePage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.CATEGORY} element={<PrivateRoute><CategoryPage /></PrivateRoute>} />
           </Route>
 
           {/* Movie Detail Layout Route */}
           <Route element={<MovieDetailLayout />}>
             <Route path={ROUTES_CONFIG.PRIVATE.MOVIE_DETAIL} element={<PrivateRoute><MovieDetailPage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.TV_SHOW_DETAIL} element={<PrivateRoute><TVShowDetailPage /></PrivateRoute>} />
+          </Route>
+
+          {/* Watch Movie Layout Route */}
+          <Route element={<WatchMovieLayout />}>
+            <Route path={ROUTES_CONFIG.PRIVATE.WATCH_MOVIE} element={<PrivateRoute><WatchMoviePage /></PrivateRoute>} />
           </Route>
 
           <Route path="*" element={<Navigate to={ROUTES_CONFIG.NAVIGATION.DEFAULT_REDIRECT} replace />} />

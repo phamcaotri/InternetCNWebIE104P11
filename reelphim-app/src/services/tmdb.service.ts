@@ -13,7 +13,8 @@ import {
   TMDBTv,
   MovieDetails,
   TvDetails,
-  TMDBMovieDetails
+  TMDBMovieDetails,
+  TMDBTvDetails
 } from '../types/media.types';
 const tmdbHttpRequest = axios.create({
   baseURL: TMDB_CONFIG.baseUrl,
@@ -39,7 +40,7 @@ export const tmdbService = {
   },
   
   getMovieDetails: async (id: number, params: any): Promise<MovieDetails> => {
-    const response = await tmdbHttpRequest.get<TMDBMovieDetails>(`/movie/${id}`, { params: { append_to_response: 'images', include_image_language: 'en,null' } });
+    const response = await tmdbHttpRequest.get<TMDBMovieDetails>(`/movie/${id}`, { params });
     return transformMovieDetails(response.data);
   },
   
@@ -48,9 +49,9 @@ export const tmdbService = {
     return transformTvResponse(response.data);
   },
   
-  getTvDetails: async (id: number): Promise<TvItem> => {
-    const response = await tmdbHttpRequest.get<TMDBTv>(`/tv/${id}`);
-    return transformTvItem(response.data);
+  getTvDetails: async (id: number, params: any): Promise<TvDetails> => {
+    const response = await tmdbHttpRequest.get<TMDBTvDetails>(`/tv/${id}`, { params });
+    return transformTvDetails(response.data);
   },
   
   searchMovies: async (type: string, params: any): Promise<MovieResponse> => {

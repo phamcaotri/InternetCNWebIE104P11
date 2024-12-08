@@ -1,41 +1,44 @@
 import React from 'react';
-import { useState } from 'react';
-import MovieList from './MovieList';
+import { useNavigate } from 'react-router-dom';
 import { MediaItem } from '../types/media.types';
 
 interface ShowAllButtonProps {
+  categoryId: string;
+  title: string;
   movies: MediaItem[];
-  onShowAllChange?: (isShowing: boolean) => void;
 }
 
-const ShowAllButton = ({ movies, onShowAllChange }: ShowAllButtonProps) => {
-  const [isShowingAll, setIsShowingAll] = useState(false);
+const ShowAllButton = ({ categoryId, title, movies }: ShowAllButtonProps) => {
+  const navigate = useNavigate();
 
-  const handleToggle = () => {
-    const newState = !isShowingAll;
-    setIsShowingAll(newState);
-    onShowAllChange?.(newState);
+  const handleClick = () => {
+    console.log('CategoryId:', categoryId);
+    console.log('Title:', title);
+    console.log('Movies:', movies);
+    
+    const path = `/category/${categoryId}`;
+    console.log('Navigating to:', path);
+    
+    navigate(path, {
+      state: { 
+        title, 
+        categoryId,
+        movies
+      }
+    });
   };
 
   return (
-    <div className="relative">
-      <button
-        onClick={handleToggle}
-        className="h-8 absolute -top-12 right-0 px-3 py-1 text-sm bg-background-light text-text
-        border border-secondary hover:border-primary
-        rounded-lg transition-colors duration-200
-        hover:bg-background-hover hover:text-text-hover
-        z-10"
-        aria-label={isShowingAll ? "Show less movies" : "Show all movies"}
-      >
-        {isShowingAll ? 'Show Less' : 'Show All'}
-      </button>
-      {isShowingAll && (
-        <div className="mt-12">
-          <MovieList movies={movies} />
-        </div>
-      )}
-    </div>
+    <button
+      onClick={handleClick}
+      className="h-8 px-3 py-1 text-sm bg-background-light text-text
+      border border-secondary hover:border-primary
+      rounded-lg transition-colors duration-200
+      hover:bg-background-hover hover:text-text-hover"
+      aria-label="View all movies in category"
+    >
+      Show All
+    </button>
   );
 };
 

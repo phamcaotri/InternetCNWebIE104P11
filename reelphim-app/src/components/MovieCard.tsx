@@ -6,7 +6,7 @@ const CARD_WIDTH = UI_CONFIG.CARD.WIDTH;
 const CARD_HEIGHT = CARD_WIDTH * UI_CONFIG.CARD.ASPECT_RATIO;
 
 interface MovieCardProps extends MediaItem {}
-const MovieCard = ({ id, title, releaseDateFormatted, posterPath }: MovieCardProps) => {
+const MovieCard = ({ id, title, releaseDateFormatted, posterPath, mediaType }: MovieCardProps) => {
     /** @author @phantruowngthanhtrung
    * Định nghĩa nội dung của MovieCard:
    * - Hiển thị thông tin của một bộ phim
@@ -28,7 +28,8 @@ const MovieCard = ({ id, title, releaseDateFormatted, posterPath }: MovieCardPro
 
   const handleClick = (e) => {
     if (!isMoving.current) {
-      navigate(`/movie/${id}`);
+      const path = mediaType === 'tv' ? `/tv/${id}` : `/movie/${id}`;
+      navigate(path);
     }
   };
 

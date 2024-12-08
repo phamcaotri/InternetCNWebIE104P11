@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SITE_CONFIG, NAVIGATION } from '../config/site.config';
 import ModeButton from './ModeButton';
+import BackToTopButton from './BackToTopButton';
 
 const Footer = () => {
   /** @author @phantruowngthanhtrung
@@ -12,7 +13,7 @@ const Footer = () => {
    * Lấy thông tin từ file index.d.ts
    */
   return (
-    <footer className="bg-background text-text w-full mt-auto">
+    <footer className="bg-background-light text-text w-full mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
@@ -43,6 +44,9 @@ const Footer = () => {
         </div>
         <div className="mt-8 pt-8 border-t border-secondary text-center text-text-muted">
           <p>{SITE_CONFIG.COPYRIGHT}</p>
+        </div>
+        <div>
+          <BackToTopButton></BackToTopButton>
         </div>
       </div>
     </footer>
