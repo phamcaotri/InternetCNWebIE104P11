@@ -21,6 +21,8 @@ import { UI_CONFIG, ROUTES_CONFIG } from './config';
 import CategoryPage from './pages/CategoryPage';
 import TVShowDetailPage from './pages/TVShowsDetailPage';
 import WatchTVShowPage from './pages/WatchTVShowPage';
+import ForgotPassword from './pages/ForgotPasswordPage';
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,6 +43,7 @@ const App = () => {
           <Route path={ROUTES_CONFIG.PUBLIC.WELCOME} element={<WelcomePage />} />
           <Route path={ROUTES_CONFIG.PUBLIC.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
+          <Route path={ROUTES_CONFIG.PUBLIC.FORGOT_PASSWORD} element={<ForgotPassword />} />
           
           {/* Main Layout Routes */}
           <Route element={<MainLayout />}>

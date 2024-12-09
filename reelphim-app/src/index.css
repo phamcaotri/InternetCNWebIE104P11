@@ -93,7 +93,7 @@
 
 @layer components {
     .input-field {
-        @apply w-full px-4 rounded-lg bg-background border border-secondary
+        @apply w-full px-4 py-2 mb-2 rounded-lg bg-background border border-secondary
         focus:ring-2 focus:ring-primary focus:border-primary
         transition-colors text-text placeholder-text-muted
         hover:border-primary caret-primary;
@@ -106,7 +106,7 @@
     }
     .btn-secondary {
         @apply w-full flex justify-center py-2 px-4 border border-transparent 
-        text-sm font-medium rounded-md text-white bg-secondary 
+        text-sm font-medium rounded-md text-text bg-secondary 
         hover:bg-secondary-hover focus:outline-none focus:ring-2 
         focus:ring-offset-2 focus:ring-secondary;
     }
