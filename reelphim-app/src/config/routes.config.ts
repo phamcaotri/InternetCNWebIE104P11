@@ -13,6 +13,7 @@ export const ROUTES_CONFIG = {
       MOVIE_DETAIL: '/movie/:id',
       TV_SHOW_DETAIL: '/tv/:id',
       WATCH_MOVIE: '/movie/watch/:id',
+      WATCH_TV_SHOW: '/tv/watch/:id',
       CATEGORY: "/category/:categoryId"
     },
     NAVIGATION: {
