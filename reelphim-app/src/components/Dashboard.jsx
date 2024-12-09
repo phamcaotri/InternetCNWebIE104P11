@@ -1,5 +1,8 @@
 import React, { useState, useRef } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import useDragScroll from '../hooks/useDragScroll';
+import { tmdbapi } from '../services/tmdbApi';
+import { useNavigate } from 'react-router-dom';
 
 export const animes = [
     {
@@ -25,6 +28,15 @@ const styles = {
         width: '100%',
         height: '100vh', // Chiếm toàn bộ chiều cao màn hình
         overflow: 'hidden' // Ẩn phần tràn
+    },
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: 'linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%)',
+        zIndex: 1
     },
     info: {
         position: 'absolute',
@@ -61,25 +73,56 @@ const styles = {
     },
     buttonRight: {
         right: '20px',
+    },
+    watchButton: {
+        padding: '10px 25px',
+        backgroundColor: '#e50914', // Netflix-style red button
+        color: 'white',
+        border: 'none',
+        borderRadius: '5px',
+        fontSize: '1.1rem',
+        cursor: 'pointer',
+        marginTop: '20px',
+        transition: 'background-color 0.3s',
+        '&:hover': {
+            backgroundColor: '#f40612'
+        }
+    },
+    logo: {
+        maxWidth: '400px',
+        width: '100%',
+        height: 'auto',
+        marginBottom: '20px'
     }
 };
 
 export const Dashboard = () => {
+
+    const { data: popularMovies } = tmdbapi.PopularMovies({ page: 2 });
+    
     const [currentIndex, setCurrentIndex] = useState(0);
     const containerRef = useRef(null);
 
+    if (!popularMovies) {
+        return <div>Loading...</div>;
+    }
+
+
+    const navigate = useNavigate();
+    const handleWatchClick = () => {
+        navigate(`/movie/${popularMovies.results[currentIndex].id}`);
+    };
+
     const handlePrev = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === 0 ? animes.length - 1 : prevIndex - 1));
+        setCurrentIndex((prevIndex) => (
+            prevIndex === 0 ? 2 : prevIndex - 1  // Changed to hardcoded 2 (3-1)
+        ));
     };
 
     const handleNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex === animes.length - 1 ? 0 : prevIndex + 1));
-    };
-
-    const scrollLeft = () => {
-        if (containerRef.current) {
-            containerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-        }
+        setCurrentIndex((prevIndex) => (
+            prevIndex === 2 ? 0 : prevIndex + 1  // Changed to hardcoded 2
+        ));
     };
 
     const scrollRight = () => {
@@ -91,15 +134,19 @@ export const Dashboard = () => {
     return (
         <div style={styles.container} ref={containerRef}>
             <img 
-                src={animes[currentIndex].imageURL} 
-                alt={animes[currentIndex].title} 
+                src={popularMovies.results[currentIndex].backdropPath}
+                alt={popularMovies.results[currentIndex].title} 
                 style={styles.image} 
             />
+            <div style={styles.overlay}></div>
             <div style={styles.info}>
-                <h1>{animes[currentIndex].title}</h1>
-                <p>{animes[currentIndex].summary}</p>
+                {/* Logo */}
+                <h1>{popularMovies.results[currentIndex].title}</h1>
+                <p>{popularMovies.results[currentIndex].overview}</p>
+                <button style={styles.watchButton} onClick={handleWatchClick}>
+                    Xem Phim
+                </button>
             </div>
-            <img src={animes[currentIndex].imageURL} alt={animes[currentIndex].title} style={styles.image} />
             <button
                 style={{ ...styles.button, ...styles.buttonLeft }}
                 onClick={handlePrev}
