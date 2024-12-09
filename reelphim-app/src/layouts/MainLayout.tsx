@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Dashboard from '../components/Dashboard';
 
 const MainLayout = () => {
   return (
@@ -10,8 +11,7 @@ const MainLayout = () => {
       {/* New full-width content section */}
       <div className="w-full bg-gray-800 p-6">
         <div className="text-center">
-          <h2 className="text-2xl font-bold">Top Content Section</h2>
-          <p>This is a full-width content section that spans the entire width</p>
+          <Dashboard />
         </div>
       </div>
 
@@ -31,6 +31,7 @@ const MainLayout = () => {
       </div>
       <Footer />
     </div>
+
   );
 };
 
