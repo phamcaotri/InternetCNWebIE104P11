@@ -21,42 +21,46 @@ export const animes = [
 
 const styles = {
     container: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: '20px',
-        justifyContent: 'space-between',
+        position: 'relative',
         width: '100%',
-        position: 'relative', // Add relative positioning to the container
-        minWidth: '300px' // Ensure the container has a minimum width
+        height: '100vh', // Chiếm toàn bộ chiều cao màn hình
+        overflow: 'hidden' // Ẩn phần tràn
     },
     info: {
-        flex: 1,
-        marginRight: '20px'
+        position: 'absolute',
+        left: '50px',
+        top: '50%', // Đặt ở giữa theo chiều dọc
+        transform: 'translateY(-50%)', // Căn chỉnh chính xác vào giữa
+        zIndex: 2,
+        color: 'white',
+        textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+        maxWidth: '40%' // Giới hạn chiều rộng của phần text
     },
     image: {
-        width: '50%',
-        maxWidth: '500px',
-        height: '50%',
-        maxHeight: '500px'
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover', // Đảm bảo hình ảnh bao phủ toàn bộ
+        position: 'absolute',
+        top: 0,
+        left: 0
     },
     button: {
-        position: 'absolute', // Use absolute positioning for the buttons
-        top: '50%', // Center the buttons vertically
-        transform: 'translateY(-50%)', // Adjust for vertical centering
-        margin: '10px',
-        padding: '10px',
-        backgroundColor: '#007bff',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 3,
+        padding: '15px 20px',
+        backgroundColor: 'rgba(0,0,0,0.5)',
         color: 'white',
         border: 'none',
         borderRadius: '5px',
         cursor: 'pointer'
     },
     buttonLeft: {
-        left: '-50px', // Position the left button outside the container
+        left: '20px',
     },
     buttonRight: {
-        right: '-50px', // Position the right button outside the container
+        right: '20px',
     }
 };
 
@@ -86,6 +90,11 @@ export const Dashboard = () => {
 
     return (
         <div style={styles.container} ref={containerRef}>
+            <img 
+                src={animes[currentIndex].imageURL} 
+                alt={animes[currentIndex].title} 
+                style={styles.image} 
+            />
             <div style={styles.info}>
                 <h1>{animes[currentIndex].title}</h1>
                 <p>{animes[currentIndex].summary}</p>
