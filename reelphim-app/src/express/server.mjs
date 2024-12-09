@@ -5,16 +5,14 @@ import TorrentSearchApi from 'torrent-search-api';
 import axios from 'axios';
 import cheerio from 'cheerio';
 
+// < KHỞI TẠO SERVER >
 const app = express();
-
 const port = 3001;
-
 app.use(cors({
   origin: '*',
   methods: ['GET'],
   allowedHeaders: ['Content-Type', 'Range'],
 }));
-
 // Thêm trust proxy setting
 app.set('trust proxy', true);
 
@@ -22,55 +20,347 @@ app.set('trust proxy', true);
 app.use((req, res, next) => {
   const clientIP = req.headers['x-forwarded-for'] || 
                   req.ip || 
-                  req.socket.remoteAddress || 
-                  req.connection.remoteAddress;
+                  req.socket.remoteAddress;
   
   console.log(`[${new Date().toISOString()}] Request from IP: ${clientIP}, Path: ${req.path}`);
-  console.log('Headers:', JSON.stringify(req.headers, null, 2)); // Log headers để debug
   next();
 });
-
 const client = new WebTorrent({
   destroyStoreOnDestroy: true,
+  // maxConns: 55,
+  // uploadLimit: 0,
+  // downloadLimit: 0,
+  // dht: true,
+  // dhtPort: 20000,
+  // path: './downloads',
+  tracker: true,
+  trackers: [
+    'udp://tracker.opentrackr.org:1337/announce',
+    'udp://tracker.openbittorrent.com:6969/announce'
+  ],
+  // webSeeds: true,
+  // strategy: 'sequential',
+  // verify: true,
 });
-const activeTorrents = new Map();
-const activeStreams = new Map();
 
-app.get('/stream/:infoHash', (req, res) => {
-  const clientIP = req.headers['x-forwarded-for'] || 
-                  req.ip || 
-                  req.socket.remoteAddress || 
-                  req.connection.remoteAddress;
-  const infoHash = req.params.infoHash;
-  console.log(`[${new Date().toISOString()}] Streaming request from IP: ${clientIP} for hash: ${infoHash}`);
-  
-  const magnet = `magnet:?xt=urn:btih:${infoHash}`;
-  
-  // Check if torrent is already being downloaded
-  let torrent = activeTorrents.get(infoHash);
-  
-  if (torrent) {
-    streamTorrent(torrent, req, res);
-    return;
+class TorrentManager {
+  constructor(maxConcurrent = 1) {
+    this.maxConcurrent = maxConcurrent;
+    this.torrents = new Set(); // Lưu infoHash của các torrent đang có trong client
+    this.pauseTimers = new Map(); // Lưu các timer để pause/resume
   }
 
-  client.add(magnet, (torrent) => {
-    activeTorrents.set(infoHash, torrent);
-    streamTorrent(torrent, req, res);
-    
-    // Handle torrent events
-    torrent.on('error', (err) => {
-      console.error('Torrent error:', err);
-      activeTorrents.delete(infoHash);
-      if (!res.headersSent) {
-        res.status(500).send('Torrent error');
+  async addTorrent(magnet, infoHash) {
+    // Kiểm tra torrent đã tồn tại trong client
+    if (this.torrents.has(infoHash)) {
+      console.log(`[${new Date().toISOString()}] Torrent already exists in client: ${infoHash}`);
+      return client.get(infoHash);
+    }
+
+    // Nếu đã đạt giới hạn, xóa torrent cũ nhất
+    if (this.torrents.size >= this.maxConcurrent) {
+      const oldestTorrent = client.torrents
+        .sort((a, b) => a.lastAccessed - b.lastAccessed)[0];
+
+      if (oldestTorrent) {
+        console.log(`[${new Date().toISOString()}] Removing oldest torrent from client: ${oldestTorrent.name}`);
+        this.torrents.delete(oldestTorrent.infoHash);
+      }
+    }
+
+    // Thêm torrent mới vào client và đợi metadata
+    return new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('Torrent add timeout')), 10000); // 10 giây
+
+      try {
+        const manager = this;
+        client.add(magnet, {
+          destroyStoreOnDestroy: true,
+        }, torrent => {
+          clearTimeout(timeout);
+          
+          // Đợi metadata load xong
+          const onTorrentReady = (torrent) => {
+            // Lưu infoHash vào Set để track
+            manager.torrents.add(infoHash);
+            
+            // Thêm lastAccessed vào torrent object
+            torrent.lastAccessed = Date.now();
+
+            // Đảm bảo torrent bắt đầu ở trạng thái pause
+            torrent.pause();
+            torrent.files.forEach(file => file.deselect());
+            
+            console.log(`[${new Date().toISOString()}] Added new torrent to client in paused state: ${torrent.name}`);
+            resolve(torrent);
+          };
+
+          if (torrent.metadata) {
+            onTorrentReady(torrent);
+          } else {
+            torrent.once('ready', () => onTorrentReady(torrent));
+          }
+        });
+      } catch (error) {
+        clearTimeout(timeout);
+        reject(error);
       }
     });
+  }
 
-    torrent.on('done', () => {
-      console.log('Torrent download finished');
+  async removeTorrent(infoHash) {
+    if (this.torrents.has(infoHash)) {
+      console.log(`[${new Date().toISOString()}] Removing torrent from tracking: ${infoHash}`);
+      this.torrents.delete(infoHash);
+    }
+  }
+
+  updateLastAccessed(infoHash) {
+    const torrent = client.get(infoHash);
+    if (torrent) {
+      torrent.lastAccessed = Date.now();
+    }
+  }
+
+  cleanup() {
+    const now = Date.now();
+    for (const infoHash of this.torrents) {
+      const torrent = client.get(infoHash);
+      if (torrent && now - torrent.lastAccessed > 30 * 60 * 1000) {
+        this.removeTorrent(infoHash);
+      }
+    }
+  }
+
+  getStatus() {
+    return Array.from(this.torrents).map(infoHash => {
+      const torrent = client.get(infoHash);
+      return {
+        infoHash,
+        name: torrent.name,
+        downloadSpeed: torrent.downloadSpeed,
+        uploadSpeed: torrent.uploadSpeed,
+        progress: torrent.progress,
+        peers: torrent.numPeers,
+        paused: torrent.paused,
+        lastAccessed: torrent.lastAccessed
+      };
     });
-  });
+  }
+
+  // Thêm phương thức để xử lý pause có delay
+  schedulePause(torrent) {
+    // Hủy timer pause cũ nếu có
+    if (this.pauseTimers.has(torrent.infoHash)) {
+      clearTimeout(this.pauseTimers.get(torrent.infoHash));
+    }
+
+    // Tạo timer mới
+    const timer = setTimeout(() => {
+      if (torrent.activeStreams <= 0) {
+        console.log(`[${new Date().toISOString()}] Pausing inactive torrent: ${torrent.name}`);
+        
+        // Dừng tất cả kết nối
+        torrent.pause();
+        
+        // Deselect tất cả files
+        torrent.files.forEach(file => file.deselect());
+        
+        // Dừng tất cả wire connections
+        torrent.wires.forEach(wire => wire.destroy());
+        
+        // Đảm bảo torrent đã thực sự pause
+        if (!torrent.paused) {
+          console.log(`[${new Date().toISOString()}] Force pausing torrent: ${torrent.name}`);
+          torrent._pause(); // Gọi internal pause method
+        }
+
+        console.log(`[${new Date().toISOString()}] Torrent paused status: ${torrent.paused}`);
+      }
+      this.pauseTimers.delete(torrent.infoHash);
+    }, 30000);
+
+    this.pauseTimers.set(torrent.infoHash, timer);
+  }
+
+  // Thêm phương thức để xử lý resume có delay
+  scheduleResume(torrent) {
+    // Hủy timer pause cũ nếu có
+    if (this.pauseTimers.has(torrent.infoHash)) {
+      clearTimeout(this.pauseTimers.get(torrent.infoHash));
+      this.pauseTimers.delete(torrent.infoHash);
+    }
+
+    // Resume ngay lập tức nếu đang pause
+    if (torrent.paused) {
+      console.log(`[${new Date().toISOString()}] Resuming paused torrent: ${torrent.name}`);
+      torrent.resume();
+      console.log(`[${new Date().toISOString()}] Torrent resumed status: ${!torrent.paused}`);
+    }
+  }
+}
+
+// Khởi tạo manager
+const torrentManager = new TorrentManager(1);
+
+// Chạy cleanup định kỳ
+setInterval(() => torrentManager.cleanup(), 5 * 60 * 1000);
+
+// Thêm class để quản lý thông tin torrent
+class TorrentInfo {
+  constructor(torrent, selectedFile = null) {
+    this.torrent = torrent;
+    this.selectedFile = selectedFile;
+    this.lastAccessed = Date.now();
+    this.clients = 0;
+  }
+}
+// Thêm endpoint để lấy thông tin tất cả torrent đang hoạt động
+app.get('/torrents/status', (req, res) => {
+  const status = Array.from(torrentManager.torrents.entries()).map(([infoHash, info]) => ({
+    infoHash,
+    name: info.torrent.name,
+    downloadSpeed: info.torrent.downloadSpeed,
+    uploadSpeed: info.torrent.uploadSpeed,
+    progress: info.torrent.progress,
+    peers: info.torrent.numPeers,
+    selectedFile: info.selectedFile?.path,
+    clients: info.clients,
+    paused: info.torrent.paused,
+    lastAccessed: info.lastAccessed
+  }));
+  
+  res.json(status);
+});
+
+// Update the /stream/:infoHash endpoint
+app.get('/stream/:infoHash', async (req, res) => {
+  const infoHash = req.params.infoHash;
+  const requestedFilePath = req.query.filePath;
+  const magnet = `magnet:?xt=urn:btih:${infoHash}`;
+
+  try {
+    const torrent = await torrentManager.addTorrent(magnet, infoHash);
+    
+    if (!torrent) {
+      throw new Error('Failed to get torrent information');
+    }
+
+    // Check if torrent is paused before trying to resume
+    if (torrent.paused) {
+      console.log(`[${new Date().toISOString()}] Resuming torrent: ${torrent.name}`);
+      torrent.resume();
+    }
+
+    let targetFile;
+    if (requestedFilePath && torrent.files) {
+      targetFile = torrent.files.find(file => 
+        decodeURIComponent(file.path) === decodeURIComponent(requestedFilePath)
+      );
+      
+      if (!targetFile) {
+        return res.status(404).json({ error: 'Requested file not found in torrent' });
+      }
+
+      // Select only the requested file
+      targetFile.select();
+      torrent.files.forEach(f => {
+        if (f !== targetFile) f.deselect();
+      });
+    } else {
+      // If no specific file requested, select the largest video file
+      targetFile = torrent.files.find(file => {
+        const ext = file.path.split('.').pop()?.toLowerCase();
+        return ['mp4', 'mkv', 'avi', 'mov', 'webm'].includes(ext);
+      });
+    }
+
+    if (!targetFile) {
+      return res.status(404).json({ error: 'No video file found in torrent' });
+    }
+
+    // Handle range requests
+    const range = req.headers.range;
+    const fileSize = targetFile.length;
+
+    // Tăng số lượng stream đang hoạt động
+    torrent.activeStreams = (torrent.activeStreams || 0) + 1;
+    torrentManager.scheduleResume(torrent);
+
+    if (range) {
+      const parts = range.replace(/bytes=/, '').split('-');
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+      const chunkSize = end - start + 1;
+
+      res.writeHead(206, {
+        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunkSize,
+        'Content-Type': 'video/mp4'
+      });
+
+      const stream = targetFile.createReadStream({ start, end });
+      stream.pipe(res);
+
+      stream.on('error', error => {
+        console.error('Stream error:', error);
+        if (!res.headersSent) {
+          res.status(500).json({ error: 'Streaming error occurred' });
+        }
+      });
+
+      req.on('close', () => {
+        stream.destroy();
+        torrent.activeStreams--;
+        
+        // Schedule pause nếu không còn stream nào
+        if (torrent.activeStreams <= 0) {
+          console.log(`[${new Date().toISOString()}] No active streams, scheduling pause for torrent: ${torrent.name}`);
+          torrentManager.schedulePause(torrent);
+        }
+      });
+
+    } else {
+      res.writeHead(200, {
+        'Content-Length': fileSize,
+        'Content-Type': 'video/mp4'
+      });
+
+      const stream = targetFile.createReadStream();
+      stream.pipe(res);
+
+      stream.on('error', error => {
+        console.error('Stream error:', error);
+        if (!res.headersSent) {
+          res.status(500).json({ error: 'Streaming error occurred' });
+        }
+      });
+
+      req.on('close', () => {
+        stream.destroy();
+        torrent.activeStreams--;
+        
+        // Schedule pause nếu không còn stream nào
+        if (torrent.activeStreams <= 0) {
+          console.log(`[${new Date().toISOString()}] No active streams, scheduling pause for torrent: ${torrent.name}`);
+          torrentManager.schedulePause(torrent);
+        }
+      });
+    }
+
+    // Update last accessed time
+    torrentManager.updateLastAccessed(infoHash);
+
+  } catch (error) {
+    console.error('Streaming error:', error);
+    if (!res.headersSent) {
+      res.status(500).json({ 
+        error: 'Failed to stream file',
+        message: error.message
+      });
+    }
+  }
 });
 
 function streamTorrent(torrent, req, res) {
@@ -79,22 +369,23 @@ function streamTorrent(torrent, req, res) {
   
   console.log('Stream request:', {
     streamId,
-    clients: activeStreams.has(streamId) ? activeStreams.get(streamId).clients : 0
+    clients: torrentManager.activeStreams.has(streamId) ? torrentManager.activeStreams.get(streamId).clients : 0
   });
 
   handleDirectStream(streamId, file, req, res);
 }
 
 function handleDirectStream(streamId, file, req, res) {
-  let streamInfo = activeStreams.get(streamId);
+  let streamInfo = torrentManager.activeStreams.get(streamId);
   const range = req.headers.range;
 
   if (!streamInfo) {
     streamInfo = {
       clients: 0,
-      lastAccessed: Date.now()
+      lastAccessed: Date.now(),
+      torrentHash: streamId.split('-')[0]
     };
-    activeStreams.set(streamId, streamInfo);
+    torrentManager.activeStreams.set(streamId, streamInfo);
   }
 
   streamInfo.clients++;
@@ -147,30 +438,16 @@ function handleStream(stream, streamInfo, streamId, req, res) {
     if (streamInfo.clients <= 0) {
       console.log(`No more clients for ${streamId}, cleaning up...`);
       stream.destroy();
-      activeStreams.delete(streamId);
+      torrentManager.activeStreams.delete(streamId);
     }
   });
 
   stream.pipe(res);
 }
 
-// Cleanup function để xóa các stream không còn được sử dụng
-function cleanupStreams() {
-  const now = Date.now();
-  for (const [streamId, streamInfo] of activeStreams.entries()) {
-    if (streamInfo.clients <= 0 || now - streamInfo.lastAccessed > 5 * 60 * 1000) {
-      console.log(`Cleaning up inactive stream: ${streamId}`);
-      activeStreams.delete(streamId);
-    }
-  }
-}
-
-// Chạy cleanup mỗi phút
-setInterval(cleanupStreams, 60 * 1000);
-
 // Thêm endpoint để lấy thông tin về các stream đang hoạt động
 app.get('/streams/stats', (req, res) => {
-  const stats = Array.from(activeStreams.entries()).map(([streamId, info]) => ({
+  const stats = Array.from(torrentManager.activeStreams.entries()).map(([streamId, info]) => ({
     streamId,
     clients: info.clients,
     lastAccessed: info.lastAccessed
@@ -179,54 +456,124 @@ app.get('/streams/stats', (req, res) => {
   res.json(stats);
 });
 
-app.get('/stats/:infoHash', (req, res) => {
-  const clientIP = req.headers['x-forwarded-for'] || 
-                  req.ip || 
-                  req.socket.remoteAddress || 
-                  req.connection.remoteAddress;
-  console.log(`[${new Date().toISOString()}] Stats request from IP: ${clientIP} for hash: ${req.params.infoHash}`);
-  
-  const torrent = activeTorrents.get(req.params.infoHash);
-  
-  if (!torrent) {
-    return res.json({ error: 'No active torrent' });
-  }
-  
-  // Update last accessed time
-  torrent.lastAccessed = Date.now();
-  
-  res.json({
-    progress: torrent.progress,
-    downloadSpeed: torrent.downloadSpeed,
-    peers: torrent.numPeers
+// Thêm hàm buildFileTree trước endpoint /files/:infoHash
+const buildFileTree = (files) => {
+  const structure = {
+    name: '',
+    type: 'directory',
+    size: 0,
+    children: {}
+  };
+
+  files.forEach(file => {
+    const pathParts = file.path.split('\\');
+    let current = structure;
+    
+    // Build directory structure
+    for (let i = 0; i < pathParts.length - 1; i++) {
+      const part = pathParts[i];
+      if (!current.children[part]) {
+        current.children[part] = {
+          name: part,
+          type: 'directory',
+          size: 0,
+          children: {}
+        };
+      }
+      current = current.children[part];
+    }
+
+    // Add file
+    const fileName = pathParts[pathParts.length - 1];
+    current.children[fileName] = {
+      name: fileName,
+      type: file.type,
+      size: file.length,
+      progress: file.progress,
+      extension: fileName.split('.').pop(),
+      path: file.path
+    };
+
+    // Update directory sizes
+    let dirCurrent = structure;
+    for (const part of pathParts.slice(0, -1)) {
+      dirCurrent.size += file.length;
+      dirCurrent = dirCurrent.children[part];
+    }
+    dirCurrent.size += file.length;
   });
+
+  return structure;
+};
+
+// Update the /files/:infoHash endpoint
+app.get('/files/:infoHash', async (req, res) => {
+  const infoHash = req.params.infoHash;
+  const magnet = `magnet:?xt=urn:btih:${infoHash}`;
+
+  try {
+    const torrent = await torrentManager.addTorrent(magnet, infoHash);
+    
+    if (!torrent) {
+      throw new Error('Failed to get torrent information');
+    }
+
+    // Đảm bảo torrent đã load metadata
+    if (!torrent.files || torrent.files.length === 0) {
+      await new Promise((resolve) => {
+        torrent.once('ready', resolve);
+      });
+    }
+
+    const files = torrent.files.map(file => ({
+      path: file.path,
+      length: file.length,
+      progress: file.progress,
+      type: getFileType(file.path)
+    }));
+
+    const structure = buildFileTree(files);
+    structure.name = torrent.name;
+
+    // Cập nhật last accessed
+    torrentManager.updateLastAccessed(infoHash);
+
+    res.json({ structure });
+
+  } catch (error) {
+    console.error('Error getting torrent files:', error);
+    res.status(500).json({
+      error: 'Failed to get torrent files',
+      message: error.message
+    });
+  }
 });
 
-// Cleanup function to remove inactive torrents
-function cleanupTorrents() {
+const getFileType = (path) => {
+  const ext = path.split('.').pop()?.toLowerCase();
+  if (['mp4', 'mkv', 'avi', 'mov', 'wmv', 'm4v'].includes(ext)) return 'video';
+  if (['mp3', 'wav', 'flac', 'aac', 'm4a'].includes(ext)) return 'audio';
+  if (['srt', 'vtt', 'sub', 'ass', 'ssa'].includes(ext)) return 'subtitle';
+  if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(ext)) return 'image';
+  return 'other';
+};
 
-  for (const [infoHash, torrent] of activeTorrents.entries()) {
-    // Remove torrent if it's done or hasn't been accessed in 5 minutes
-    const shouldRemove = torrent.done || 
-      (Date.now() - torrent.lastAccessed > 5 * 60 * 1000);
-    
-    if (shouldRemove) {
-      console.log(`Removing torrent: ${infoHash}`);
-      client.remove(torrent);
-      activeTorrents.delete(infoHash);
-    }
-  }
+// Add cleanup for file listing requests
+const cleanupTorrents = () => {
+  console.log(`[${new Date().toISOString()}] Running torrent cleanup...`);
+  torrentManager.cleanup();
 }
 
-// Run cleanup more frequently
-setInterval(cleanupTorrents, 60 * 1000); // Every minute
+// Run cleanup every 5 minutes
+setInterval(cleanupTorrents, 5 * 60 * 1000);
 
 // Handle process termination
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
   console.log('Cleaning up torrents before exit...');
-  for (const torrent of activeTorrents.values()) {
-    client.remove(torrent);
-  }
+  const promises = Array.from(torrentManager.torrents).map(infoHash => 
+    torrentManager.removeTorrent(infoHash)
+  );
+  await Promise.all(promises);
   process.exit();
 });
 
@@ -341,4 +688,3 @@ app.get('/api/torrents/search', async (req, res) => {
     res.status(500).json({ error: 'Search failed' });
   }
 });
-

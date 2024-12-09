@@ -142,7 +142,7 @@ export const transformMovieDetails = (item: TMDBMovieDetails): MovieDetails => {
         vote_average: backdrop.vote_average,
         vote_count: backdrop.vote_count,
         width: backdrop.width,
-      })),
+      })) || [],
       logos: item.images.logos?.map(logo => ({
         aspect_ratio: logo.aspect_ratio,
         height: logo.height,
@@ -151,7 +151,7 @@ export const transformMovieDetails = (item: TMDBMovieDetails): MovieDetails => {
         vote_average: logo.vote_average,
         vote_count: logo.vote_count,
         width: logo.width,
-      })),
+      })) || [],
       posters: item.images.posters?.map(poster => ({
         aspect_ratio: poster.aspect_ratio,
         height: poster.height,
@@ -160,13 +160,13 @@ export const transformMovieDetails = (item: TMDBMovieDetails): MovieDetails => {
         vote_average: poster.vote_average,
         vote_count: poster.vote_count,
         width: poster.width,
-      })),
+      })) || [],
     } : null,
     alternativeTitles: item.alternative_titles ? {
       titles: item.alternative_titles.titles?.map(title => ({
         iso_3166_1: title.iso_3166_1,
         title: title.title,
-      })),
+      })) || [],
     } : null,
   }
 }
