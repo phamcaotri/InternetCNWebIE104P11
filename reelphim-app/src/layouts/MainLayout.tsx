@@ -7,14 +7,6 @@ const MainLayout = () => {
   return (
     <div className="min-h-screen bg-background text-white flex flex-col">
       <Header />
-      {/* New full-width content section */}
-      <div className="w-full bg-gray-800 p-6">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold">Top Content Section</h2>
-          <p>This is a full-width content section that spans the entire width</p>
-        </div>
-      </div>
-
       {/* Main layout with sidebars */}
       <div className="flex-grow flex">
         {/* Left sidebar */}
