@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
     NAME: 'Reelphim',
-    LOGO: '/src/assets/logo.png',
+    LOGO: '/src/assets/logo_reelphim.png',
     TAGLINE: 'Trải nghiệm điện ảnh tuyệt vời',
     DESCRIPTION: 'Reelphim là nền tảng xem phim trực tuyến hàng đầu với đa dạng thể loại phim và series TV.',
     COPYRIGHT: '© 2024 Reelphim. Tất cả quyền được bảo lưu.',
