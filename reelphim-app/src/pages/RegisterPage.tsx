@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/01.webp';
+import { registerUser } from '../services/api'; // Kết nối API đăng ký
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -11,19 +12,28 @@ const RegisterPage = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState(''); // Trạng thái lỗi
 
-  const handleSubmit = (e) => {
+ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Kiểm tra mật khẩu và xác nhận mật khẩu
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError('Mật khẩu không khớp!');
       return;
     }
 
-    // Nếu hợp lệ, xử lý đăng ký
-    setError(''); // Xóa lỗi nếu có
-    console.log('Registration successful:', { name, email, password });
-    navigate('/login');
+    if (password !== confirmPassword) {
+      setError('Ban chưa chấp nhận điều khoản và điều kiện!');
+      return;
+    }
+
+    try {
+      const userData = { name, email, password };
+      const response = await registerUser(userData); // Gửi dữ liệu người dùng đến backend
+      console.log('Đăng ký thành công:', response);
+      navigate('/login'); // Chuyển hướng người dùng đến trang đăng nhập
+    } catch (error) {
+      setError(error.response?.data?.message || 'Đăng ký thất bại'); // Hiển thị lỗi từ backend
+    }
   };
 
   return (
@@ -54,8 +64,8 @@ const RegisterPage = () => {
                 className="input-field block w-full px-4 py-2 bg-gray-800 text-white placeholder-gray-500 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                 placeholder="Full Name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                />
             </div>
 
             {/* Email Address */}
@@ -72,7 +82,7 @@ const RegisterPage = () => {
                 className="input-field block w-full px-4 py-2 bg-gray-800 text-white placeholder-gray-500 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                 placeholder="Email address"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
               />
             </div>
 
@@ -90,7 +100,7 @@ const RegisterPage = () => {
                 className="input-field block w-full px-4 py-2 bg-gray-800 text-white placeholder-gray-500 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
               />
             </div>
 
@@ -108,7 +118,7 @@ const RegisterPage = () => {
                 className="input-field block w-full px-4 py-2 bg-gray-800 text-white placeholder-gray-500 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                 placeholder="Confirm Password"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
               />
             </div>
           </div>
@@ -129,7 +139,8 @@ const RegisterPage = () => {
               required
               className="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-600 rounded"
               checked={acceptTerms}
-              onChange={(e) => setAcceptTerms(e.target.checked)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAcceptTerms(e.target.checked)}
+
             />
             <label htmlFor="accept-terms" className="ml-2 text-sm text-gray-300">
               Tôi đã đọc các{' '}
