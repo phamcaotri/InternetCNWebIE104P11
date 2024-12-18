@@ -20,6 +20,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { UI_CONFIG, ROUTES_CONFIG } from './config';
 import CategoryPage from './pages/CategoryPage';
 import TVShowDetailPage from './pages/TVShowsDetailPage';
+import WatchTVShowPage from './pages/WatchTVShowPage';
+import ForgotPassword from './pages/ForgotPasswordPage';
 
 
 const queryClient = new QueryClient({
@@ -41,6 +43,7 @@ const App = () => {
           <Route path={ROUTES_CONFIG.PUBLIC.WELCOME} element={<WelcomePage />} />
           <Route path={ROUTES_CONFIG.PUBLIC.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
+          <Route path={ROUTES_CONFIG.PUBLIC.FORGOT_PASSWORD} element={<ForgotPassword />} />
           
           {/* Main Layout Routes */}
           <Route element={<MainLayout />}>
@@ -62,6 +65,7 @@ const App = () => {
           {/* Watch Movie Layout Route */}
           <Route element={<WatchMovieLayout />}>
             <Route path={ROUTES_CONFIG.PRIVATE.WATCH_MOVIE} element={<PrivateRoute><WatchMoviePage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.WATCH_TV_SHOW} element={<PrivateRoute><WatchTVShowPage /></PrivateRoute>} />
           </Route>
 
           <Route path="*" element={<Navigate to={ROUTES_CONFIG.NAVIGATION.DEFAULT_REDIRECT} replace />} />

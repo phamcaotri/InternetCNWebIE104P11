@@ -106,9 +106,9 @@ const LoginPage = () => {
             </div>
 
             <div className="text-sm">
-              <a href="#" className="btn-tertiary">
+              <Link to="/forgot-password" className="btn-tertiary">
                 Forgot your password?
-              </a>
+              </Link>
             </div>
           </div>
 

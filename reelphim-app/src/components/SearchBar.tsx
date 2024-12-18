@@ -52,7 +52,7 @@ const Search = () => {
   };
 
   return (
-    <div className="relative border border-primary rounded-lg">
+    <div className="relative rounded-lg">
       <form onSubmit={handleSearch} className="relative">
         <input
           type="text"
@@ -67,7 +67,7 @@ const Search = () => {
         />
         <button
           type="submit"
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 text-text-muted hover:text-primary transition-colors"
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 text-text-muted transition-colors"
           title="Tìm kiếm"
         >
           <SearchIcon size={20} />
