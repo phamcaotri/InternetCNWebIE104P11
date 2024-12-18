@@ -157,7 +157,7 @@ export const searchTorrents = async (query, category = 'Movies', limit = 20) => 
       magnet: torrent.magnet || '',
       provider: torrent.provider,
     }));
-    console.log('🚀 Kết quả được định dạng:', formattedResults);
+    console.log('Kết quả được định dạng:', formattedResults);
     return formattedResults;
   } catch (error) {
     console.error('[TorrentSearchApi] Search error:', error);
