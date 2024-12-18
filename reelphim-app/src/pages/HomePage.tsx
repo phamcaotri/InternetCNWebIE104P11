@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieSection from '../components/MovieSection';
 import { tmdbapi } from '../services/tmdbApi';
+import Dashboard from '../components/Dashboard';
 
 const HomePage = () => {
   /** @author @phamcaotri
@@ -24,6 +25,13 @@ const HomePage = () => {
   // }
 
   return (
+    <div className="min-h-screen bg-background text-white flex flex-col">
+      {/* New full-width content section */}
+      <div className="w-full bg-black-800 p-6">
+        <div className="text-center">
+          <Dashboard />
+        </div>
+      </div>
     <main>
       {nowPlayingMovies?.results && (
         <MovieSection
@@ -57,6 +65,7 @@ const HomePage = () => {
         />
       )}
     </main>
+    </div>
   );
 };
 
