@@ -37,6 +37,26 @@ const Footer = () => {
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Liên hệ</h4>
+            <ul className="social-links flex space-x-2 mb-4">
+              {NAVIGATION.SOCIAL_LINKS.map((item) => (
+                <li key={item.path}>
+                  <a href={item.path} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary-hover">
+                    {(() => {
+                      if (item.name === 'Facebook') {
+                        return <img src="/src/assets/facebook.png" alt="Facebook" className="w-6 h-6" />;
+                      }
+                      if (item.name === 'Twitter') {
+                        return <img src="/src/assets/xtwitter.png" alt="X/Twitter" className="w-6 h-6" />;
+                      }
+                      if (item.name === 'Instagram') {
+                        return <img src="/src/assets/instagram.png" alt="Instagram" className="w-6 h-6" />;
+                      }
+                      return item.name;
+                    })()}
+                  </a>
+                </li>
+              ))}
+            </ul>
             <p className="text-text">Email: {SITE_CONFIG.CONTACT_EMAIL}</p>
             <p className="text-text">Điện thoại: {SITE_CONFIG.SUPPORT_PHONE}</p>
           </div>

@@ -5,9 +5,9 @@ export const SITE_CONFIG = {
     DESCRIPTION: 'Reelphim là nền tảng xem phim trực tuyến hàng đầu với đa dạng thể loại phim và series TV.',
     COPYRIGHT: '© 2024 Reelphim. Tất cả quyền được bảo lưu.',
     SOCIAL_LINKS: {
-      FACEBOOK: 'https://facebook.com/reelphim',
-      TWITTER: 'https://twitter.com/reelphim',
-      INSTAGRAM: 'https://instagram.com/reelphim',
+      FACEBOOK: 'https://facebook.com/phambthuan',
+      XTWITTER: 'https://x.com/TheBrightTomo',
+      INSTAGRAM: 'https://instagram.com/tomohitokiyoneta',
     },
     CONTACT_EMAIL: 'support@reelphim.com',
     SUPPORT_PHONE: '+84 123 456 789',
@@ -28,7 +28,11 @@ export const SITE_CONFIG = {
     FOOTER_LINKS: [
       { name: 'Về chúng tôi', path: '/about' },
       { name: 'Điều khoản sử dụng', path: '/terms' },
-      { name: 'Chính sách bảo mật', path: '/privacy' },
-      { name: 'Liên hệ', path: '/contact' },
+      { name: 'Chính sách bảo mật', path: '/privacy' }
     ],
+    SOCIAL_LINKS: [
+      { name: 'Facebook', path: 'https://facebook.com/phambthuan' },
+      { name: 'Twitter', path: 'https://x.com/TheBrightTomo' },
+      { name: 'Instagram', path: 'https://instagram.com/tomohitokiyoneta' }
+    ]
   };
