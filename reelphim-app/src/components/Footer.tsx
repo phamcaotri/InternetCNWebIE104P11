@@ -37,6 +37,15 @@ const Footer = () => {
           </div>
           <div>
             <h4 className="text-lg font-semibold mb-4">Liên hệ</h4>
+            <ul className="space-y-2">
+              {NAVIGATION.SOCIAL_LINKS.map((item) => (
+                <li key={item.path}>
+                  <a href={item.path} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary-hover">
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
             <p className="text-text">Email: {SITE_CONFIG.CONTACT_EMAIL}</p>
             <p className="text-text">Điện thoại: {SITE_CONFIG.SUPPORT_PHONE}</p>
           </div>
