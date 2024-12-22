@@ -15,7 +15,7 @@ export const ROUTES_CONFIG = {
       WATCH_MOVIE: '/movie/watch/:id',
       WATCH_TV_SHOW: '/tv/watch/:id',
       CATEGORY: "/category/:categoryId",
-      GENRES: "/genres/:genresId"
+      GENRES: "/genres",
     },
     NAVIGATION: {
       DEFAULT_REDIRECT: '/',
