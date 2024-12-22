@@ -45,7 +45,6 @@ const App = () => {
           <Route path={ROUTES_CONFIG.PUBLIC.WELCOME} element={<WelcomePage />} />
           <Route path={ROUTES_CONFIG.PUBLIC.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
-          <Route path={ROUTES_CONFIG.PUBLIC.FORGOT_PASSWORD} element={<ForgotPassword />} />
           
           {/* Main Layout Routes */}
           <Route element={<MainLayout />}>

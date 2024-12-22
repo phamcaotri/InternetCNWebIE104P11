@@ -214,7 +214,7 @@ const TVShowDetail = () => {
                 className="h-24 object-contain mb-4"
               />
             ) : (
-              <h1 className="text-3xl font-bold mb-2">{tvShow?.originalName}</h1>
+              <h1 className="text-3xl font-bold mb-2 text-text-special">{tvShow?.originalName}</h1>
             )}
 
             <div className="space-y-6">
@@ -226,7 +226,7 @@ const TVShowDetail = () => {
               </div>
 
               <section>
-                <h2 className="text-xl font-semibold mb-2">Overview</h2>
+                <h2 className="text-xl text-text-special font-semibold mb-2">Overview</h2>
                 <p className="text-gray-300">{tvShow?.overview || 'Coming soon...'}</p>
               </section>
 

@@ -24,7 +24,7 @@ const RegisterPage = () => {
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       ></div>
-      <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
+      <div className="absolute inset-0 bg-background opacity-70 z-10"></div>
       <div className="form-container">
         <div className="text-center">
           <h2 className="mt-6 text-4xl font-extrabold text-text">
