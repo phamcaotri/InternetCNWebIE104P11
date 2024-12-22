@@ -32,6 +32,7 @@ module.exports = {
           DEFAULT: 'var(--color-text-default)', 
           muted: 'var(--color-text-muted)',
           hover: 'var(--color-text-hover)',
+          special: 'var(--color-text-special)',
         },
       },
       fontFamily: {
