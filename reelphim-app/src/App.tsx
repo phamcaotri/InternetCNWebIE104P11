@@ -22,7 +22,7 @@ import CategoryPage from './pages/CategoryPage';
 import TVShowDetailPage from './pages/TVShowsDetailPage';
 import WatchTVShowPage from './pages/WatchTVShowPage';
 import ForgotPassword from './pages/ForgotPasswordPage';
-
+import AboutPage from './pages/AboutPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,6 +54,7 @@ const App = () => {
             <Route path={ROUTES_CONFIG.PRIVATE.SEARCH} element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
             <Route path={ROUTES_CONFIG.PRIVATE.WATCH_MOVIE} element={<PrivateRoute><WatchMoviePage /></PrivateRoute>} />
             <Route path={ROUTES_CONFIG.PRIVATE.CATEGORY} element={<PrivateRoute><CategoryPage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.ABOUT_US} element={<PrivateRoute><AboutPage /></PrivateRoute>} />          
           </Route>
 
           {/* Movie Detail Layout Route */}
