@@ -15,13 +15,10 @@ export const ROUTES_CONFIG = {
       WATCH_MOVIE: '/movie/watch/:id',
       WATCH_TV_SHOW: '/tv/watch/:id',
       CATEGORY: "/category/:categoryId",
-<<<<<<< HEAD
       ABOUT_US: '/about',
       TERMS: '/terms',
-      PRIVACY: '/privacy'
-=======
+      PRIVACY: '/privacy',
       GENRES: "/genres",
->>>>>>> origin/main
     },
     NAVIGATION: {
       DEFAULT_REDIRECT: '/',
