@@ -31,9 +31,8 @@ const UserPage: React.FC = () => {
 
     const editableFieldStyle = {
         background: 'none',
-        color: 'white',
         border: 'none',
-        borderBottom: '1px solid white',
+        borderBottom: '1px solid',
         marginLeft: '10px',
         textAlign: 'left',
         display: 'inline-block',
@@ -70,7 +69,6 @@ const UserPage: React.FC = () => {
         },
         editButton: {
             backgroundColor: 'red',
-            color: 'white',
             border: 'none',
             padding: '5px 10px',
             borderRadius: '5px',
@@ -96,13 +94,12 @@ const UserPage: React.FC = () => {
         passwordInputWrapper: {
             display: 'flex',
             alignItems: 'center',
-            flex: 2, // Same as other fields
+            flex: 2,
             width: '100%',
         },
         passwordToggleButton: {
             marginLeft: '10px',
             background: 'transparent',
-            color: 'white',
             border: 'none',
             cursor: 'pointer',
             whiteSpace: 'nowrap',
@@ -115,7 +112,7 @@ const UserPage: React.FC = () => {
                 <div style={styles.centralColumn}>
                     <div style={styles.section}>
                         <div style={styles.header}>
-                            <h2 style={styles.headerTitle}>Thông tin tài khoản</h2>
+                            <h2 className="text-text" style={styles.headerTitle}>Thông tin tài khoản</h2>
                             {isEditing ? (
                                 <button style={styles.editButton} onClick={handleSaveClick}>
                                     Lưu thông tin
@@ -126,7 +123,7 @@ const UserPage: React.FC = () => {
                                 </button>
                             )}
                         </div>
-                        <div style={styles.fieldRow}>
+                        <div className="text-text" style={styles.fieldRow}>
                             <span style={styles.fieldLabel}>Tên tài khoản</span>
                             {isEditing ? (
                                 <input
@@ -140,7 +137,7 @@ const UserPage: React.FC = () => {
                                 <span style={styles.fieldValue}>{userInfo.username}</span>
                             )}
                         </div>
-                        <div style={styles.fieldRow}>
+                        <div className="text-text" style={styles.fieldRow}>
                             <span style={styles.fieldLabel}>Email</span>
                             {isEditing ? (
                                 <input
@@ -154,7 +151,7 @@ const UserPage: React.FC = () => {
                                 <span style={styles.fieldValue}>{userInfo.email}</span>
                             )}
                         </div>
-                        <div style={styles.fieldRow}>
+                        <div className="text-text" style={styles.fieldRow}>
                             <span style={styles.fieldLabel}>Mật khẩu</span>
                             {isEditing ? (
                                 <div style={styles.passwordInputWrapper}>
@@ -178,7 +175,7 @@ const UserPage: React.FC = () => {
                                 </span>
                             )}
                         </div>
-                        <div style={styles.fieldRow}>
+                        <div className="text-text" style={styles.fieldRow}>
                             <span style={styles.fieldLabel}>Số điện thoại</span>
                             {isEditing ? (
                                 <input
