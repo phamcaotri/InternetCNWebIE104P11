@@ -10,8 +10,8 @@ const Notification: React.FC<NotificationProps> = ({ message, type, onClose }) =
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
-    }, 4000); // Ẩn thông báo sau 5 giây
-    return () => clearTimeout(timer); // Xóa bộ hẹn giờ khi component bị hủy
+    }, 4000); 
+    return () => clearTimeout(timer);
   }, [onClose]);
 
   return (

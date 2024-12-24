@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 import sanitizeHtml from 'sanitize-html';
 
-const auth = { };
+export const auth = { };
 
 auth.registerUser = async (req, res) => {
     const { name, email, password } = req.body;
@@ -58,9 +58,117 @@ auth.loginUser = async (req, res) => {
 };
 
 auth.logout = (req, res) => {
-    res.clearCookie('token');
+  const token = req.headers.authorization?.split(' ')[1];
+  
+  if (!token) {
+    return res.status(400).json({ success: false, message: 'Token không hợp lệ' });
+  }
 
-    return res.status(200).json({ message: 'Đăng xuất thành công' });
-}
+  console.log(`User logged out with token: ${token}`);
+  return res.status(200).json({ success: true, message: 'Đăng xuất thành công' });
+};
 
-export default auth;
+auth.getuserid = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1]; // Lấy token từ header
+  console.log('Authorization Header:', req.headers.authorization);
+
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'Không có token.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Xác minh token
+    req.user = decoded; // Lưu thông tin user vào req.user
+    console.log('Decoded Token:', decoded);
+
+    next();
+  } catch (error) {
+    console.error('Token không hợp lệ:', error.message);
+    res.status(401).json({ success: false, message: 'Token không hợp lệ.' });
+  }
+};
+
+auth.updateProfilePhoto = async (req, res) => {
+  const profilePhoto = req.file; // File từ Multer
+  const { userId } = req.body; // userId từ frontend
+
+  if (!userId || !profilePhoto) {
+    return res.status(400).json({ message: 'User ID và file ảnh là bắt buộc.' });
+  }
+
+  try {
+    // Gọi model để upload file lên Supabase
+    const { publicUrl, error } = await User.uploadAvatarToSupabase(userId, profilePhoto);
+
+    if (error) {
+      throw new Error('Lỗi khi upload file lên Supabase Storage.');
+    }
+
+    // Cập nhật URL vào database qua model
+    const { data, error: dbError } = await User.updateUserProfilePhoto(userId, publicUrl);
+
+    if (dbError) {
+      throw new Error('Lỗi khi lưu URL ảnh vào cơ sở dữ liệu.');
+    }
+
+    res.status(200).json({
+      message: 'Cập nhật ảnh đại diện thành công.',
+      publicURL: publicUrl,
+    });
+  } catch (error) {
+    console.error('Error updating profile photo:', error.message);
+    res.status(500).json({ message: 'Cập nhật ảnh đại diện thất bại.', error: error.message });
+  }
+};
+
+auth.getUserAva = async (req, res) => {
+  const userId = req.user.id; // Lấy từ middleware
+
+  if (!userId) {
+    return res.status(400).json({ message: 'User ID is required.' });
+  }
+
+  try {
+    const { user, error } = await User.getAva(userId);
+    if (error) {
+      throw error;
+    }
+
+    res.status(200).json({ user });
+  } catch (error) {
+    console.error('Error fetching user info:', error.message);
+    res.status(500).json({ message: 'Failed to fetch user info.' });
+  }
+};
+
+auth.updateUserProfile = async (req, res) => {
+  const userId = req.user.id; // Lấy userId từ middleware
+  const { name, email, phone, password } = req.body; // Dữ liệu cần cập nhật
+
+  if (!userId) {
+    return res.status(400).json({ success: false, message: 'User ID is required.' });
+  }
+
+  try {
+    const updates = {};
+    if (name) updates.name = name;
+    if (email) updates.email = email;
+    if (phone) updates.phone_number = phone;
+    if (password) {
+      // Hash mật khẩu trước khi lưu
+      const saltRounds = 10; // Bạn có thể tăng lên để bảo mật hơn
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      updates.password = hashedPassword;
+    }
+    const { data, error } = await User.updateProfile(userId, updates);
+
+    if (error) {
+      throw new Error(error.message || 'Error updating user profile.');
+    }
+
+    res.status(200).json({ success: true, message: 'Profile updated successfully.', data });
+  } catch (error) {
+    console.error('Error updating user profile:', error.message);
+    res.status(500).json({ success: false, message: 'Failed to update profile.', error: error.message });
+  }
+};

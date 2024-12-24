@@ -6,8 +6,9 @@ import { SITE_CONFIG } from '../config/site.config';
 import { searchTorrents } from '../services/torrentApi';
 import { sortTorrents } from '../utils/sortTorrents';
 import { TorrentResult } from '../types/torrent';
+import { getUserId, removeFavourite, addFavourite, checkFavourite } from '../services/api';
 
-const MovieDetailPage = () => {
+const MovieDetailPage =  () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const mainLanguage = SITE_CONFIG.DEFAULT_LANGUAGE;
@@ -19,8 +20,70 @@ const MovieDetailPage = () => {
   const [sortBy, setSortBy] = useState<'seeds' | 'size' | 'peers'>('seeds');
   const [selectedProvider, setSelectedProvider] = useState('1337x');
   const PROVIDERS = ['1337x'];
+  
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteClick = async () => {
+    if (movie) {
+      const userId = await getUserId();
+      if (isFavorite) {
+        // Xóa khỏi danh sách yêu thích
+        const favorite = JSON.parse(localStorage.getItem('favorites') || '[]');
+        const updatedFavorites = favorite.filter((fav) => fav.movieId !== movie.id);
+        localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+        await removeFavourite(userId, movie.id);
+        setIsFavorite(false); // Cập nhật trạng thái
+      } else {
+        // Thêm vào danh sách yêu thích
+        const favorite = JSON.parse(localStorage.getItem('favorites') || '[]');
+        const newFavorite = {
+          movieId: movie.id,
+          title: movie.title,
+          poster: movie.backdropPath,
+        };
+        const updatedFavorites = [...favorite, newFavorite];
+        localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+        await addFavourite(userId, movie.id, movie.title, movie.backdropPath);
+        setIsFavorite(true); // Cập nhật trạng thái
+      }
+    }
+  };
+  
+  
+  useEffect(() => {
+    const fetchFavoriteStatus = async () => {
+      const userId = await getUserId();
+      if (userId && movie?.id) {
+        try {
+          const response = await checkFavourite(userId, movie.id); // Gọi API kiểm tra yêu thích
+          setIsFavorite(response.isFavorite); // Cập nhật trạng thái yêu thích
+        } catch (error) {
+          console.error('Error fetching favorite status:', error);
+        }
+      }
+    };
+  
+    if (movie) {
+      fetchFavoriteStatus();
+    }
+  }, [movie]);
+
   const handlePlayClick = (magnetURI: string) => {
-    navigate(`/movie/watch/${id}?magnet=${encodeURIComponent(magnetURI)}`);
+    if (movie) {
+      // Lưu thông tin phim vào localStorage
+      localStorage.setItem(
+        'currentMovie',
+        JSON.stringify({
+          movieId: id, 
+          title: movie.title, 
+          banner: movie.backdropPath,
+          magnet: magnetURI,
+        })
+      );
+  
+      // Điều hướng sang WatchPage
+      navigate(`/movie/watch/${id}?magnet=${encodeURIComponent(magnetURI)}`);
+    }
   };
 
   const handleSearch = async () => {
@@ -98,16 +161,29 @@ const MovieDetailPage = () => {
 
           {/* Right Column - Details */}
           <div className="md:col-span-2 text-text pt-6">
+          <div className="flex items-center justify-between mb-4">
+            {/* Tiêu đề phim */}
             {movie?.images?.logos && movie.images.logos.length > 0 ? (
               <img 
                 src={movie.images.logos[0].file_path}
                 alt={movie?.title}
-                className="h-24 object-contain mb-4"
+                className="h-24 object-contain"
               />
             ) : (
-              <h1 className="text-3xl font-bold mb-2">{movie?.title}</h1>
+              <h1 className="text-3xl font-bold flex-1">{movie?.title}</h1>
             )}
 
+            {/* Nút Yêu thích */}
+            <button
+              onClick={handleFavoriteClick}
+              className={`ml-4 flex-shrink-0 px-4 py-2 rounded-lg transition-colors ${
+                isFavorite ? 'bg-red-600 hover:bg-red-500 text-white' : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
+              }`}
+            >
+              {isFavorite ? 'Bỏ yêu thích' : 'Thêm yêu thích'}
+            </button>
+          </div>
+            
             <div className="space-y-6">
               <div className="flex gap-4 text-sm text-gray-400">
                 <span>{movie?.releaseDateFormatted}</span>
@@ -222,5 +298,4 @@ const MovieDetailPage = () => {
     </>
   );
 };
-
 export default MovieDetailPage;

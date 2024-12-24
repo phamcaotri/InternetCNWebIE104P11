@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import backgroundImage from '../assets/movie_poster_background.jpg';
+import backgroundImage from '../assets/01.webp';
 import { Link } from 'react-router-dom';
 
 const ForgotPassword = () => {

@@ -17,30 +17,37 @@ const LoginPage = () => {
   const [notification, setNotification] = useState('');
 
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setError(''); // Reset lỗi trước khi gửi
+  e.preventDefault(); // Ngăn hành động reload trang
+  setError(''); // Reset thông báo lỗi trước đó
+  setLoading(true); // Hiển thị trạng thái loading
 
   try {
-    const userData = { email, password };
-    const response = await loginUser(userData); // Gửi thông tin đăng nhập đến backend
+    const userData = { email, password }; // Chuẩn bị dữ liệu gửi lên server
+    const response = await loginUser(userData); // Gọi API login
     console.log('Đăng nhập thành công:', response);
 
-    // Lưu JWT token vào localStorage
-    localStorage.setItem('authToken', response.token);
+    if (response?.token) {
+      // Lưu JWT token vào localStorage
+      localStorage.setItem('authToken', response.token);
 
-    // Hiển thị thông báo thành công
-    setNotification('Đăng nhập thành công!');
+      // Hiển thị thông báo thành công
+      setNotification('Đăng nhập thành công!');
 
-    // Điều hướng người dùng đến trang chính (HomePage)
-    const { state } = location;
-    navigate(state?.from || '/Home');
+      // Điều hướng người dùng đến trang chính (HomePage)
+      const { state } = location; // Lấy thông tin trang trước đó
+      navigate(state?.from || '/Home'); // Điều hướng về trang trước hoặc HomePage
+    } else {
+      throw new Error('Token không tồn tại trong phản hồi từ server'); // Lỗi nếu không có token
+    }
   } catch (error: any) {
-    setError(error.response?.data?.message || 'Đăng nhập thất bại'); // Hiển thị lỗi từ backend
+    console.error('Lỗi khi đăng nhập:', error);
+    // Hiển thị lỗi cụ thể từ backend hoặc lỗi mặc định
+    setError(error.response?.data?.message || 'Đăng nhập thất bại, vui lòng thử lại!');
   } finally {
     setLoading(false); // Dù thành công hay thất bại, tắt loading
   }
-
 };
+
 
 return (
   <div className="min-h-screen flex items-center justify-center relative">

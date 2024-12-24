@@ -43,7 +43,7 @@ const Header = () => {
       <header className={`bg-background-light text-text w-full fixed top-0 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`} style={{ zIndex: 9999 }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6">
-          <Link to="/" className="flex items-center">
+          <Link to="/home" className="flex items-center">
             <img src={SITE_CONFIG.LOGO} alt={SITE_CONFIG.NAME} className="h-12 w-auto " />
             <div className="text-2xl font-bold ml-2">{SITE_CONFIG.NAME}</div>
           </Link>
