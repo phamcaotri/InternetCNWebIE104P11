@@ -25,7 +25,6 @@ import AboutPage from './pages/AboutPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import GenresPage from './pages/Genres';
-import GenresMoviesPage from './pages/GenresMoviesPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
