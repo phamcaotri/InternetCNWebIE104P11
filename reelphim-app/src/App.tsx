@@ -23,6 +23,11 @@ import WatchTVShowPage from './pages/WatchTVShowPage';
 import ForgotPassword from './pages/ForgotPasswordPage';
 import FavoriteMoviesTestPage from './pages/FavoriteMoviesTestPage';
 const { PrivateRoute, PublicRoute } = LogRoutes;
+import AboutPage from './pages/AboutPage';
+import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
+import GenresPage from './pages/Genres';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -47,6 +52,25 @@ const App = () => {
                 <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
                 <Route path={ROUTES_CONFIG.PUBLIC.FORGOT_PASSWORD} element={<ForgotPassword />} />
             </Route>
+        <Routes>
+          <Route path={ROUTES_CONFIG.PUBLIC.WELCOME} element={<WelcomePage />} />
+          <Route path={ROUTES_CONFIG.PUBLIC.LOGIN} element={<LoginPage />} />
+          <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
+          
+          {/* Main Layout Routes */}
+          <Route element={<MainLayout />}>
+            <Route path={ROUTES_CONFIG.PRIVATE.HOME} element={<PrivateRoute><HomePage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.USER} element={<PrivateRoute><UserPage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.TV_SHOWS} element={<PrivateRoute><TVShowsPage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.MOVIES} element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.SEARCH} element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.WATCH_MOVIE} element={<PrivateRoute><WatchMoviePage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.CATEGORY} element={<PrivateRoute><CategoryPage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.ABOUT_US} element={<PrivateRoute><AboutPage /></PrivateRoute>} />   
+            <Route path={ROUTES_CONFIG.PRIVATE.TERMS} element={<PrivateRoute><TermsPage /></PrivateRoute>} />   
+            <Route path={ROUTES_CONFIG.PRIVATE.PRIVACY} element={<PrivateRoute><PrivacyPage /></PrivateRoute>} />      
+            <Route path={ROUTES_CONFIG.PRIVATE.GENRES} element={<PrivateRoute><GenresPage /></PrivateRoute>} />
+          </Route>
 
             {/* Protected Routes */}
             <Route element={<MainLayout />}>

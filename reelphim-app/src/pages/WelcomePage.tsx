@@ -10,8 +10,12 @@ const WelcomePage = () => {
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       ></div>
+<<<<<<< HEAD
 
       <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
+=======
+      <div className="absolute inset-0 bg-background opacity-70 z-10"></div>
+>>>>>>> e60eafee5c94b5ea69f0af9be37d807d5251fc9a
       <div className="form-container">
         <div className="text-center">
 
