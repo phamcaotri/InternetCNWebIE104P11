@@ -50,6 +50,7 @@
         --color-text-default: #F0F0F0;
         --color-text-hover: #FFFFFF;
         --color-text-muted: #A0A0A0;
+        --color-text-special: #a0a0a0;
         
         --color-border-default: #2A2A2A;
         --color-border-hover: #454545;
@@ -73,13 +74,14 @@
         --color-accent-dark: #E5E5E5;
         --color-accent-hover: #FFFFFF;
         
-        --color-background-default: #FFFFFF;
-        --color-background-light: #F5F5F5;
+        --color-background-default: #F5F5F5;
+        --color-background-light: #e1e1e1;
         --color-background-hover: #EFEFEF;
         
         --color-text-default: #0F0F0F;
         --color-text-hover: #000000;
         --color-text-muted: #666666;
+        --color-text-special: #a0a0a0;
         
         --color-border-default: #E5E5E5;
         --color-border-hover: #CCCCCC;
@@ -94,8 +96,7 @@
 @layer components {
     .input-field {
         @apply w-full px-4 py-2 mb-2 rounded-lg bg-background border border-secondary
-        focus:ring-2 focus:ring-primary focus:border-primary
-        transition-colors text-text placeholder-text-muted
+        focus:border-primary transition-colors text-text placeholder-text-muted
         hover:border-primary caret-primary;
     }
     .btn-primary {

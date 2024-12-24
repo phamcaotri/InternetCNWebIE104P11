@@ -42,12 +42,24 @@ const RegisterPage = () => {
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       ></div>
+<<<<<<< HEAD
       <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
       <div className="form-container relative z-20 bg-gray p-10 rounded-lg shadow-lg max-w-4xl w-full">
       <div className="text-center mb-6">
 
           <h2 className="text-3xl font-bold text-white">Chào mừng đến với Reelphim!</h2>
           <p className="mt-2 text-sm text-text-muted">Hãy điền vào các ô bên dưới để cùng bắt đầu nhé</p>
+=======
+      <div className="absolute inset-0 bg-background opacity-70 z-10"></div>
+      <div className="form-container">
+        <div className="text-center">
+          <h2 className="mt-6 text-4xl font-extrabold text-text">
+            Create an Account
+          </h2>
+          <p className="mt-2 text-sm text-text-muted">
+            Join ReelPhim for unlimited entertainment
+          </p>
+>>>>>>> e60eafee5c94b5ea69f0af9be37d807d5251fc9a
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
