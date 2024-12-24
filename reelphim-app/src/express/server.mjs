@@ -581,6 +581,18 @@ app.listen(port, '0.0.0.0', () => {
   console.log(`Torrent streaming server running on port ${port}`);
 });
 
+// Khởi tạo TorrentSearchApi
+TorrentSearchApi.enableProvider('1337x');
+TorrentSearchApi.enableProvider('eztv');
+TorrentSearchApi.enableProvider('kickasstorrents');
+TorrentSearchApi.enableProvider('limetorrents');
+TorrentSearchApi.enableProvider('rarbg');
+TorrentSearchApi.enableProvider('thepiratebay');
+TorrentSearchApi.enableProvider('torrent9');
+TorrentSearchApi.enableProvider('torrentproject');
+TorrentSearchApi.enableProvider('torrentz2');
+TorrentSearchApi.enableProvider('yts');
+// Thêm các provider khác nếu cần
 
 app.get('/search', async (req, res) => {
   try {
