@@ -21,8 +21,10 @@ import { UI_CONFIG, ROUTES_CONFIG } from './config';
 import CategoryPage from './pages/CategoryPage';
 import TVShowDetailPage from './pages/TVShowsDetailPage';
 import WatchTVShowPage from './pages/WatchTVShowPage';
-import ForgotPassword from './pages/ForgotPasswordPage';
-
+import AboutPage from './pages/AboutPage';
+import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
+import GenresPage from './pages/Genres';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -43,7 +45,6 @@ const App = () => {
           <Route path={ROUTES_CONFIG.PUBLIC.WELCOME} element={<WelcomePage />} />
           <Route path={ROUTES_CONFIG.PUBLIC.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
-          <Route path={ROUTES_CONFIG.PUBLIC.FORGOT_PASSWORD} element={<ForgotPassword />} />
           
           {/* Main Layout Routes */}
           <Route element={<MainLayout />}>
@@ -54,6 +55,10 @@ const App = () => {
             <Route path={ROUTES_CONFIG.PRIVATE.SEARCH} element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
             <Route path={ROUTES_CONFIG.PRIVATE.WATCH_MOVIE} element={<PrivateRoute><WatchMoviePage /></PrivateRoute>} />
             <Route path={ROUTES_CONFIG.PRIVATE.CATEGORY} element={<PrivateRoute><CategoryPage /></PrivateRoute>} />
+            <Route path={ROUTES_CONFIG.PRIVATE.ABOUT_US} element={<PrivateRoute><AboutPage /></PrivateRoute>} />   
+            <Route path={ROUTES_CONFIG.PRIVATE.TERMS} element={<PrivateRoute><TermsPage /></PrivateRoute>} />   
+            <Route path={ROUTES_CONFIG.PRIVATE.PRIVACY} element={<PrivateRoute><PrivacyPage /></PrivateRoute>} />      
+            <Route path={ROUTES_CONFIG.PRIVATE.GENRES} element={<PrivateRoute><GenresPage /></PrivateRoute>} />
           </Route>
 
           {/* Movie Detail Layout Route */}

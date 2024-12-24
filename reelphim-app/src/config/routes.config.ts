@@ -3,7 +3,6 @@ export const ROUTES_CONFIG = {
       WELCOME: '/',
       LOGIN: '/login',
       REGISTER: '/register',
-      FORGOT_PASSWORD: '/forgot-password',
     },
     PRIVATE: {
       HOME: '/home',
@@ -15,7 +14,11 @@ export const ROUTES_CONFIG = {
       TV_SHOW_DETAIL: '/tv/:id',
       WATCH_MOVIE: '/movie/watch/:id',
       WATCH_TV_SHOW: '/tv/watch/:id',
-      CATEGORY: "/category/:categoryId"
+      CATEGORY: "/category/:categoryId",
+      ABOUT_US: '/about',
+      TERMS: '/terms',
+      PRIVACY: '/privacy',
+      GENRES: "/genres",
     },
     NAVIGATION: {
       DEFAULT_REDIRECT: '/',
