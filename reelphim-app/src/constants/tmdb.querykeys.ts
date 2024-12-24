@@ -3,6 +3,7 @@ export const QUERY_KEYS = {
       LIST: (type: string) => ['movies', type],
       DETAILS: (id: number) => ['movie', id],
       GENRES: ['movies', 'genres'],
+      BY_GENRE: (genreId: number) => ['movies', 'byGenre', genreId],
     },
     TV: {
       LIST: (type: string) => ['tv', type],

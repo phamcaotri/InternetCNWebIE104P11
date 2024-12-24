@@ -3,6 +3,7 @@ export const ROUTES_CONFIG = {
       WELCOME: '/',
       LOGIN: '/login',
       REGISTER: '/register',
+      TERMS: '/terms'
     },
     PRIVATE: {
       HOME: '/home',

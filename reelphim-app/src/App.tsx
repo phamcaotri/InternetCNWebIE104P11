@@ -1,9 +1,11 @@
-  // TRANG WEB CHÍNH CỦA WEB.
-import React, { useEffect } from 'react';
-import LogRoutes from './components/checkLog';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';import MainLayout from './layouts/MainLayout';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthProvider } from './contexts/AuthContext';
+import LogRoutes from './components/checkLog';
+import MainLayout from './layouts/MainLayout';
 import MovieDetailLayout from './layouts/MovieDetailLayout';
+import WatchMovieLayout from './layouts/WatchMovieLayout';
 import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -14,19 +16,16 @@ import UserPage from './pages/UserPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import MovieDetailPage from './pages/MovieDetailPage';
 import WatchMoviePage from './pages/WatchMoviePage';
-import WatchMovieLayout from './layouts/WatchMovieLayout';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { UI_CONFIG, ROUTES_CONFIG } from './config';
 import CategoryPage from './pages/CategoryPage';
 import TVShowDetailPage from './pages/TVShowsDetailPage';
 import WatchTVShowPage from './pages/WatchTVShowPage';
-import ForgotPassword from './pages/ForgotPasswordPage';
-import FavoriteMoviesTestPage from './pages/FavoriteMoviesTestPage';
-const { PrivateRoute, PublicRoute } = LogRoutes;
 import AboutPage from './pages/AboutPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import GenresPage from './pages/Genres';
+import { UI_CONFIG, ROUTES_CONFIG } from './config';
+
+const { PrivateRoute, PublicRoute } = LogRoutes;
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,7 +35,7 @@ const queryClient = new QueryClient({
       retry: UI_CONFIG.QUERY.RETRY_COUNT,
     },
   },
-})
+});
 
 const App = () => {
   return (
@@ -44,43 +43,27 @@ const App = () => {
       <Router>
         <AuthProvider>
           <Routes>
-          <Route path="/test-favorites" element={<FavoriteMoviesTestPage />} />
+            {/* Free Routes */}
+            <Route path={ROUTES_CONFIG.PUBLIC.TERMS} element={<TermsPage />} />
+
             {/* Public Routes */}
             <Route element={<PublicRoute />}>
-                <Route path={ROUTES_CONFIG.PUBLIC.WELCOME} element={<WelcomePage />} />
-                <Route path={ROUTES_CONFIG.PUBLIC.LOGIN} element={<LoginPage />} />
-                <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
-                <Route path={ROUTES_CONFIG.PUBLIC.FORGOT_PASSWORD} element={<ForgotPassword />} />
+              <Route path={ROUTES_CONFIG.PUBLIC.WELCOME} element={<WelcomePage />} />
+              <Route path={ROUTES_CONFIG.PUBLIC.LOGIN} element={<LoginPage />} />
+              <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
             </Route>
-        <Routes>
-          <Route path={ROUTES_CONFIG.PUBLIC.WELCOME} element={<WelcomePage />} />
-          <Route path={ROUTES_CONFIG.PUBLIC.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTES_CONFIG.PUBLIC.REGISTER} element={<RegisterPage />} />
-          
-          {/* Main Layout Routes */}
-          <Route element={<MainLayout />}>
-            <Route path={ROUTES_CONFIG.PRIVATE.HOME} element={<PrivateRoute><HomePage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.USER} element={<PrivateRoute><UserPage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.TV_SHOWS} element={<PrivateRoute><TVShowsPage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.MOVIES} element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.SEARCH} element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.WATCH_MOVIE} element={<PrivateRoute><WatchMoviePage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.CATEGORY} element={<PrivateRoute><CategoryPage /></PrivateRoute>} />
-            <Route path={ROUTES_CONFIG.PRIVATE.ABOUT_US} element={<PrivateRoute><AboutPage /></PrivateRoute>} />   
-            <Route path={ROUTES_CONFIG.PRIVATE.TERMS} element={<PrivateRoute><TermsPage /></PrivateRoute>} />   
-            <Route path={ROUTES_CONFIG.PRIVATE.PRIVACY} element={<PrivateRoute><PrivacyPage /></PrivateRoute>} />      
-            <Route path={ROUTES_CONFIG.PRIVATE.GENRES} element={<PrivateRoute><GenresPage /></PrivateRoute>} />
-          </Route>
 
-            {/* Protected Routes */}
+            {/* Protected Routes - Main Layout */}
             <Route element={<MainLayout />}>
               <Route path={ROUTES_CONFIG.PRIVATE.HOME} element={<PrivateRoute><HomePage /></PrivateRoute>} />
               <Route path={ROUTES_CONFIG.PRIVATE.USER} element={<PrivateRoute><UserPage /></PrivateRoute>} />
               <Route path={ROUTES_CONFIG.PRIVATE.TV_SHOWS} element={<PrivateRoute><TVShowsPage /></PrivateRoute>} />
               <Route path={ROUTES_CONFIG.PRIVATE.MOVIES} element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
               <Route path={ROUTES_CONFIG.PRIVATE.SEARCH} element={<PrivateRoute><SearchResultsPage /></PrivateRoute>} />
-              <Route path={ROUTES_CONFIG.PRIVATE.WATCH_MOVIE} element={<PrivateRoute><WatchMoviePage /></PrivateRoute>} />
               <Route path={ROUTES_CONFIG.PRIVATE.CATEGORY} element={<PrivateRoute><CategoryPage /></PrivateRoute>} />
+              <Route path={ROUTES_CONFIG.PRIVATE.ABOUT_US} element={<PrivateRoute><AboutPage /></PrivateRoute>} />
+              <Route path={ROUTES_CONFIG.PRIVATE.PRIVACY} element={<PrivateRoute><PrivacyPage /></PrivateRoute>} />
+              <Route path={ROUTES_CONFIG.PRIVATE.GENRES} element={<PrivateRoute><GenresPage /></PrivateRoute>} />
             </Route>
 
             {/* Movie Detail Layout */}
