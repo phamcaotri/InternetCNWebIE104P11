@@ -1,7 +1,7 @@
 import { TorrentResult } from "../types/torrent";
 
 const currentHost = window.location.hostname;
-const SERVER_PORT = '3001';
+const SERVER_PORT = '5000';
 const SERVER_URL = `http://${currentHost}:${SERVER_PORT}`;
 
 export const searchTorrents = async (query: string, provider = '1337x'): Promise<TorrentResult[]> => {

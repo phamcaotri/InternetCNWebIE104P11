@@ -80,4 +80,11 @@ export const tmdbService = {
     return response.data;
   },
 
+  getMoviesByGenre: async (genreId: number, params: any = {}): Promise<MovieResponse> => {
+    const response = await tmdbHttpRequest.get<TMDBMovieResponse>('/discover/movie', {
+      params: { ...params, with_genres: genreId },
+    });
+    return transformMovieResponse(response.data);
+  },  
+
 }

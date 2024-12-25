@@ -4,33 +4,41 @@ import { tmdbapi } from '../services/tmdbApi';
 
 
 const GenresPage = () => {
-  const { data: popularMovies } = tmdbapi.PopularMovies();
-  const { data: newMovies } = tmdbapi.NowPlayingMovies();
-  const { data: classicMovies } = tmdbapi.TopRatedMovies();
+  const { data: actionMovies } = tmdbapi.MoviesByGenre(28); // Action genre
+  const { data: documentaryMovies } = tmdbapi.MoviesByGenre(99); // Documentary genre
+  const { data: AdventureMovies } = tmdbapi.MoviesByGenre(12); // Documentary genre
+  const { data: topRatedMovies } = tmdbapi.TopRatedMovies();
 
   return (
     <main>
       <h1 className="text-3xl font-bold mb-8 text-text">Genres</h1>
-      {popularMovies?.results && (
+      {actionMovies?.results && (
       <MovieSection
         title="Hành động"
         description="Những bộ phim hành động đang gây sốt."
-        movies={popularMovies.results}
+        movies={actionMovies.results}
       />
       )}
-      {newMovies?.results && (
+      {documentaryMovies?.results && (
       <MovieSection
         title="Phim tài liệu"
         description="Các bộ phim tài liệu hay nhất."
-        movies={newMovies.results}
+        movies={documentaryMovies.results}
       />
       )}
-      {classicMovies?.results && (
+      {topRatedMovies?.results && (
       <MovieSection
         title="Phim kinh điển"
         description="Những tác phẩm điện ảnh bất hủ qua các thời đại."
-        movies={classicMovies.results}
+        movies={topRatedMovies.results}
       />
+      )}
+      {AdventureMovies?.results && (
+        <MovieSection
+          title="Phim phiêu lưu"
+          description="Những bộ phim phiêu lưu tuyệt với."
+          movies={AdventureMovies.results}
+        />
       )}
     </main>
   );

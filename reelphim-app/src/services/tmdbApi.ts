@@ -45,6 +45,13 @@ export const useGetTvDetailsQuery = (id: number, params = {}) => {
   });
 };
 
+export const useMoviesByGenreQuery = (genreId: number, params = {}) => {
+  return useQuery({
+    queryKey: [...QUERY_KEYS.MOVIES.BY_GENRE(genreId), params],
+    queryFn: () => tmdbService.getMoviesByGenre(genreId, params),
+  });
+};
+
 // export const useTrendingQuery = (mediaType: string, timeWindow: string, params = {}) => {
 //   return useQuery({
 //     queryKey: QUERY_KEYS.TRENDING(mediaType, timeWindow),
@@ -98,6 +105,9 @@ class TMDBApi {
   }
   GetTvDetails(id: number, params = {}) {
     return useGetTvDetailsQuery(id, params);
+  }
+  MoviesByGenre(genreId: number, params = {}) {
+    return useMoviesByGenreQuery(genreId, params);
   }
 }
 

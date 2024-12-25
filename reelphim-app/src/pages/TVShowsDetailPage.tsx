@@ -51,7 +51,7 @@ interface TorrentStructure {
 }
 
 const currentHost = window.location.hostname;
-const SERVER_PORT = '3001';
+const SERVER_PORT = '5000';
 const SERVER_URL = `http://${currentHost}:${SERVER_PORT}`;
 
 const TVShowDetail = () => {
@@ -326,7 +326,7 @@ const TVShowDetail = () => {
                             No files found
                           </div>
                         )}
-                      </div>
+                      </div>  
                     )}
                   </div>
                 ))}
